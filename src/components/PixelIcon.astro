@@ -1,0 +1,11 @@
+---
+const { type, size = 40 } = Astro.props;
+---
+
+<canvas
+  data-pixel-icon={type}
+  width={size}
+  height={size}
+  style={`width:${size}px; height:${size}px; image-rendering:pixelated; display:block; flex-shrink:0;`}
+  aria-hidden="true"
+></canvas>

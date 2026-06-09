@@ -1,0 +1,22 @@
+backend:
+  name: github
+  repo: REPO_PLACEHOLDER/bolinatec-site
+  branch: main
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: news
+    label: Notícias
+    folder: src/content/news
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Descrição, name: description, widget: text }
+      - { label: Data, name: date, widget: datetime }
+      - { label: Autor, name: author, widget: string, required: false }
+      - { label: Imagem, name: image, widget: image, required: false }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Conteúdo, name: body, widget: markdown }

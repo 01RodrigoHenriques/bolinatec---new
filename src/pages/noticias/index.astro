@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import BentoCard from '../../components/BentoCard.astro';
+import RevealText from '../../components/RevealText.astro';
+import Tag from '../../components/Tag.astro';
+
+const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Layout title="Notícias | Bolina Tec" description="Notícias, projetos e atualizações da Bolina Tec.">
+  <section class="py-32 px-6 md:px-12 lg:px-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-16">
+        <Tag>NOTÍCIAS</Tag>
+        <RevealText class="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]" text={"Atualizações\nda Bolina Tec."} />
+        <p class="mt-6 text-sm text-black/45 max-w-xl leading-relaxed">
+          Acompanhe projetos, reflexões e novidades sobre consultoria tecnológica, agricultura, território e inovação técnica.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+        {news.map((post, index) => (
+          <a href={`/noticias/${post.id}`} class="group">
+            <BentoCard class="h-full p-7 flex flex-col justify-between" delay={index * 80}>
+              <div class="space-y-4">
+                <div class="text-[11px] tracking-[0.2em] text-black/30 uppercase">
+                  {new Date(post.data.date).toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' })}
+                </div>
+                <h2 class="text-xl font-light leading-snug group-hover:translate-x-0.5 transition-transform">{post.data.title}</h2>
+                <p class="text-sm text-black/45 leading-relaxed">{post.data.description}</p>
+              </div>
+              <div class="mt-8 text-xs tracking-widest uppercase text-black/35 group-hover:text-black/60 transition-colors">
+                Ler notícia
+              </div>
+            </BentoCard>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

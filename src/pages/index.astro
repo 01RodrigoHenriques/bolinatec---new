@@ -1,0 +1,711 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import IntroAnimation from '../components/IntroAnimation.astro';
+import Tag from '../components/Tag.astro';
+import RevealText from '../components/RevealText.astro';
+import PixelIcon from '../components/PixelIcon.astro';
+import BentoCard from '../components/BentoCard.astro';
+import { HeroGL } from '../components/HeroGL';
+
+const newsPosts = (await getCollection('news'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const heroStats = [
+  { value: '', label: '' },
+  { value: '', label: '' },
+  { value: '', label: '' },
+];
+
+const methodCards = [
+  {
+    n: '01',
+    title: 'Diagnóstico',
+    desc: 'Começamos pelo problema, não pela solução. Levantamos contexto, restrições e o que já foi tentado antes.',
+    delay: 0,
+    icon: 'search',
+  },
+  {
+    n: '02',
+    title: 'Validação',
+    desc: 'Nenhuma proposta avança sem ser testada com dados reais e com quem vai operar o sistema.',
+    delay: 80,
+    icon: 'check',
+  },
+  {
+    n: '03',
+    title: 'Proposta',
+    desc: 'Uma proposta técnica tem de ser executável por quem a recebe — não só compreensível para quem a escreveu.',
+    delay: 140,
+    icon: 'lightbulb',
+  },
+  {
+    n: '04',
+    title: 'Implementação',
+    desc: 'Não entregamos ficheiros. Entregamos capacidade de operar sem depender de nós.',
+    delay: 200,
+    icon: 'code',
+  },
+];
+
+const contactPlans = [
+  {
+    name: 'Email',
+    price: 'geral@bolinatec.com',
+    sub: 'Resposta em 24h úteis',
+    features: ['Consultoria tecnológica', 'Agro e território', 'Desenvolvimento digital'],
+    delay: 0,
+  },
+  {
+    name: 'Reunião',
+    price: 'Agendar',
+    period: '/30 min',
+    sub: 'Falamos sobre o teu contexto',
+    features: ['Diagnóstico inicial', 'Encontro remoto ou presencial', 'Definição de próximos passos'],
+    highlight: true,
+    delay: 80,
+  },
+  {
+    name: 'Proposta',
+    price: 'Briefing',
+    sub: 'Ponto de partida para o projeto',
+    features: ['Levantamento de necessidades', 'Estimativa de esforço', 'Roadmap de implementação'],
+    delay: 140,
+  },
+];
+
+const auditLogs = [
+  { time: '12:34:21', action: 'diagnóstico_validado' },
+  { time: '12:34:18', action: 'proposta_revista' },
+  { time: '12:34:15', action: 'dados_consolidados' },
+  { time: '12:34:12', action: 'documentação_atualizada' },
+  { time: '12:34:09', action: 'entrega_registada' },
+];
+
+const products = [
+  {
+    category: 'agricultura',
+    title: 'HeliTube',
+    description: 'Monitorização contínua de sistemas de campo — pH, condutividade e rastreabilidade.',
+    slug: '/noticias/helitube-inovacao-agro',
+    icon: 'sun',
+  },
+  {
+    category: 'agricultura',
+    title: 'AgroPassaporte',
+    description: 'Dados de exploração, finanças e mercado no mesmo lugar — para decidir com contexto.',
+    slug: '/noticias/agro-dados-gestao',
+    icon: 'check',
+  },
+  {
+    category: 'cyber',
+    title: 'ioMts Neurais',
+    description: 'Sistemas de inteligência artificial para análise preditiva e automação de processos.',
+    slug: '/noticias/cyber-seguranca-ia',
+    icon: 'brain',
+  },
+  {
+    category: 'imobiliaria',
+    title: 'Imo Harmonia',
+    description: 'Menos retrabalho em projetos de arquitetura. Do regulamento à submissão, sem surpresas.',
+    slug: '/noticias/imo-arquitetura-digital',
+    icon: 'file',
+  },
+];
+---
+
+<Layout title="Bolina Tec | Consultoria Tecnológica" description="A Bolina Tec presta consultoria tecnológica e desenvolve soluções digitais aplicadas a agricultura, território e inovação técnica.">
+  <IntroAnimation />
+
+  <section id="sobre" class="relative h-screen overflow-hidden bg-black">
+    <HeroGL client:only="react" />
+
+    <div class="absolute inset-x-0 top-0 z-10 pointer-events-none" style="height:22%; background: linear-gradient(to bottom, #000 0%, transparent 100%);"></div>
+    <div class="absolute inset-x-0 bottom-0 z-10 pointer-events-none" style="height:28%; background: linear-gradient(to top, #000 0%, transparent 100%);"></div>
+
+    <div class="absolute inset-0 z-30 flex flex-col items-center justify-center px-6 md:px-12 text-center">
+      <h1
+        data-hero-title
+        class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-white leading-[1.05] tracking-tight mb-6 max-w-4xl"
+        style="font-family: 'IBM Plex Sans', sans-serif; opacity:0; filter:blur(24px); transform:translateY(32px); transition: opacity 1s cubic-bezier(0.16,1,0.3,1), filter 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);"
+      >
+        Consultoria Tecnológica<br />para o mundo real.
+      </h1>
+
+      <p
+        data-hero-subtitle
+        class="text-sm md:text-base text-white/45 max-w-xl mb-12"
+        style="font-family: 'IBM Plex Sans', sans-serif; opacity:0; filter:blur(12px); transform:translateY(16px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1) 200ms, filter 0.9s cubic-bezier(0.16,1,0.3,1) 200ms, transform 0.9s cubic-bezier(0.16,1,0.3,1) 200ms;"
+      >
+        Resolvemos problemas técnicos complexos em agricultura, território e sistemas digitais — do diagnóstico ao piloto.
+      </p>
+
+      <div class="flex gap-8 sm:gap-12">
+        {heroStats.map((stat, index) => (
+          <div
+            data-hero-stat
+            style={`opacity:0; filter:blur(16px); transform:translateY(20px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${280 + index * 80}ms, filter 0.8s cubic-bezier(0.16,1,0.3,1) ${280 + index * 80}ms, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${280 + index * 80}ms;`}
+          >
+            <div class="text-2xl sm:text-3xl text-white font-light tracking-tight" style="font-family: 'IBM Plex Sans', sans-serif;">{stat.value}</div>
+            <div class="text-xs text-white/35 tracking-widest uppercase mt-1" style="font-family: 'IBM Plex Sans', sans-serif;">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="solucoes" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+        <div>
+          <PixelIcon type="agents" size={40} />
+          <div class="mt-4"><Tag>SOLUÇÕES</Tag></div>
+          <RevealText class="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]" text={"Produtos\npor área."} />
+        </div>
+        <p class="text-sm text-black leading-relaxed max-w-xs">
+          Soluções construídas para problemas reais — não para demonstrações.
+        </p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-8 mb-12" data-product-tabs>
+        <button
+          data-tab="agricultura"
+          class="product-tab pb-2 text-sm tracking-widest transition-colors border-b-2 text-neutral-400 hover:text-black border-transparent font-medium"
+          style="font-family: 'IBM Plex Sans', sans-serif;"
+        >
+          Agricultura
+        </button>
+        <button
+          data-tab="cyber"
+          class="product-tab pb-2 text-sm tracking-widest transition-colors border-b-2 text-neutral-400 hover:text-black border-transparent font-medium"
+          style="font-family: 'IBM Plex Sans', sans-serif;"
+        >
+          Cyber + IA
+        </button>
+        <button
+          data-tab="imobiliaria"
+          class="product-tab pb-2 text-sm tracking-widest transition-colors border-b-2 text-neutral-400 hover:text-black border-transparent font-medium"
+          style="font-family: 'IBM Plex Sans', sans-serif;"
+        >
+          Imobiliária
+        </button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-products-grid>
+        {products.map((product) => (
+          <div data-category={product.category} class="product-card">
+            <a href={product.slug} class="block bg-white rounded-xl border border-neutral-200/60 p-8 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 text-left group">
+              <div class="w-12 h-12 rounded-lg border border-neutral-200/60 flex items-center justify-center mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-neutral-800">
+                  {product.icon === 'sun' && <><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></>}
+                  {product.icon === 'check' && <path d="M20 6 9 17l-5-5"/>}
+                  {product.icon === 'brain' && <><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></>}
+                  {product.icon === 'file' && <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></>}
+                </svg>
+              </div>
+              <h3 class="text-xl font-light mb-2" style="font-family: 'IBM Plex Sans', sans-serif;">{product.title}</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed mb-6">{product.description}</p>
+              <span class="text-xs tracking-widest uppercase text-neutral-600 hover:text-black transition-colors inline-flex items-center gap-2 group">
+                Saber mais
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform group-hover:translate-x-1">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="workflow" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06] overflow-hidden bg-[#0f0f0f]">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-20">
+        <p class="text-xs font-medium tracking-[0.3em] text-white/40 uppercase mb-4">COMO TRABALHAMOS</p>
+        <h2 class="text-4xl md:text-5xl font-light tracking-tight leading-[1.05] text-white">
+          Do contexto à entrega.<br />Em quatro passos.
+        </h2>
+      </div>
+
+      <div class="flex flex-col divide-y divide-white/[0.06]">
+        {methodCards.map((step, index) => (
+          <div class="group grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-6 md:gap-24 py-8 items-center hover:bg-white/[0.02] transition-colors px-4 -mx-4 rounded-xl">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 shrink-0 rounded-xl border border-white/10 flex items-center justify-center text-white/40 group-hover:border-white/20 group-hover:text-white/60 transition-colors">
+                {index === 0 && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>}
+                {index === 1 && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6 9 17l-5-5"/></svg>}
+                {index === 2 && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>}
+                {index === 3 && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>}
+              </div>
+              <h3 class="text-xl md:text-2xl font-light text-white">{step.title}</h3>
+            </div>
+            <p class="text-sm text-white/45 leading-relaxed group-hover:text-white/60 transition-colors">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="noticias" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+        <div>
+          <PixelIcon type="agents" size={40} />
+          <div class="mt-4"><Tag>NOTÍCIAS</Tag></div>
+          <RevealText class="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]" text={"Atualizações,\nprojetos e contexto."} />
+        </div>
+        <p class="text-sm text-black leading-relaxed max-w-xs">
+          O que estamos a construir, o que aprendemos no terreno e o que vale a pena acompanhar em tecnologia e território.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {newsPosts.map((post, index) => (
+          <a href={`/noticias/${post.id}`} class="group">
+            <BentoCard class="h-full p-7 flex flex-col justify-between" delay={index * 80}>
+              <div class="space-y-4">
+                <div class="text-[11px] tracking-[0.2em] text-black uppercase">
+                  {new Date(post.data.date).toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' })}
+                </div>
+                <h3 class="text-xl font-light leading-snug group-hover:translate-x-0.5 transition-transform">{post.data.title}</h3>
+                <p class="text-sm text-black leading-relaxed">{post.data.description}</p>
+              </div>
+              <div class="mt-8 text-xs tracking-widest uppercase text-black group-hover:text-black transition-colors">
+                Ler notícia
+              </div>
+            </BentoCard>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="equipa" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div>
+          <PixelIcon type="agents" size={40} />
+          <div class="mt-4"><Tag>EQUIPA</Tag></div>
+          <RevealText class="mt-5 text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.05]" text={"Pessoa certa,\npara o problema certo."} />
+          <p class="mt-6 text-base text-black leading-relaxed max-w-sm">
+            Consultoria, desenvolvimento e operação de campo na mesma equipa — para não haver gap entre quem pensa e quem executa.
+          </p>
+        </div>
+        <div class="relative">
+          <div class="bg-[#faf9f7] rounded-2xl border border-black/[0.07] p-8">
+            <div class="text-sm text-black leading-relaxed">
+              António Cerdeira<br />
+              <span class="text-black/50">CEO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section id="contacto" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06] bg-[#0a0a0a] overflow-hidden">
+  
+  <svg class="absolute w-0 h-0 pointer-events-none">
+    <defs>
+      <filter id="contact-metallic-fast" color-interpolation-filters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" result="noise1" seed="1" />
+        <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
+          <animate attributeName="dy" values="60; 0" dur="4s" repeatCount="indefinite" calcMode="linear" />
+        </feOffset>
+
+        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" result="noise2" seed="1" />
+        <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
+          <animate attributeName="dy" values="0; -60" dur="4s" repeatCount="indefinite" calcMode="linear" />
+        </feOffset>
+
+        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" result="noise3" seed="2" />
+        <feOffset in="noise3" dx="0" dy="0" result="offsetNoise3">
+          <animate attributeName="dx" values="60; 0" dur="4s" repeatCount="indefinite" calcMode="linear" />
+        </feOffset>
+
+        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" result="noise4" seed="2" />
+        <feOffset in="noise4" dx="0" dy="0" result="offsetNoise4">
+          <animate attributeName="dx" values="0; -60" dur="4s" repeatCount="indefinite" calcMode="linear" />
+        </feOffset>
+
+        <feComposite in="offsetNoise1" in2="offsetNoise2" result="part1" />
+        <feComposite in="offsetNoise3" in2="offsetNoise4" result="part2" />
+        <feBlend in="part1" in2="part2" mode="color-dodge" result="combinedNoise" />
+
+        <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="16" xChannelSelector="R" yChannelSelector="B" />
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="max-w-5xl mx-auto">
+    
+    <div class="text-center mb-20 flex flex-col items-center">
+      <PixelIcon type="platform" size={40} class="text-white" />
+      <div class="mt-4"><Tag class="bg-white/10 text-white border-white/20">CONTACTO</Tag></div>
+      <RevealText class="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05] text-white" text={"Vamos falar\nsobre o teu projeto."} />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+      {contactPlans.map((plan) => {
+        const isEmail = plan.price.includes('@');
+        const isHighlight = plan.highlight;
+        
+        let buttonText = "ENVIAR EMAIL";
+        if (plan.name.toLowerCase().includes('proposta') || plan.name.toLowerCase().includes('briefing')) buttonText = "PEDIR BRIEFING";
+        if (isHighlight) buttonText = "AGENDAR REUNIÃO";
+
+        return (
+          <div 
+            class={`rounded-2xl p-8 flex flex-col justify-between min-h-[480px] relative transition-all duration-300 group ${
+              isHighlight 
+                ? 'bg-[#0c0c0c] text-white border border-white/20 shadow-[0_0_40px_rgba(255,255,255,0.15)] md:scale-[1.04] z-10' 
+                : 'bg-[#161616] text-neutral-200 border border-white/[0.06] hover:border-white/20 hover:text-white shadow-[0_0_20px_rgba(255,255,255,0.02)]'
+            }`}
+          >
+            
+            <div class="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden transform-gpu will-change-[transform,opacity]">
+              
+              <div 
+                class={`absolute -inset-[1px] rounded-2xl border transform-gpu ${
+                  isHighlight ? 'border-white/90 opacity-100' : 'border-white/40 opacity-40 group-hover:opacity-100'
+                }`}
+                style="filter: url(#contact-metallic-fast);"
+              ></div>
+              
+              <div 
+                class={`absolute -inset-1 rounded-2xl bg-white/5 blur-sm transform-gpu transition-opacity duration-300 ${
+                  isHighlight ? 'opacity-100' : 'opacity-0 group-hover:opacity-70'
+                }`} 
+                style="filter: url(#contact-metallic-fast);"
+              ></div>
+              
+              <div class={`absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent transition-opacity ${
+                isHighlight ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+              }`}></div>
+            </div>
+
+            <div class="relative z-10">
+              <div class="mb-6">
+                <span class="font-mono text-[10px] tracking-widest uppercase px-2.5 py-1 rounded border border-white/10 bg-white/[0.04] text-neutral-300">
+                  {plan.name}
+                </span>
+              </div>
+              
+              <div class="mb-2">
+                <span class={`font-light leading-tight tracking-tight block ${isEmail ? 'text-lg font-normal text-white break-all' : 'text-3xl text-white'}`}>
+                  {plan.price}
+                </span>
+                {plan.period && <span class="text-xs font-mono text-neutral-400 block mt-1">{plan.period}</span>}
+              </div>
+              
+              <p class="text-xs mt-3 leading-relaxed text-neutral-400">
+                {plan.sub}
+              </p>
+
+              <div class="h-[1px] my-6 bg-white/10"></div>
+
+              <ul class="space-y-3.5">
+                {plan.features.map((feature) => (
+                  <li class="flex items-start gap-2.5 text-xs">
+                    <span class="w-1 h-1 rounded-full mt-1.5 shrink-0 bg-white/40"></span>
+                    <span class="text-neutral-300 group-hover:text-neutral-200 transition-colors">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="pt-8 relative z-10">
+              <button
+                type="button"
+                class={`w-full py-3 rounded-xl text-xs font-mono tracking-widest uppercase transition-all duration-200 ${
+                  isHighlight 
+                    ? 'bg-white text-black font-semibold hover:bg-neutral-200 shadow-[0_4px_25px_rgba(255,255,255,0.25)]' 
+                    : 'bg-[#262626] text-white border border-white/5 hover:bg-[#323232] hover:border-white/10'
+                }`}
+              >
+                {buttonText}
+              </button>
+            </div>
+
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+</section>
+
+  <section class="relative py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06] overflow-hidden">
+    <img
+      src="/images/footer.png"
+      alt=""
+      aria-hidden="true"
+      class="absolute bottom-0 left-0 w-full object-cover object-bottom pointer-events-none select-none"
+      style="opacity:0.85;"
+    />
+    <div class="absolute inset-0 pointer-events-none" style="mask-image: linear-gradient(to top, transparent 0%, black 55%); -webkit-mask-image: linear-gradient(to top, transparent 0%, black 55%); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);"></div>
+    <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(to top, rgb(245,244,240) 0%, rgba(245,244,240,0.92) 18%, rgba(245,244,240,0.55) 35%, transparent 55%);"></div>
+    <div class="relative z-10 max-w-2xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.05] mb-6">
+        Recebe novidades<br />ou pede contacto direto.
+      </h2>
+      <p class="text-sm text-black leading-relaxed mb-10">
+        Partilha o contexto do projeto. Respondemos com um próximo passo concreto — não com uma proposta genérica.
+      </p>
+      <form data-join-form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+        <input
+          data-join-input
+          type="email"
+          placeholder="email@email.com"
+          required
+          class="flex-1 bg-white border border-black/10 rounded-xl px-4 py-3 text-sm text-[#111] placeholder:text-black/40 focus:outline-none focus:border-black/25 transition-colors"
+        />
+        <button type="submit" class="px-8 py-3 bg-[#111] text-white text-sm rounded-xl hover:bg-[#333] transition-colors tracking-widest font-medium">
+          Pedir Contacto
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <script is:inline>
+    (() => {
+      if (window.__agenticHomeInitialized) return;
+      window.__agenticHomeInitialized = true;
+
+      const LETTERS_IN_TOTAL = 90 * (7 - 1) + 700 + 300;
+      const LETTERS_OUT_TOTAL = 55 * (7 - 1) + 450;
+      const CURTAIN_DELAY = LETTERS_IN_TOTAL + 100;
+      const CURTAIN_DURATION = 1300;
+      const HERO_REVEAL_MS = CURTAIN_DELAY + CURTAIN_DURATION - 150;
+      const ANIM_TOTAL = CURTAIN_DELAY + LETTERS_OUT_TOTAL + 1400;
+
+      const intro = document.querySelector('[data-intro-animation]');
+      const introLetters = intro ? Array.from(intro.querySelectorAll('[data-intro-letter]')) : [];
+      const curtain = intro ? intro.querySelector('[data-intro-curtain]') : null;
+      const heroTitle = document.querySelector('[data-hero-title]');
+      const heroSubtitle = document.querySelector('[data-hero-subtitle]');
+      const heroStats = Array.from(document.querySelectorAll('[data-hero-stat]'));
+      const heroSection = document.querySelector('#sobre');
+      const heroVideo = document.querySelector('[data-hero-video]');
+
+      const setLetters = (phase) => {
+        introLetters.forEach((letter, index) => {
+          const inDelay = index * 90;
+          const outDelay = index * 55;
+          const transitionIn = `opacity 700ms cubic-bezier(0.16,1,0.3,1) ${inDelay}ms, filter 700ms cubic-bezier(0.16,1,0.3,1) ${inDelay}ms, transform 700ms cubic-bezier(0.16,1,0.3,1) ${inDelay}ms`;
+          const transitionOut = `opacity 450ms cubic-bezier(0.4,0,1,1) ${outDelay}ms, filter 450ms cubic-bezier(0.4,0,1,1) ${outDelay}ms, transform 450ms cubic-bezier(0.4,0,1,1) ${outDelay}ms`;
+          letter.style.transition = phase === 'in' ? transitionIn : phase === 'out' ? transitionOut : 'none';
+          letter.style.opacity = phase === 'in' ? '1' : '0';
+          letter.style.filter = phase === 'in' ? 'blur(0px)' : phase === 'out' ? 'blur(24px)' : 'blur(36px)';
+          letter.style.transform = phase === 'in' ? 'translateY(0px)' : phase === 'out' ? 'translateY(-20px)' : 'translateY(48px)';
+        });
+      };
+
+      setTimeout(() => setLetters('in'), 80);
+      setTimeout(() => setLetters('out'), LETTERS_IN_TOTAL);
+
+      if (curtain) {
+        setTimeout(() => {
+          curtain.style.bottom = '100%';
+          curtain.style.transition = 'bottom 1.3s cubic-bezier(0.76, 0, 0.24, 1)';
+        }, CURTAIN_DELAY);
+      }
+
+      setTimeout(() => {
+        if (heroTitle) {
+          heroTitle.style.opacity = '1';
+          heroTitle.style.filter = 'blur(0px)';
+          heroTitle.style.transform = 'translateY(0px)';
+        }
+        if (heroSubtitle) {
+          heroSubtitle.style.opacity = '1';
+          heroSubtitle.style.filter = 'blur(0px)';
+          heroSubtitle.style.transform = 'translateY(0px)';
+        }
+        heroStats.forEach((stat) => {
+          stat.style.opacity = '1';
+          stat.style.filter = 'blur(0px)';
+          stat.style.transform = 'translateY(0px)';
+        });
+        if (heroVideo) {
+          heroVideo.style.transform = 'scale(1.05)';
+        }
+      }, HERO_REVEAL_MS);
+
+      setTimeout(() => {
+        if (intro) intro.remove();
+      }, ANIM_TOTAL);
+
+      document.querySelectorAll('[data-reveal-text]').forEach((el) => {
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0]?.isIntersecting) {
+            el.setAttribute('data-visible', 'true');
+            observer.disconnect();
+          }
+        }, { threshold: 0.2 });
+        observer.observe(el);
+      });
+
+      document.querySelectorAll('[data-bento-card]').forEach((card) => {
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0]?.isIntersecting) {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0px)';
+            observer.disconnect();
+          }
+        }, { threshold: 0.1 });
+        observer.observe(card);
+      });
+
+      document.querySelectorAll('[data-mouse-glow]').forEach((container) => {
+        container.addEventListener('pointermove', (event) => {
+          const rect = container.getBoundingClientRect();
+          container.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`);
+          container.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);
+        });
+      });
+
+      const setupMobileNav = () => {
+        const nav = document.querySelector('[data-mobile-nav]');
+        if (!nav) return;
+        const toggle = nav.querySelector('[data-mobile-toggle]');
+        const panel = nav.querySelector('[data-mobile-panel]');
+        const lines = Array.from(nav.querySelectorAll('[data-burger-line]'));
+        const closeLinks = Array.from(nav.querySelectorAll('[data-mobile-close]'));
+
+        const sync = (open) => {
+          if (!panel || !toggle) return;
+          panel.style.maxHeight = open ? '320px' : '0px';
+          panel.style.opacity = open ? '1' : '0';
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+          if (lines[0]) lines[0].style.transform = open ? 'translateY(6px) rotate(45deg)' : 'none';
+          if (lines[1]) lines[1].style.opacity = open ? '0' : '1';
+          if (lines[1]) lines[1].style.transform = open ? 'scaleX(0)' : 'none';
+          if (lines[2]) lines[2].style.transform = open ? 'translateY(-6px) rotate(-45deg)' : 'none';
+          nav.dataset.open = open ? 'true' : 'false';
+        };
+
+        toggle?.addEventListener('click', () => sync(nav.dataset.open !== 'true'));
+        closeLinks.forEach((link) => link.addEventListener('click', () => sync(false)));
+      };
+
+      setupMobileNav();
+
+      const nav = document.querySelector('[data-mobile-nav]');
+      const syncNavTheme = () => {
+        if (!nav || !heroSection) return;
+        const heroBottom = heroSection.getBoundingClientRect().bottom;
+        nav.dataset.theme = heroBottom > 80 ? 'dark' : 'light';
+      };
+      syncNavTheme();
+      window.addEventListener('scroll', syncNavTheme, { passive: true });
+
+      const stacking = document.querySelector('[data-stacking-agent-cards]');
+      if (stacking) {
+        const cards = Array.from(stacking.querySelectorAll('[data-stacking-card]'));
+        const STICKY_TOP = 80;
+        const STICKY_STEP = 16;
+        const SCALE_STEP = 0.04;
+        const OFFSET_STEP = 8;
+
+        const update = () => {
+          const depth = cards.map((card, i) => {
+            let count = 0;
+            for (let j = i + 1; j < cards.length; j++) {
+              const rect = cards[j].getBoundingClientRect();
+              const stickyTop = STICKY_TOP + j * STICKY_STEP;
+              if (rect.top <= stickyTop + 2) count += 1;
+            }
+            return count;
+          });
+
+          cards.forEach((card, i) => {
+            const inner = card.firstElementChild;
+            const d = depth[i];
+            const scale = 1 - d * SCALE_STEP;
+            const translateY = d * OFFSET_STEP;
+            if (inner) {
+              inner.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+            }
+          });
+        };
+
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+      }
+
+      const joinForm = document.querySelector('[data-join-form]');
+      const joinSuccess = document.querySelector('[data-join-success]');
+      const joinInput = document.querySelector('[data-join-input]');
+      joinForm?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!joinInput || !joinInput.value) return;
+        joinForm.classList.add('hidden');
+        joinSuccess?.classList.remove('hidden');
+      });
+
+      // Product Tabs Logic
+      const setupProductTabs = () => {
+        const tabsContainer = document.querySelector('[data-product-tabs]');
+        const productsGrid = document.querySelector('[data-products-grid]');
+        
+        if (!tabsContainer || !productsGrid) return;
+
+        const tabs = Array.from(tabsContainer.querySelectorAll('.product-tab'));
+        const productCards = Array.from(productsGrid.querySelectorAll('.product-card'));
+
+        const setActiveTab = (activeCategory) => {
+          // Update tab styles
+          tabs.forEach(tab => {
+            const tabCategory = tab.getAttribute('data-tab');
+            if (tabCategory === activeCategory) {
+              tab.classList.add('border-black', 'text-black');
+              tab.classList.remove('text-neutral-400', 'border-transparent');
+            } else {
+              tab.classList.remove('border-black', 'text-black');
+              tab.classList.add('text-neutral-400', 'border-transparent');
+            }
+          });
+
+          // Filter products with fade effect
+          productCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (category === activeCategory) {
+              card.style.opacity = '0';
+              card.style.transform = 'translateY(10px)';
+              setTimeout(() => {
+                card.style.display = 'block';
+                setTimeout(() => {
+                  card.style.opacity = '1';
+                  card.style.transform = 'translateY(0)';
+                }, 50);
+              }, 200);
+            } else {
+              card.style.opacity = '0';
+              card.style.transform = 'translateY(10px)';
+              setTimeout(() => {
+                card.style.display = 'none';
+              }, 200);
+            }
+          });
+        };
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            const category = tab.getAttribute('data-tab');
+            setActiveTab(category);
+          });
+        });
+
+        // Initialize with first tab
+        setActiveTab('agricultura');
+      };
+
+      setupProductTabs();
+    })();
+  </script>
+</Layout>

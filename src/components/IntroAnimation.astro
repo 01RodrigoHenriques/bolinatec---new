@@ -1,0 +1,20 @@
+---
+const letters = ['B', 'O', 'L', 'I', 'N', 'A','T', 'E', 'C'];
+---
+
+<div data-intro-animation data-phase="idle" class="fixed inset-0 z-[100] pointer-events-none" aria-hidden="true">
+  <div data-intro-curtain class="absolute inset-x-0 top-0" style="bottom:0%; background:#000000;"></div>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div class="flex" style="gap:0.05em;">
+      {letters.map((letter, index) => (
+        <span
+          data-intro-letter
+          class="font-sans font-bold text-white leading-none select-none"
+          style={`font-size: calc((100vw - 64px) / ${letters.length}); letter-spacing:0.05em; opacity:0; filter:blur(36px); transform:translateY(48px); will-change: opacity, filter, transform;`}
+        >
+          {letter}
+        </span>
+      ))}
+    </div>
+  </div>
+</div>

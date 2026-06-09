@@ -1,0 +1,60 @@
+---
+const seedRows = [
+  { id: 'A1B2C3', name: 'ana-sousa', task: 'Diagnóstico técnico em andamento', region: 'consultoria', status: 'disponível', progress: 42, elapsed: '3m 12s' },
+  { id: 'D4E5F6', name: 'rui-matos', task: 'Validação de proposta com cliente', region: 'agricultura', status: 'em reunião', progress: 67, elapsed: '7m 48s' },
+  { id: 'G7H8I9', name: 'maria-costa', task: 'Levantamento de dados de território', region: 'território', status: 'em campo', progress: 18, elapsed: '1m 05s' },
+  { id: 'J0K1L2', name: 'tiago-ferreira', task: 'Preparação de implementação digital', region: 'produto', status: 'disponível', progress: 55, elapsed: '5m 30s' },
+  { id: 'M3N4O5', name: 'ines-pereira', task: 'Documentação de projeto e entregáveis', region: 'operações', status: 'online', progress: 80, elapsed: '11m 22s' },
+  { id: 'P6Q7R8', name: 'luis-fernandes', task: 'Acompanhamento de execução em cliente', region: 'parcerias', status: 'concluído', progress: 99, elapsed: '14m 01s' },
+];
+---
+
+<div data-live-agent-feed style="border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; overflow: hidden; background: rgba(255,255,255,0.7);">
+  <div style="display:grid; grid-template-columns:80px 1fr 80px 70px; padding:8px 16px; border-bottom:1px solid rgba(0,0,0,0.06); background: rgba(0,0,0,0.03);">
+    <span style="font-size:8px; letter-spacing:0.16em; color:rgba(0,0,0,0.30); font-family: monospace;">MEMBRO</span>
+    <span style="font-size:8px; letter-spacing:0.16em; color:rgba(0,0,0,0.30); font-family: monospace;">FOCO</span>
+    <span style="font-size:8px; letter-spacing:0.16em; color:rgba(0,0,0,0.30); font-family: monospace;">ÁREA</span>
+    <span style="font-size:8px; letter-spacing:0.16em; color:rgba(0,0,0,0.30); font-family: monospace;">DISP.</span>
+  </div>
+
+  <div data-live-agent-feed-rows style="overflow:hidden;">
+    {seedRows.map((row, i) => (
+      <div
+        style={`display:grid; grid-template-columns:80px 1fr 80px 70px; padding:10px 16px; border-bottom:1px solid rgba(0,0,0,0.04); gap:8px; align-items:center; ${i === seedRows.length - 1 ? 'animation: rowSlideIn 0.4s cubic-bezier(0.16,1,0.3,1) both;' : ''}`}
+      >
+        <div>
+          <div style="font-size:9px; font-family: monospace; color:rgba(0,0,0,0.65); margin-bottom:1px;">{row.name}</div>
+          <div style="font-size:7.5px; font-family: monospace; color:rgba(0,0,0,0.25);">#{row.id}</div>
+        </div>
+
+        <div style="min-width:0;">
+          <div style="font-size:9px; color:rgba(0,0,0,0.50); line-height:1.35; margin-bottom:5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{row.task}</div>
+          <div style="width:100%; height:2px; background:rgba(0,0,0,0.08); border-radius:9px;">
+            <div style={`height:100%; border-radius:9px; width:${row.progress}%; background:rgba(0,0,0,0.35); transition: width 0.5s linear;`}></div>
+          </div>
+        </div>
+
+        <div style="font-size:8px; font-family: monospace; color:rgba(0,0,0,0.30);">{row.region}</div>
+
+        <div style="display:flex; align-items:center; gap:5px;">
+          <span
+            style={`width:5px; height:5px; border-radius:50%; background:${row.status === 'disponível' ? '#4ade80' : row.status === 'em reunião' ? '#facc15' : row.status === 'em campo' ? '#60a5fa' : row.status === 'online' ? '#14b8a6' : '#94a3b8'}; box-shadow:${row.status === 'disponível' || row.status === 'online' ? '0 0 6px rgba(74, 222, 128, 0.8)' : 'none'}; animation:${row.status === 'disponível' || row.status === 'online' ? 'statusPulse 2s ease-in-out infinite' : 'none'}; flex-shrink:0;`}
+          ></span>
+          <span style="font-size:8px; font-family: monospace; color:rgba(0,0,0,0.35); text-transform:lowercase;">{row.status}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <style>
+    @keyframes rowSlideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+  </style>
+</div>

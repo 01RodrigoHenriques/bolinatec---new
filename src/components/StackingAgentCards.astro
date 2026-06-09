@@ -1,0 +1,69 @@
+---
+const agents = [
+  {
+    label: 'HELI TUBE',
+    title: 'HeliTube',
+    desc: 'Monitorização contínua de sistemas de campo — pH, condutividade e rastreabilidade numa plataforma observável.',
+    stats: [],
+    img: '/images/arc.png',
+  },
+  {
+    label: 'AGRO HARMONIA',
+    title: 'Agro Harmonia',
+    desc: 'Dados de exploração, finanças e mercado no mesmo lugar — para decidir com contexto, não com intuição.',
+    stats: [],
+    img: '/images/arc.png',
+  },
+  {
+    label: 'IMO HARMONIA',
+    title: 'Imo Harmonia',
+    desc: 'Menos retrabalho em projetos de arquitetura. Do regulamento à submissão, sem surpresas documentais.',
+    stats: [],
+    img: '/images/arc.png',
+  },
+];
+---
+
+<div data-stacking-agent-cards style="display:flex; flex-direction:column; perspective:1400px; perspective-origin:50% 0%;">
+  {agents.map((agent, index) => (
+    <div data-stacking-card class="sticky mb-4" style={`top:${80 + index * 16}px; z-index:${10 + index};`}>
+      <div style="transform-origin:top center; transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); will-change: transform;">
+        <div class="group relative bg-[#faf9f7] rounded-2xl border border-black/[0.07] overflow-hidden cursor-pointer">
+          <div class="relative w-full h-52 pointer-events-none md:hidden">
+            <img
+              src={agent.img}
+              alt={agent.label}
+              class="absolute inset-0 w-full h-full object-cover object-center"
+              style="mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 85%); -webkit-mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 85%);"
+            />
+          </div>
+
+          <div class="hidden md:block absolute inset-y-0 right-0 w-1/2 pointer-events-none">
+            <img src={agent.img} alt={agent.label} class="w-full h-full object-cover object-center" />
+            <div class="absolute inset-0" style="background: linear-gradient(to right, #faf9f7 0%, transparent 55%);"></div>
+          </div>
+
+          <div class="relative z-10 p-8">
+            <div class="md:max-w-[60%]">
+              <div class="flex items-start justify-between mb-6">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] tracking-widest font-sans text-black/40 bg-black/[0.04]">{agent.label}</span>
+              </div>
+              <h3 class="text-xl font-light mb-3">{agent.title}</h3>
+              <p class="text-sm text-black/45 leading-relaxed mb-8">{agent.desc}</p>
+            </div>
+            {agent.stats.length > 0 && (
+              <div class="flex gap-8 pt-6 border-t border-black/[0.06]">
+                {agent.stats.map((stat) => (
+                  <div>
+                    <div class="text-2xl font-light">{stat.v}</div>
+                    <div class="text-[11px] text-black/35 tracking-widest mt-0.5">{stat.l}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>

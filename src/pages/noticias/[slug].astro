@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Tag from '../../components/Tag.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('news');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} | Bolina Tec`} description={post.data.description}>
+  <article class="py-32 px-6 md:px-12 lg:px-20">
+    <div class="max-w-3xl mx-auto">
+      <Tag>NOTÍCIAS</Tag>
+      <h1 class="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]">{post.data.title}</h1>
+      <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-black/40">
+        <span>{new Date(post.data.date).toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+        {post.data.author && <span>{post.data.author}</span>}
+      </div>
+
+      {post.data.image && (
+        <img
+          src={post.data.image}
+          alt={post.data.title}
+          class="mt-10 w-full rounded-2xl border border-black/[0.06] object-cover"
+        />
+      )}
+
+      <div class="prose prose-neutral max-w-none mt-10 prose-headings:font-light prose-a:text-black prose-a:underline prose-p:text-black/70">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Layout>

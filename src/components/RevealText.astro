@@ -1,0 +1,66 @@
+---
+const {
+  text,
+  class: className = '',
+  as = 'h2',
+  stagger = 80,
+  duration = 700,
+  delay = 0,
+} = Astro.props;
+
+const lines = String(text).split('\n');
+const words: Array<{ word: string; index: number }> = [];
+let wordIndex = 0;
+
+for (const line of lines) {
+  const chunks = line.split(' ');
+  chunks.forEach((word, i) => {
+    if (!word) return;
+    words.push({
+      word: i < chunks.length - 1 ? `${word}&nbsp;` : word,
+      index: wordIndex++,
+    });
+  });
+  if (line !== lines[lines.length - 1]) {
+    words.push({ word: '\n', index: wordIndex++ });
+  }
+}
+
+const Tag = as;
+---
+
+<Tag
+  class={`reveal-text block overflow-hidden ${className}`}
+  data-reveal-text
+  data-visible="false"
+  style={`--reveal-duration:${duration}ms; --reveal-stagger:${stagger}ms; --reveal-base:${delay}ms;`}
+>
+  {words.map((item) => item.word === '\n' ? (
+    <br />
+  ) : (
+    <span
+      class="reveal-word"
+      style={`--reveal-delay:${delay + item.index * stagger}ms;`}
+      set:html={item.word}
+    ></span>
+  ))}
+</Tag>
+
+<style>
+  .reveal-text .reveal-word {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(12px);
+    transition-property: opacity, filter, transform;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    transition-duration: var(--reveal-duration);
+  }
+
+  .reveal-text[data-visible='true'] .reveal-word {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+    transition-delay: var(--reveal-delay);
+  }
+</style>

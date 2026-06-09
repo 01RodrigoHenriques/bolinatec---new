@@ -1,0 +1,71 @@
+---
+import MobileNav from '../components/MobileNav.astro';
+import '../styles/global.css';
+
+const {
+  title = 'Bolina Tec | Consultoria Tecnológica',
+  description = 'A Bolina Tec presta consultoria tecnológica e desenvolve soluções digitais aplicadas a agricultura, território e inovação técnica.',
+} = Astro.props;
+
+const navLinks = [
+  { label: 'Sobre', href: '#sobre' },
+  { label: 'Serviços', href: '#servicos' },
+  { label: 'Soluções', href: '#solucoes' },
+  { label: 'Equipa', href: '#equipa' },
+  { label: 'Notícias', href: '#noticias' },
+  { label: 'Contacto', href: '#contacto' },
+];
+
+const legalLinks = [
+  { label: 'Privacidade', href: '#' },
+  { label: 'Termos', href: '#' },
+  { label: 'bolinatec.com', href: 'https://bolinatec.com' },
+];
+---
+
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  </head>
+  <body class="font-sans antialiased bg-[#F5F4F0] text-[#111] min-h-screen">
+    <header>
+      <MobileNav />
+    </header>
+    <main>
+      <slot />
+    </main>
+
+    <footer class="bg-[#0a0a0a] py-10 px-6 md:px-12 lg:px-20 border-t border-white/[0.06]">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <span class="font-pixel text-xs tracking-[0.25em] text-white/50">BOLINA TEC</span>
+
+        <div class="flex flex-wrap items-center gap-x-8 gap-y-3">
+          {navLinks.map((link) => (
+            <a href={link.href} class="text-xs text-white/35 hover:text-white/70 transition-colors tracking-widest">
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <div class="flex items-center gap-6">
+          {legalLinks.map((link) => (
+            <a href={link.href} class="text-xs text-white/25 hover:text-white/55 transition-colors tracking-widest">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+      <div class="max-w-6xl mx-auto mt-8 pt-6 border-t border-white/[0.04]">
+        <span class="text-xs text-white/20">&copy; 2026 Bolina Tec. Todos os direitos reservados.</span>
+      </div>
+    </footer>
+  </body>
+</html>
