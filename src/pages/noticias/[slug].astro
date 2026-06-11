@@ -15,7 +15,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={`${post.data.title} | Bolina Tec`} description={post.data.description}>
+<Layout title={`${post.data.title} | Bolina Tec`} description={post.data.description ?? 'Notícias, projetos e atualizações da Bolina Tec.'}
   <article class="py-32 px-6 md:px-12 lg:px-20">
     <div class="max-w-3xl mx-auto">
       <Tag>NOTÍCIAS</Tag>
@@ -36,4 +36,13 @@ const { Content } = await render(post);
       </div>
     </div>
   </article>
+  <script is:inline>
+  const nav = document.querySelector('[data-mobile-nav]');
+  const syncNavTheme = () => {
+    if (!nav) return;
+    nav.dataset.theme = 'light';
+  };
+  syncNavTheme();
+  window.addEventListener('scroll', syncNavTheme, { passive: true });
+</script>
 </Layout>

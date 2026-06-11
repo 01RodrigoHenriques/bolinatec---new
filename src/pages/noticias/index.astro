@@ -24,13 +24,13 @@ const noticias = (await getCollection('noticias')).sort((a, b) => b.data.date.ge
           <a href={`/noticias/${post.id}`} class="group">
             <BentoCard class="h-full p-7 flex flex-col justify-between" delay={index * 80}>
               <div class="space-y-4">
-                <div class="text-[11px] tracking-[0.2em] text-black/30 uppercase">
+                <div class="text-[11px] tracking-[0.2em] text-black/50 uppercase">
                   {new Date(post.data.date).toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' })}
                 </div>
                 <h2 class="text-xl font-light leading-snug group-hover:translate-x-0.5 transition-transform">{post.data.title}</h2>
-                <p class="text-sm text-black/45 leading-relaxed">{post.data.description}</p>
+                <p class="text-sm text-black/60 leading-relaxed">{post.data.description}</p>
               </div>
-              <div class="mt-8 text-xs tracking-widest uppercase text-black/35 group-hover:text-black/60 transition-colors">
+              <div class="mt-8 text-xs tracking-widest uppercase text-black/50 group-hover:text-black transition-colors">
                 Ler notícia
               </div>
             </BentoCard>
@@ -39,4 +39,17 @@ const noticias = (await getCollection('noticias')).sort((a, b) => b.data.date.ge
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    document.querySelectorAll('[data-bento-card]').forEach((card) => {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0]?.isIntersecting) {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0px)';
+          observer.disconnect();
+        }
+      }, { threshold: 0.1 });
+      observer.observe(card);
+    });
+  </script>
 </Layout>

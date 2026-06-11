@@ -596,11 +596,19 @@ const products = [
       setupMobileNav();
 
       const nav = document.querySelector('[data-mobile-nav]');
-      const syncNavTheme = () => {
-        if (!nav || !heroSection) return;
-        const heroBottom = heroSection.getBoundingClientRect().bottom;
-        nav.dataset.theme = heroBottom > 80 ? 'dark' : 'light';
-      };
+const syncNavTheme = () => {
+  if (!nav) return;
+  const darkSections = Array.from(document.querySelectorAll('#sobre, #workflow, #contacto'));
+  let isDark = false;
+  for (const section of darkSections) {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= 80 && rect.bottom >= 80) {
+      isDark = true;
+      break;
+    }
+  }
+  nav.dataset.theme = isDark ? 'dark' : 'light';
+};
       syncNavTheme();
       window.addEventListener('scroll', syncNavTheme, { passive: true });
 
