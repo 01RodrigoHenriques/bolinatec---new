@@ -5,7 +5,7 @@ import BentoCard from '../../components/BentoCard.astro';
 import RevealText from '../../components/RevealText.astro';
 import Tag from '../../components/Tag.astro';
 
-const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const noticias = (await getCollection('noticias')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <Layout title="Notícias | Bolina Tec" description="Notícias, projetos e atualizações da Bolina Tec.">
@@ -20,7 +20,7 @@ const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() 
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-        {news.map((post, index) => (
+        {noticias.map((post, index) => (
           <a href={`/noticias/${post.id}`} class="group">
             <BentoCard class="h-full p-7 flex flex-col justify-between" delay={index * 80}>
               <div class="space-y-4">

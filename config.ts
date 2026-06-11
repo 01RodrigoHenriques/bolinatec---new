@@ -1,8 +1,7 @@
 import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
 
-const noticias = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/noticias' }),
+const noticiasCollection = defineCollection({
+  type: 'content',
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
@@ -12,8 +11,8 @@ const noticias = defineCollection({
   }),
 });
 
-const paginas = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/paginas' }),
+const paginasCollection = defineCollection({
+  type: 'content',
   schema: z.object({
     title: z.string(),
     slug: z.string(),
@@ -24,8 +23,8 @@ const paginas = defineCollection({
   }),
 });
 
-const projetos = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/projetos' }),
+const projetosCollection = defineCollection({
+  type: 'content',
   schema: z.object({
     title: z.string(),
     area: z.enum(['agricultura', 'território', 'inovação']),
@@ -34,8 +33,8 @@ const projetos = defineCollection({
   }),
 });
 
-const equipa = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/equipa' }),
+const equipaCollection = defineCollection({
+  type: 'content',
   schema: z.object({
     name: z.string(),
     role: z.string(),
@@ -44,4 +43,9 @@ const equipa = defineCollection({
   }),
 });
 
-export const collections = { noticias, paginas, projetos, equipa };
+export const collections = {
+  noticias: noticiasCollection,
+  paginas: paginasCollection,
+  projetos: projetosCollection,
+  equipa: equipaCollection,
+};

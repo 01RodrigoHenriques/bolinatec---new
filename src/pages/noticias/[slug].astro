@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Tag from '../../components/Tag.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('news');
+  const posts = await getCollection('noticias');
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
@@ -22,17 +22,15 @@ const { Content } = await render(post);
       <h1 class="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]">{post.data.title}</h1>
       <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-black/40">
         <span>{new Date(post.data.date).toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
-        {post.data.author && <span>{post.data.author}</span>}
+        {post.data.category && <span>{post.data.category}</span>}
       </div>
-
-      {post.data.image && (
-        <img
-          src={post.data.image}
-          alt={post.data.title}
-          class="mt-10 w-full rounded-2xl border border-black/[0.06] object-cover"
-        />
-      )}
-
+{post.data.coverImage && (
+    <img
+       src={post.data.coverImage}
+       alt={post.data.title}
+       class="mt-10 w-full rounded-2xl border border-black/[0.06] object-cover"
+   />
+  )}
       <div class="prose prose-neutral max-w-none mt-10 prose-headings:font-light prose-a:text-black prose-a:underline prose-p:text-black/70">
         <Content />
       </div>

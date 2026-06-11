@@ -1,22 +1,67 @@
+local_backend: true
+
 backend:
   name: github
-  repo: REPO_PLACEHOLDER/bolinatec-site
+  repo: 01RodrigoHenriques/bolinatec---new   
   branch: main
+  # auth_proxy_url: https://SEU_WORKER.workers.dev/auth 
 
-media_folder: public/images
-public_folder: /images
+media_folder: public/images/uploads
+public_folder: /images/uploads
 
 collections:
-  - name: news
+  - name: noticias
     label: Notícias
-    folder: src/content/news
+    folder: src/content/noticias
     create: true
     slug: "{{slug}}"
     fields:
       - { label: Título, name: title, widget: string }
-      - { label: Descrição, name: description, widget: text }
+      - { label: Descrição Curta, name: description, widget: text, required: false }
       - { label: Data, name: date, widget: datetime }
-      - { label: Autor, name: author, widget: string, required: false }
-      - { label: Imagem, name: image, widget: image, required: false }
-      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Categoria, name: category, widget: string, required: false }
+      - { label: Imagem de Capa, name: coverImage, widget: image, required: false }
       - { label: Conteúdo, name: body, widget: markdown }
+
+  - name: paginas
+    label: Páginas
+    folder: src/content/paginas
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string }
+      - label: SEO
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Meta Título, name: metaTitle, widget: string, required: false }
+          - { label: Meta Descrição, name: metaDescription, widget: text, required: false }
+      - { label: Conteúdo, name: body, widget: markdown }
+
+  - name: projetos
+    label: Projetos
+    folder: src/content/projetos
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Título, name: title, widget: string }
+      - label: Área
+        name: area
+        widget: select
+        options: ["agricultura", "território", "inovação"]
+      - { label: Descrição Curta, name: shortDescription, widget: text }
+      - { label: Imagem, name: image, widget: image, required: false }
+      - { label: Conteúdo, name: body, widget: markdown }
+
+  - name: equipa
+    label: Equipa
+    folder: src/content/equipa
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Nome, name: name, widget: string }
+      - { label: Cargo, name: role, widget: string }
+      - { label: Foto, name: photo, widget: image, required: false }
+      - { label: Bio Curta, name: shortBio, widget: text, required: false }

@@ -8,7 +8,7 @@ import PixelIcon from '../components/PixelIcon.astro';
 import BentoCard from '../components/BentoCard.astro';
 import { HeroGL } from '../components/HeroGL';
 
-const newsPosts = (await getCollection('news'))
+const newsPosts = (await getCollection('noticias'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
 
