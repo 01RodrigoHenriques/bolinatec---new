@@ -3,6 +3,7 @@ backend:
   repo: 01RodrigoHenriques/bolinatec---new
   branch: main
   auth_proxy_url: https://auth.bolinatecconsulting.workers.dev/auth
+  auth_endpoint: auth  # opcional, pode ser omitido se o endpoint for o mesmo do auth_proxy_url
 
 media_folder: public/images/uploads
 public_folder: /images/uploads
