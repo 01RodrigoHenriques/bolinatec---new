@@ -22,23 +22,6 @@ collections:
       - { label: Imagem de Capa, name: coverImage, widget: image, required: false }
       - { label: Conteudo, name: body, widget: markdown }
 
-  - name: paginas
-    label: Paginas
-    folder: src/content/paginas
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: Titulo, name: title, widget: string }
-      - { label: Slug, name: slug, widget: string }
-      - label: SEO
-        name: seo
-        widget: object
-        collapsed: true
-        fields:
-          - { label: Meta Titulo, name: metaTitle, widget: string, required: false }
-          - { label: Meta Descricao, name: metaDescription, widget: text, required: false }
-      - { label: Conteudo, name: body, widget: markdown }
-
   - name: projetos
     label: Projetos
     folder: src/content/projetos

@@ -28,7 +28,7 @@ const projetos = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projetos' }),
   schema: z.object({
     title: z.string(),
-    area: z.enum(['agricultura', 'território', 'inovação']),
+    area: z.enum(['agricultura', 'territorio', 'inovacao']),
     shortDescription: z.string(),
     image: z.string().optional(),
   }),

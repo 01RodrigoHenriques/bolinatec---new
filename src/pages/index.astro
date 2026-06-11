@@ -12,40 +12,29 @@ const newsPosts = (await getCollection('noticias'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
 
-const heroStats = [
-  { value: '', label: '' },
-  { value: '', label: '' },
-  { value: '', label: '' },
-];
+const teamMembers = await getCollection('equipa');
+const projetos = await getCollection('projetos');
 
 const methodCards = [
   {
     n: '01',
     title: 'Diagnóstico',
     desc: 'Começamos pelo problema, não pela solução. Levantamos contexto, restrições e o que já foi tentado antes.',
-    delay: 0,
-    icon: 'search',
   },
   {
     n: '02',
     title: 'Validação',
     desc: 'Nenhuma proposta avança sem ser testada com dados reais e com quem vai operar o sistema.',
-    delay: 80,
-    icon: 'check',
   },
   {
     n: '03',
     title: 'Proposta',
     desc: 'Uma proposta técnica tem de ser executável por quem a recebe — não só compreensível para quem a escreveu.',
-    delay: 140,
-    icon: 'lightbulb',
   },
   {
     n: '04',
     title: 'Implementação',
     desc: 'Não entregamos ficheiros. Entregamos capacidade de operar sem depender de nós.',
-    delay: 200,
-    icon: 'code',
   },
 ];
 
@@ -75,50 +64,12 @@ const contactPlans = [
   },
 ];
 
-const auditLogs = [
-  { time: '12:34:21', action: 'diagnóstico_validado' },
-  { time: '12:34:18', action: 'proposta_revista' },
-  { time: '12:34:15', action: 'dados_consolidados' },
-  { time: '12:34:12', action: 'documentação_atualizada' },
-  { time: '12:34:09', action: 'entrega_registada' },
-];
-
-const products = [
-  {
-    category: 'agricultura',
-    title: 'HeliTube',
-    description: 'Monitorização contínua de sistemas de campo — pH, condutividade e rastreabilidade.',
-    slug: '/noticias/helitube-inovacao-agro',
-    icon: 'sun',
-  },
-  {
-    category: 'agricultura',
-    title: 'AgroPassaporte',
-    description: 'Dados de exploração, finanças e mercado no mesmo lugar — para decidir com contexto.',
-    slug: '/noticias/agro-dados-gestao',
-    icon: 'check',
-  },
-  {
-    category: 'cyber',
-    title: 'ioMts Neurais',
-    description: 'Sistemas de inteligência artificial para análise preditiva e automação de processos.',
-    slug: '/noticias/cyber-seguranca-ia',
-    icon: 'brain',
-  },
-  {
-    category: 'imobiliaria',
-    title: 'Imo Harmonia',
-    description: 'Menos retrabalho em projetos de arquitetura. Do regulamento à submissão, sem surpresas.',
-    slug: '/noticias/imo-arquitetura-digital',
-    icon: 'file',
-  },
-];
 ---
 
 <Layout title="Bolina Tec | Consultoria Tecnológica" description="A Bolina Tec presta consultoria tecnológica e desenvolve soluções digitais aplicadas a agricultura, território e inovação técnica.">
   <IntroAnimation />
 
-  <section id="sobre" class="relative h-screen overflow-hidden bg-black">
+  <section id="sobre" data-nav-theme="dark" class="relative h-screen overflow-hidden bg-black">
     <HeroGL client:only="react" />
 
     <div class="absolute inset-x-0 top-0 z-10 pointer-events-none" style="height:22%; background: linear-gradient(to bottom, #000 0%, transparent 100%);"></div>
@@ -140,22 +91,10 @@ const products = [
       >
         Resolvemos problemas técnicos complexos em agricultura, território e sistemas digitais — do diagnóstico ao piloto.
       </p>
-
-      <div class="flex gap-8 sm:gap-12">
-        {heroStats.map((stat, index) => (
-          <div
-            data-hero-stat
-            style={`opacity:0; filter:blur(16px); transform:translateY(20px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${280 + index * 80}ms, filter 0.8s cubic-bezier(0.16,1,0.3,1) ${280 + index * 80}ms, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${280 + index * 80}ms;`}
-          >
-            <div class="text-2xl sm:text-3xl text-white font-light tracking-tight" style="font-family: 'IBM Plex Sans', sans-serif;">{stat.value}</div>
-            <div class="text-xs text-white/35 tracking-widest uppercase mt-1" style="font-family: 'IBM Plex Sans', sans-serif;">{stat.label}</div>
-          </div>
-        ))}
-      </div>
     </div>
   </section>
 
-  <section id="solucoes" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
+  <section id="solucoes" data-nav-theme="light" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
     <div class="max-w-6xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
         <div>
@@ -178,36 +117,42 @@ const products = [
           Agricultura
         </button>
         <button
-          data-tab="cyber"
+          data-tab="territorio"
           class="product-tab pb-2 text-sm tracking-widest transition-colors border-b-2 text-neutral-400 hover:text-black border-transparent font-medium"
           style="font-family: 'IBM Plex Sans', sans-serif;"
         >
-          Cyber + IA
+          Território
         </button>
         <button
-          data-tab="imobiliaria"
+          data-tab="inovacao"
           class="product-tab pb-2 text-sm tracking-widest transition-colors border-b-2 text-neutral-400 hover:text-black border-transparent font-medium"
           style="font-family: 'IBM Plex Sans', sans-serif;"
         >
-          Imobiliária
+          Inovação
         </button>
       </div>
 
       <!-- Products Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-products-grid>
-        {products.map((product) => (
-          <div data-category={product.category} class="product-card">
-            <a href={product.slug} class="block bg-white rounded-xl border border-neutral-200/60 p-8 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 text-left group">
-              <div class="w-12 h-12 rounded-lg border border-neutral-200/60 flex items-center justify-center mb-4">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-neutral-800">
-                  {product.icon === 'sun' && <><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></>}
-                  {product.icon === 'check' && <path d="M20 6 9 17l-5-5"/>}
-                  {product.icon === 'brain' && <><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></>}
-                  {product.icon === 'file' && <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></>}
-                </svg>
-              </div>
-              <h3 class="text-xl font-light mb-2" style="font-family: 'IBM Plex Sans', sans-serif;">{product.title}</h3>
-              <p class="text-sm text-neutral-600 leading-relaxed mb-6">{product.description}</p>
+        {projetos.map((projeto) => (
+          <div data-category={projeto.data.area} class="product-card">
+            <a href={`/projetos/${projeto.id}`} class="block bg-white rounded-xl border border-neutral-200/60 p-8 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 text-left group">
+              {projeto.data.image && (
+                <img 
+                  src={`/images/uploads/${projeto.data.image}`} 
+                  alt={projeto.data.title}
+                  class="w-12 h-12 rounded-lg border border-neutral-200/60 flex items-center justify-center mb-4 object-cover"
+                />
+              )}
+              {!projeto.data.image && (
+                <div class="w-12 h-12 rounded-lg border border-neutral-200/60 flex items-center justify-center mb-4">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-neutral-800">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                  </svg>
+                </div>
+              )}
+              <h3 class="text-xl font-light mb-2" style="font-family: 'IBM Plex Sans', sans-serif;">{projeto.data.title}</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed mb-6">{projeto.data.shortDescription}</p>
               <span class="text-xs tracking-widest uppercase text-neutral-600 hover:text-black transition-colors inline-flex items-center gap-2 group">
                 Saber mais
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform group-hover:translate-x-1">
@@ -221,7 +166,7 @@ const products = [
     </div>
   </section>
 
-  <section id="workflow" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06] overflow-hidden bg-[#0f0f0f]">
+  <section id="workflow" data-nav-theme="dark" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06] overflow-hidden bg-[#0f0f0f]">
     <div class="max-w-6xl mx-auto">
       <div class="mb-20">
         <p class="text-xs font-medium tracking-[0.3em] text-white/40 uppercase mb-4">COMO TRABALHAMOS</p>
@@ -249,7 +194,7 @@ const products = [
     </div>
   </section>
 
-  <section id="noticias" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
+  <section id="noticias" data-nav-theme="light" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
     <div class="max-w-6xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
         <div>
@@ -283,7 +228,7 @@ const products = [
     </div>
   </section>
 
-  <section id="equipa" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
+  <section id="equipa" data-nav-theme="light" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
     <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
         <div>
@@ -295,18 +240,32 @@ const products = [
           </p>
         </div>
         <div class="relative">
-          <div class="bg-[#faf9f7] rounded-2xl border border-black/[0.07] p-8">
-            <div class="text-sm text-black leading-relaxed">
-              António Cerdeira<br />
-              <span class="text-black/50">CEO</span>
-            </div>
+          <div class="space-y-4">
+            {teamMembers.map((member) => (
+              <div class="bg-[#faf9f7] rounded-2xl border border-black/[0.07] p-8">
+                {member.data.photo && (
+                  <img 
+                    src={`/images/uploads/${member.data.photo}`} 
+                    alt={member.data.name}
+                    class="w-20 h-20 rounded-full object-cover mb-4"
+                  />
+                )}
+                <div class="text-sm text-black leading-relaxed">
+                  {member.data.name}<br />
+                  <span class="text-black/50">{member.data.role}</span>
+                  {member.data.shortBio && (
+                    <p class="mt-2 text-xs text-black/70 leading-relaxed">{member.data.shortBio}</p>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </div>
   </section>
 
-<section id="contacto" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06] bg-[#0a0a0a] overflow-hidden">
+<section id="contacto" data-nav-theme="dark" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06] bg-[#0a0a0a] overflow-hidden">
   
   <svg class="absolute w-0 h-0 pointer-events-none">
     <defs>
@@ -487,9 +446,6 @@ const products = [
       const curtain = intro ? intro.querySelector('[data-intro-curtain]') : null;
       const heroTitle = document.querySelector('[data-hero-title]');
       const heroSubtitle = document.querySelector('[data-hero-subtitle]');
-      const heroStats = Array.from(document.querySelectorAll('[data-hero-stat]'));
-      const heroSection = document.querySelector('#sobre');
-      const heroVideo = document.querySelector('[data-hero-video]');
 
       const setLetters = (phase) => {
         introLetters.forEach((letter, index) => {
@@ -525,14 +481,6 @@ const products = [
           heroSubtitle.style.filter = 'blur(0px)';
           heroSubtitle.style.transform = 'translateY(0px)';
         }
-        heroStats.forEach((stat) => {
-          stat.style.opacity = '1';
-          stat.style.filter = 'blur(0px)';
-          stat.style.transform = 'translateY(0px)';
-        });
-        if (heroVideo) {
-          heroVideo.style.transform = 'scale(1.05)';
-        }
       }, HERO_REVEAL_MS);
 
       setTimeout(() => {
@@ -558,14 +506,6 @@ const products = [
           }
         }, { threshold: 0.1 });
         observer.observe(card);
-      });
-
-      document.querySelectorAll('[data-mouse-glow]').forEach((container) => {
-        container.addEventListener('pointermove', (event) => {
-          const rect = container.getBoundingClientRect();
-          container.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`);
-          container.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);
-        });
       });
 
       const setupMobileNav = () => {
@@ -596,64 +536,42 @@ const products = [
       setupMobileNav();
 
       const nav = document.querySelector('[data-mobile-nav]');
-const syncNavTheme = () => {
-  if (!nav) return;
-  const darkSections = Array.from(document.querySelectorAll('#sobre, #workflow, #contacto'));
-  let isDark = false;
-  for (const section of darkSections) {
-    const rect = section.getBoundingClientRect();
-    if (rect.top <= 80 && rect.bottom >= 80) {
-      isDark = true;
-      break;
-    }
-  }
-  nav.dataset.theme = isDark ? 'dark' : 'light';
-};
-      syncNavTheme();
-      window.addEventListener('scroll', syncNavTheme, { passive: true });
-
-      const stacking = document.querySelector('[data-stacking-agent-cards]');
-      if (stacking) {
-        const cards = Array.from(stacking.querySelectorAll('[data-stacking-card]'));
-        const STICKY_TOP = 80;
-        const STICKY_STEP = 16;
-        const SCALE_STEP = 0.04;
-        const OFFSET_STEP = 8;
-
-        const update = () => {
-          const depth = cards.map((card, i) => {
-            let count = 0;
-            for (let j = i + 1; j < cards.length; j++) {
-              const rect = cards[j].getBoundingClientRect();
-              const stickyTop = STICKY_TOP + j * STICKY_STEP;
-              if (rect.top <= stickyTop + 2) count += 1;
-            }
-            return count;
-          });
-
-          cards.forEach((card, i) => {
-            const inner = card.firstElementChild;
-            const d = depth[i];
-            const scale = 1 - d * SCALE_STEP;
-            const translateY = d * OFFSET_STEP;
-            if (inner) {
-              inner.style.transform = `scale(${scale}) translateY(${translateY}px)`;
-            }
-          });
+      
+      // IntersectionObserver for theme detection
+      const setupNavThemeObserver = () => {
+        if (!nav) return;
+        
+        const sections = Array.from(document.querySelectorAll('[data-nav-theme]'));
+        if (sections.length === 0) return;
+        
+        const observerOptions = {
+          root: null,
+          rootMargin: '-80px 0px -80px 0px',
+          threshold: 0
         };
-
-        window.addEventListener('scroll', update, { passive: true });
-        update();
-      }
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const theme = entry.target.getAttribute('data-nav-theme');
+              if (theme === 'dark' || theme === 'light') {
+                nav.dataset.theme = theme;
+              }
+            }
+          });
+        }, observerOptions);
+        
+        sections.forEach((section) => observer.observe(section));
+      };
+      
+      setupNavThemeObserver();
 
       const joinForm = document.querySelector('[data-join-form]');
-      const joinSuccess = document.querySelector('[data-join-success]');
       const joinInput = document.querySelector('[data-join-input]');
       joinForm?.addEventListener('submit', (event) => {
         event.preventDefault();
         if (!joinInput || !joinInput.value) return;
         joinForm.classList.add('hidden');
-        joinSuccess?.classList.remove('hidden');
       });
 
       // Product Tabs Logic
