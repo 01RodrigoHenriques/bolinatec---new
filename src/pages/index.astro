@@ -139,7 +139,7 @@ const contactPlans = [
             <a href={`/projetos/${projeto.id}`} class="block bg-white rounded-xl border border-neutral-200/60 p-8 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 text-left group">
               {projeto.data.image && (
                 <img 
-                  src={`/images/uploads/${projeto.data.image}`} 
+                  src={projeto.data.image}
                   alt={projeto.data.title}
                   class="w-12 h-12 rounded-lg border border-neutral-200/60 flex items-center justify-center mb-4 object-cover"
                 />
@@ -245,7 +245,7 @@ const contactPlans = [
               <div class="bg-[#faf9f7] rounded-2xl border border-black/[0.07] p-8">
                 {member.data.photo && (
                   <img 
-                    src={`/images/uploads/${member.data.photo}`} 
+                    src={member.data.photo}
                     alt={member.data.name}
                     class="w-20 h-20 rounded-full object-cover mb-4"
                   />
