@@ -14,22 +14,24 @@ A Bolina Tec presta consultoria tecnológica e desenvolve soluções digitais pa
 
 ## Stack Tecnológica
 
-- **Framework**: Astro 6.4.3 (Static Site Generation)
-- **UI**: React 19.2.7 + Tailwind CSS 4.2.0
+- **Framework**: Astro 6 (Static Site Generation)
+- **UI**: React 19 + Tailwind CSS 4
 - **Linguagem**: TypeScript 5
 - **3D**: Three.js + React Three Fiber
 - **CMS**: Decap CMS (GitHub backend)
 - **Content**: Astro Content Collections
+- **SEO**: @astrojs/sitemap
 - **Deploy**: Cloudflare Pages
 
 ## Funcionalidades
 
-- **Soluções por Área**: Produtos organizados por categorias (Agricultura, Cyber + IA, Imobiliária)
+- **Soluções por Área**: Produtos organizados por categorias (Agricultura, Território, Inovação)
 - **Sistema de Notícias**: Blog com Markdown e Decap CMS
-- **Animações 3D**: Hero section com Three.js
-- **Design Premium**: Interface minimalista com tema dark
-- **SEO Otimizado**: Meta tags e estrutura semântica
+- **Animações 3D**: Hero section com Three.js e sistema de partículas
+- **Design Premium**: Interface minimalista com tema dark/light adaptativo
+- **SEO Otimizado**: Sitemap automático, robots.txt e meta tags semânticas
 - **Performance**: Build estático para máxima velocidade
+- **Páginas Legais**: Política de Privacidade e Termos e Condições
 
 ## Desenvolvimento
 
@@ -51,12 +53,22 @@ pnpm preview
 
 ```
 src/
-├── components/       # Componentes reutilizáveis
-├── content/          # Content Collections (notícias)
-├── layouts/          # Layouts principais
+├── components/       # Componentes reutilizáveis (Astro + React)
+│   ├── gl/           # Componentes Three.js (partículas, shaders)
+│   └── *.astro       # Componentes UI (Tag, RevealText, BentoCard, etc.)
+├── content/          # Content Collections (notícias, projetos, equipa)
+├── layouts/          # Layout principal
 ├── pages/            # Rotas e páginas
-└── styles/           # Estilos globais
+├── styles/           # Estilos globais (Tailwind CSS 4)
+└── config.ts         # Configuração de collections
 ```
+
+## CMS
+
+O Decap CMS está disponível em `/admin/` e permite gerir:
+- **Notícias**: Artigos com título, data, categoria e conteúdo Markdown
+- **Projetos**: Projetos com área, descrição e imagem
+- **Equipa**: Membros da equipa com foto e bio
 
 ## Licença
 

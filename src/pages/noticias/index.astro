@@ -9,7 +9,7 @@ const noticias = (await getCollection('noticias')).sort((a, b) => b.data.date.ge
 ---
 
 <Layout title="Notícias | Bolina Tec" description="Notícias, projetos e atualizações da Bolina Tec.">
-  <section class="py-32 px-6 md:px-12 lg:px-20">
+  <section data-nav-theme="light" class="py-32 px-6 md:px-12 lg:px-20">
     <div class="max-w-6xl mx-auto">
       <div class="mb-16">
         <Tag>NOTÍCIAS</Tag>
@@ -51,5 +51,16 @@ const noticias = (await getCollection('noticias')).sort((a, b) => b.data.date.ge
       }, { threshold: 0.1 });
       observer.observe(card);
     });
+    document.querySelectorAll('[data-reveal-text]').forEach((el) => {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0]?.isIntersecting) {
+          el.setAttribute('data-visible', 'true');
+          observer.disconnect();
+        }
+      }, { threshold: 0.2 });
+      observer.observe(el);
+    });
+    const nav = document.querySelector('[data-mobile-nav]');
+    if (nav) nav.dataset.theme = 'light';
   </script>
 </Layout>

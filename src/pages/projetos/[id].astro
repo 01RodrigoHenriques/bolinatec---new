@@ -22,7 +22,7 @@ const areaLabels = {
 ---
 
 <Layout title={`${projeto.data.title} | Bolina Tec`} description={projeto.data.shortDescription}>
-  <section class="py-32 px-6 md:px-12 lg:px-20">
+  <section data-nav-theme="light" class="py-32 px-6 md:px-12 lg:px-20">
     <div class="max-w-4xl mx-auto">
       <!-- Breadcrumb -->
       <nav class="mb-8">
@@ -150,3 +150,8 @@ const areaLabels = {
     margin: 1.5rem 0;
   }
 </style>
+
+<script is:inline>
+  const nav = document.querySelector('[data-mobile-nav]');
+  if (nav) nav.dataset.theme = 'light';
+</script>

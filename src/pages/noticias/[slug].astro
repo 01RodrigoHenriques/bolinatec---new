@@ -15,8 +15,8 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={`${post.data.title} | Bolina Tec`} description={post.data.description ?? 'Notícias, projetos e atualizações da Bolina Tec.'}
-  <article class="py-32 px-6 md:px-12 lg:px-20">
+<Layout title={`${post.data.title} | Bolina Tec`} description={post.data.description ?? 'Notícias, projetos e atualizações da Bolina Tec.'}>
+  <article data-nav-theme="light" class="py-32 px-6 md:px-12 lg:px-20">
     <div class="max-w-3xl mx-auto">
       <Tag>NOTÍCIAS</Tag>
       <h1 class="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]">{post.data.title}</h1>
