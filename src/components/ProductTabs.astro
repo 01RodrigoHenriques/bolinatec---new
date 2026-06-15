@@ -26,13 +26,11 @@ const { tabs, defaultTab = tabs[0]?.id } = Astro.props;
 
 <script is:inline define:vars={{ defaultTab }}>
   (() => {
-    const container = document.currentScript?.previousElementSibling;
-    if (!container) return;
+    const tabsContainer = document.querySelector('[data-product-tabs]');
+    const grid = document.querySelector('[data-products-grid]');
+    if (!tabsContainer || !grid) return;
 
-    const tabs = Array.from(container.querySelectorAll('.product-tab'));
-    const grid = container.nextElementSibling;
-    if (!grid) return;
-
+    const tabs = Array.from(tabsContainer.querySelectorAll('.product-tab'));
     const cards = Array.from(grid.querySelectorAll('.product-card'));
 
     const setActive = (category) => {
