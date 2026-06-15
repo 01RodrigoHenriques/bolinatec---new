@@ -11,10 +11,6 @@
   "devDependencies": {
     "@astrojs/react": "^5.0.7",
     "@astrojs/sitemap": "^3.7.3",
-    "@fontsource/courier-prime": "^5.2.8",
-    "@fontsource/geist": "^5.2.9",
-    "@fontsource/geist-mono": "^5.2.8",
-    "@fontsource/ibm-plex-sans": "^5.2.8",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
     "@tailwindcss/postcss": "^4.2.0",
