@@ -5,6 +5,8 @@ import IntroAnimation from '../components/IntroAnimation.astro';
 import Tag from '../components/Tag.astro';
 import RevealText from '../components/RevealText.astro';
 import BentoCard from '../components/BentoCard.astro';
+import ProductTabs from '../components/ProductTabs.astro';
+import ContactForm from '../components/ContactForm.astro';
 import { HeroGL } from '../components/HeroGL';
 
 const newsPosts = (await getCollection('noticias'))
@@ -74,7 +76,7 @@ const contactPlans = [
 <Layout title="Bolina Tec | Consultoria Tecnológica" description="A Bolina Tec presta consultoria tecnológica e desenvolve soluções digitais aplicadas a agricultura, território e inovação técnica.">
   <IntroAnimation />
 
-  <section id="sobre" data-nav-theme="dark" class="relative h-screen overflow-hidden bg-black">
+  <section id="sobre" data-hero-section data-nav-theme="dark" class="relative h-screen overflow-hidden bg-black">
     <HeroGL client:only="react" />
 
     <div class="absolute inset-x-0 top-0 z-10 pointer-events-none" style="height:22%; background: linear-gradient(to bottom, #000 0%, transparent 100%);"></div>
@@ -111,30 +113,14 @@ const contactPlans = [
         </p>
       </div>
 
-      <!-- Tabs -->
-      <div class="flex gap-8 mb-12" data-product-tabs>
-        <button
-          data-tab="agricultura"
-          class="product-tab pb-2 text-sm tracking-widest transition-colors border-b-2 text-neutral-400 hover:text-black border-transparent font-medium"
-          style="font-family: 'IBM Plex Sans', sans-serif;"
-        >
-          Agricultura
-        </button>
-        <button
-          data-tab="territorio"
-          class="product-tab pb-2 text-sm tracking-widest transition-colors border-b-2 text-neutral-400 hover:text-black border-transparent font-medium"
-          style="font-family: 'IBM Plex Sans', sans-serif;"
-        >
-          Território
-        </button>
-        <button
-          data-tab="inovacao"
-          class="product-tab pb-2 text-sm tracking-widest transition-colors border-b-2 text-neutral-400 hover:text-black border-transparent font-medium"
-          style="font-family: 'IBM Plex Sans', sans-serif;"
-        >
-          Inovação
-        </button>
-      </div>
+      <ProductTabs
+        tabs={[
+          { id: 'agricultura', label: 'Agricultura' },
+          { id: 'territorio', label: 'Território' },
+          { id: 'inovacao', label: 'Inovação' },
+        ]}
+        defaultTab="agricultura"
+      />
 
       <!-- Products Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-products-grid>
@@ -145,6 +131,7 @@ const contactPlans = [
                 <img 
                   src={projeto.data.image}
                   alt={projeto.data.title}
+                  loading="lazy"
                   class="w-12 h-12 rounded-lg border border-neutral-200/60 flex items-center justify-center mb-4 object-cover"
                 />
               )}
@@ -249,6 +236,7 @@ const contactPlans = [
                   <img 
                     src={member.data.photo}
                     alt={member.data.name}
+                    loading="lazy"
                     class="w-20 h-20 rounded-full object-cover mb-4"
                   />
                 )}
@@ -400,6 +388,7 @@ const contactPlans = [
       src="/images/footer.png"
       alt=""
       aria-hidden="true"
+      loading="lazy"
       class="absolute bottom-0 left-0 w-full object-cover object-bottom pointer-events-none select-none"
       style="opacity:0.85;"
     />
@@ -412,18 +401,7 @@ const contactPlans = [
       <p class="text-sm text-black leading-relaxed mb-10">
         Partilha o contexto do projeto. Respondemos com um próximo passo concreto — não com uma proposta genérica.
       </p>
-      <form data-join-form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-        <input
-          data-join-input
-          type="email"
-          placeholder="email@email.com"
-          required
-          class="flex-1 bg-white border border-black/10 rounded-xl px-4 py-3 text-sm text-[#111] placeholder:text-black/40 focus:outline-none focus:border-black/25 transition-colors"
-        />
-        <button type="submit" class="px-8 py-3 bg-[#111] text-white text-sm rounded-xl hover:bg-[#333] transition-colors tracking-widest font-medium">
-          Pedir Contacto
-        </button>
-      </form>
+      <ContactForm />
     </div>
   </section>
 
@@ -484,154 +462,6 @@ const contactPlans = [
       setTimeout(() => {
         if (intro) intro.remove();
       }, ANIM_TOTAL);
-
-      document.querySelectorAll('[data-reveal-text]').forEach((el) => {
-        const observer = new IntersectionObserver((entries) => {
-          if (entries[0]?.isIntersecting) {
-            el.setAttribute('data-visible', 'true');
-            observer.disconnect();
-          }
-        }, { threshold: 0.2 });
-        observer.observe(el);
-      });
-
-      document.querySelectorAll('[data-bento-card]').forEach((card) => {
-        const observer = new IntersectionObserver((entries) => {
-          if (entries[0]?.isIntersecting) {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0px)';
-            observer.disconnect();
-          }
-        }, { threshold: 0.1 });
-        observer.observe(card);
-      });
-
-      const setupMobileNav = () => {
-        const nav = document.querySelector('[data-mobile-nav]');
-        if (!nav) return;
-        const toggle = nav.querySelector('[data-mobile-toggle]');
-        const panel = nav.querySelector('[data-mobile-panel]');
-        const lines = Array.from(nav.querySelectorAll('[data-burger-line]'));
-        const closeLinks = Array.from(nav.querySelectorAll('[data-mobile-close]'));
-
-        const sync = (open) => {
-          if (!panel || !toggle) return;
-          panel.style.maxHeight = open ? '320px' : '0px';
-          panel.style.opacity = open ? '1' : '0';
-          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-          toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-          if (lines[0]) lines[0].style.transform = open ? 'translateY(6px) rotate(45deg)' : 'none';
-          if (lines[1]) lines[1].style.opacity = open ? '0' : '1';
-          if (lines[1]) lines[1].style.transform = open ? 'scaleX(0)' : 'none';
-          if (lines[2]) lines[2].style.transform = open ? 'translateY(-6px) rotate(-45deg)' : 'none';
-          nav.dataset.open = open ? 'true' : 'false';
-        };
-
-        toggle?.addEventListener('click', () => sync(nav.dataset.open !== 'true'));
-        closeLinks.forEach((link) => link.addEventListener('click', () => sync(false)));
-      };
-
-      setupMobileNav();
-
-      const nav = document.querySelector('[data-mobile-nav]');
-      
-      // IntersectionObserver for theme detection
-      const setupNavThemeObserver = () => {
-        if (!nav) return;
-        
-        const sections = Array.from(document.querySelectorAll('[data-nav-theme]'));
-        if (sections.length === 0) return;
-        
-        const observerOptions = {
-          root: null,
-          rootMargin: '-80px 0px -80px 0px',
-          threshold: 0
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const theme = entry.target.getAttribute('data-nav-theme');
-              if (theme === 'dark' || theme === 'light') {
-                nav.dataset.theme = theme;
-              }
-            }
-          });
-        }, observerOptions);
-        
-        sections.forEach((section) => observer.observe(section));
-      };
-      
-      setupNavThemeObserver();
-
-      const joinForm = document.querySelector('[data-join-form]');
-      const joinInput = document.querySelector('[data-join-input]');
-      joinForm?.addEventListener('submit', (event) => {
-        event.preventDefault();
-        if (!joinInput || !joinInput.value) return;
-        const email = encodeURIComponent(joinInput.value);
-        window.location.href = `mailto:geral@bolinatec.com?subject=Pedido%20de%20Contacto&body=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20vossos%20servi%C3%A7os.%0A%0AEmail%3A%20${email}`;
-        joinForm.innerHTML = '<p class="text-sm text-black/60">Obrigado! A abrir o teu cliente de email...</p>';
-      });
-
-      // Product Tabs Logic
-      const setupProductTabs = () => {
-        const tabsContainer = document.querySelector('[data-product-tabs]');
-        const productsGrid = document.querySelector('[data-products-grid]');
-        
-        if (!tabsContainer || !productsGrid) return;
-
-        const tabs = Array.from(tabsContainer.querySelectorAll('.product-tab'));
-        const productCards = Array.from(productsGrid.querySelectorAll('.product-card'));
-
-        const setActiveTab = (activeCategory) => {
-          // Update tab styles
-          tabs.forEach(tab => {
-            const tabCategory = tab.getAttribute('data-tab');
-            if (tabCategory === activeCategory) {
-              tab.classList.add('border-black', 'text-black');
-              tab.classList.remove('text-neutral-400', 'border-transparent');
-            } else {
-              tab.classList.remove('border-black', 'text-black');
-              tab.classList.add('text-neutral-400', 'border-transparent');
-            }
-          });
-
-          // Filter products with fade effect
-          productCards.forEach(card => {
-            const category = card.getAttribute('data-category');
-            if (category === activeCategory) {
-              card.style.opacity = '0';
-              card.style.transform = 'translateY(10px)';
-              setTimeout(() => {
-                card.style.display = 'block';
-                setTimeout(() => {
-                  card.style.opacity = '1';
-                  card.style.transform = 'translateY(0)';
-                }, 50);
-              }, 200);
-            } else {
-              card.style.opacity = '0';
-              card.style.transform = 'translateY(10px)';
-              setTimeout(() => {
-                card.style.display = 'none';
-              }, 200);
-            }
-          });
-        };
-
-        tabs.forEach(tab => {
-          tab.addEventListener('click', () => {
-            const category = tab.getAttribute('data-tab');
-            setActiveTab(category);
-          });
-        });
-
-        // Initialize with first tab
-        setActiveTab('agricultura');
-      };
-
-      setupProductTabs();
     })();
   </script>
 </Layout>

@@ -1,11 +1,17 @@
 ---
 import MobileNav from '../components/MobileNav.astro';
+import NavScript from '../components/NavScript.astro';
 import '../styles/global.css';
 
 const {
   title = 'Bolina Tec | Consultoria Tecnológica',
   description = 'A Bolina Tec presta consultoria tecnológica e desenvolve soluções digitais aplicadas a agricultura, território e inovação técnica.',
+  image = '/images/uploads/logo.webp',
+  canonical,
 } = Astro.props;
+
+const resolvedCanonical = canonical || new URL(Astro.url.pathname, Astro.site).href;
+const resolvedImage = new URL(image, Astro.site).href;
 ---
 
 <!doctype html>
@@ -15,17 +21,60 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <link rel="canonical" href={resolvedCanonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={resolvedCanonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={resolvedImage} />
+    <meta property="og:locale" content="pt_PT" />
+    <meta property="og:site_name" content="Bolina Tec" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/images/favicon.png" type="image/png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Bolina Tec",
+      "description": description,
+      "url": "https://bolinatec.com",
+      "logo": resolvedImage,
+      "areaServed": "PT",
+      "knowsAbout": ["Consultoria Tecnológica", "Agricultura", "Território", "Inovação"],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "geral@bolinatec.com",
+        "contactType": "customer service"
+      }
+    })} />
+
+    <slot name="head" />
   </head>
   <body class="font-sans antialiased bg-[#F5F4F0] text-[#111] min-h-screen">
+    <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-black focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:outline-none">
+      Saltar para o conteúdo
+    </a>
+
     <header>
       <MobileNav />
     </header>
-    <main>
+    <main id="conteudo">
       <slot />
     </main>
 
@@ -80,5 +129,6 @@ const {
         </div>
       </div>
     </footer>
+    <NavScript />
   </body>
 </html>

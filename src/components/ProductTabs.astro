@@ -1,0 +1,69 @@
+---
+interface Tab {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  tabs: Tab[];
+  defaultTab?: string;
+}
+
+const { tabs, defaultTab = tabs[0]?.id } = Astro.props;
+---
+
+<div class="flex gap-8 mb-12" data-product-tabs>
+  {tabs.map((tab) => (
+    <button
+      data-tab={tab.id}
+      class="product-tab pb-2 text-sm tracking-widest transition-colors border-b-2 text-neutral-400 hover:text-black border-transparent font-medium"
+      style="font-family: 'IBM Plex Sans', sans-serif;"
+    >
+      {tab.label}
+    </button>
+  ))}
+</div>
+
+<script is:inline define:vars={{ defaultTab }}>
+  (() => {
+    const container = document.currentScript?.previousElementSibling;
+    if (!container) return;
+
+    const tabs = Array.from(container.querySelectorAll('.product-tab'));
+    const grid = container.nextElementSibling;
+    if (!grid) return;
+
+    const cards = Array.from(grid.querySelectorAll('.product-card'));
+
+    const setActive = (category) => {
+      tabs.forEach(tab => {
+        const match = tab.getAttribute('data-tab') === category;
+        tab.classList.toggle('border-black', match);
+        tab.classList.toggle('text-black', match);
+        tab.classList.toggle('text-neutral-400', !match);
+        tab.classList.toggle('border-transparent', !match);
+      });
+
+      cards.forEach(card => {
+        const match = card.getAttribute('data-category') === category;
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+          card.style.display = match ? 'block' : 'none';
+          if (match) {
+            requestAnimationFrame(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            });
+          }
+        }, 200);
+      });
+    };
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => setActive(tab.getAttribute('data-tab')));
+    });
+
+    setActive(defaultTab);
+  })();
+</script>

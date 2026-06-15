@@ -54,6 +54,7 @@ const areaLabels = {
           <img 
             src={projeto.data.image}
             alt={projeto.data.title}
+            loading="lazy"
             class="w-full rounded-2xl border border-black/[0.07] object-cover"
           />
         </div>
@@ -150,8 +151,3 @@ const areaLabels = {
     margin: 1.5rem 0;
   }
 </style>
-
-<script is:inline>
-  const nav = document.querySelector('[data-mobile-nav]');
-  if (nav) nav.dataset.theme = 'light';
-</script>

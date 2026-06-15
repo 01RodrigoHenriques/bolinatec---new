@@ -1,0 +1,31 @@
+---
+const { action = 'mailto:geral@bolinatec.com', subject = 'Pedido%20de%20Contacto' } = Astro.props;
+---
+
+<form data-join-form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+  <input
+    data-join-input
+    type="email"
+    placeholder="email@email.com"
+    required
+    class="flex-1 bg-white border border-black/10 rounded-xl px-4 py-3 text-sm text-[#111] placeholder:text-black/40 focus:outline-none focus:border-black/25 transition-colors"
+  />
+  <button type="submit" class="px-8 py-3 bg-[#111] text-white text-sm rounded-xl hover:bg-[#333] transition-colors tracking-widest font-medium">
+    Pedir Contacto
+  </button>
+</form>
+
+<script is:inline>
+  (() => {
+    const form = document.currentScript?.closest('section')?.querySelector('[data-join-form]');
+    if (!form) return;
+    const input = form.querySelector('[data-join-input]');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!input || !input.value) return;
+      const email = encodeURIComponent(input.value);
+      window.location.href = `mailto:geral@bolinatec.com?subject=Pedido%20de%20Contacto&body=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20vossos%20servi%C3%A7os.%0A%0AEmail%3A%20${email}`;
+      form.innerHTML = '<p class="text-sm text-black/60">Obrigado! A abrir o teu cliente de email...</p>';
+    });
+  })();
+</script>

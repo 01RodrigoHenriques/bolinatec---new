@@ -1,4 +1,3 @@
-import { resolve } from 'node:path';
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
@@ -10,8 +9,4 @@ export default defineConfig({
     enabled: false,
   },
   integrations: [react(), sitemap()],
-  vite: {
-    resolve: {
-    },
-  },
 });

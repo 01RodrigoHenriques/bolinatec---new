@@ -39,28 +39,4 @@ const noticias = (await getCollection('noticias')).sort((a, b) => b.data.date.ge
       </div>
     </div>
   </section>
-
-  <script is:inline>
-    document.querySelectorAll('[data-bento-card]').forEach((card) => {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0]?.isIntersecting) {
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0px)';
-          observer.disconnect();
-        }
-      }, { threshold: 0.1 });
-      observer.observe(card);
-    });
-    document.querySelectorAll('[data-reveal-text]').forEach((el) => {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0]?.isIntersecting) {
-          el.setAttribute('data-visible', 'true');
-          observer.disconnect();
-        }
-      }, { threshold: 0.2 });
-      observer.observe(el);
-    });
-    const nav = document.querySelector('[data-mobile-nav]');
-    if (nav) nav.dataset.theme = 'light';
-  </script>
 </Layout>

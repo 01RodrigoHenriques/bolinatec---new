@@ -28,6 +28,7 @@ const { Content } = await render(post);
     <img
        src={post.data.coverImage}
        alt={post.data.title}
+       loading="lazy"
        class="mt-10 w-full rounded-2xl border border-black/[0.06] object-cover"
    />
   )}
@@ -36,13 +37,4 @@ const { Content } = await render(post);
       </div>
     </div>
   </article>
-  <script is:inline>
-  const nav = document.querySelector('[data-mobile-nav]');
-  const syncNavTheme = () => {
-    if (!nav) return;
-    nav.dataset.theme = 'light';
-  };
-  syncNavTheme();
-  window.addEventListener('scroll', syncNavTheme, { passive: true });
-</script>
 </Layout>
