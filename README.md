@@ -13,7 +13,7 @@ Consultoria tecnológica e desenvolvimento de soluções digitais aplicadas a ag
 A Bolina Tec presta consultoria tecnológica e desenvolve soluções digitais para problemas reais em agricultura, território e sistemas digitais. Do diagnóstico ao piloto, resolvemos problemas técnicos complexos com uma abordagem prática e baseada em dados.
 
 # live
-bolinatec.com
+[bolinatec.com](https://bolinatec.com)
 
 ## Stack Tecnológica
 
