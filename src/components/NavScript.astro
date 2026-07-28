@@ -1,113 +1,27 @@
----
----
-
 <script is:inline>
   (() => {
     if (window.__navScriptInit) return;
     window.__navScriptInit = true;
 
-    const nav = document.querySelector('[data-mobile-nav]');
-    if (!nav) return;
-
-    const toggle = nav.querySelector('[data-mobile-toggle]');
-    const panel = nav.querySelector('[data-mobile-panel]');
-    const lines = Array.from(nav.querySelectorAll('[data-burger-line]'));
-    const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
-    const getFocusableElements = () => {
-      if (!panel) return [];
-      return Array.from(panel.querySelectorAll(focusableSelector));
-    };
-
-    const sync = (open) => {
-      if (!panel || !toggle) return;
-      panel.style.maxHeight = open ? '320px' : '0px';
-      panel.style.opacity = open ? '1' : '0';
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      if (lines[0]) lines[0].style.transform = open ? 'translateY(6px) rotate(45deg)' : 'none';
-      if (lines[1]) lines[1].style.opacity = open ? '0' : '1';
-      if (lines[1]) lines[1].style.transform = open ? 'scaleX(0)' : 'none';
-      if (lines[2]) lines[2].style.transform = open ? 'translateY(-6px) rotate(-45deg)' : 'none';
-      nav.dataset.open = open ? 'true' : 'false';
-
-      if (open) {
-        const focusable = getFocusableElements();
-        if (focusable.length > 0) {
-          requestAnimationFrame(() => focusable[0].focus());
-        }
-      }
-    };
-
-    toggle?.addEventListener('click', () => sync(nav.dataset.open !== 'true'));
-
-    nav.querySelectorAll('[data-mobile-close]').forEach((link) => {
-      link.addEventListener('click', () => sync(false));
-    });
-
-    panel?.addEventListener('keydown', (e) => {
-      if (e.key !== 'Tab') return;
-      const focusable = getFocusableElements();
-      if (focusable.length === 0) return;
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (e.shiftKey) {
-        if (document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        }
-      } else {
-        if (document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && nav.dataset.open === 'true') {
-        sync(false);
-        toggle?.focus();
-      }
-    });
-
-    const sections = Array.from(document.querySelectorAll('[data-nav-theme]'));
-    if (sections.length > 0) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const theme = entry.target.getAttribute('data-nav-theme');
-            if (theme === 'dark' || theme === 'light') {
-              nav.dataset.theme = theme;
-            }
-          }
-        });
-      }, { root: null, rootMargin: '-80px 0px -80px 0px', threshold: 0 });
-
-      sections.forEach((section) => observer.observe(section));
-    }
-
     document.querySelectorAll('[data-bento-card]').forEach((card) => {
-      const bentoObserver = new IntersectionObserver((entries) => {
+      const observer = new IntersectionObserver((entries) => {
         if (entries[0]?.isIntersecting) {
           card.style.opacity = '1';
           card.style.transform = 'translateY(0px)';
-          bentoObserver.disconnect();
+          observer.disconnect();
         }
       }, { threshold: 0.1 });
-      bentoObserver.observe(card);
+      observer.observe(card);
     });
 
     document.querySelectorAll('[data-reveal-text]').forEach((el) => {
-      const revealObserver = new IntersectionObserver((entries) => {
+      const observer = new IntersectionObserver((entries) => {
         if (entries[0]?.isIntersecting) {
           el.setAttribute('data-visible', 'true');
-          revealObserver.disconnect();
+          observer.disconnect();
         }
       }, { threshold: 0.2 });
-      revealObserver.observe(el);
+      observer.observe(el);
     });
   })();
 </script>

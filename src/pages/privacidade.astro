@@ -86,20 +86,4 @@ import RevealText from '../components/RevealText.astro';
       </div>
     </div>
   </section>
-
-  <script is:inline>
-    document.querySelectorAll('[data-reveal-text]').forEach((el) => {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0]?.isIntersecting) {
-          el.setAttribute('data-visible', 'true');
-          observer.disconnect();
-        }
-      }, { threshold: 0.2 });
-      observer.observe(el);
-    });
-  </script>
-  <script is:inline>
-    const nav = document.querySelector('[data-mobile-nav]');
-    if (nav) nav.dataset.theme = 'light';
-  </script>
 </Layout>
