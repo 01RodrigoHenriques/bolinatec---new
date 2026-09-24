@@ -1,43 +1,29 @@
-import { Canvas } from "@react-three/fiber"
-import { Preload } from "@react-three/drei"
-import { Particles } from "./particles"
-
-const speed = 1.0, focus = 3.8, aperture = 1.79, size = 185
-const noiseScale = 0.6, noiseIntensity = 0.52, timeScale = 1.0
-const pointSize = 4.0, opacity = 0.85, planeScale = 12.0
-const vignetteDarkness = 1.5, vignetteOffset = 0.4
-const useManualTime = false, manualTime = 0
+import { Canvas } from "@react-three/fiber";
+import { Preload } from "@react-three/drei";
+import { SpatialBoardScene } from "./board";
 
 type GLProps = {
-  hovering: boolean
-}
+  hovering: boolean;
+};
 
 export function GL({ hovering }: GLProps) {
   return (
     <Canvas
       dpr={[1, 1.5]}
-      gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-      camera={{ position: [0, 0, 5], fov: 50 }}
-      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      camera={{ position: [0, 5.0, 8.4], fov: 36 }}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
     >
-      <color attach="background" args={['#000000']} />
-      <fog attach="fog" args={['#000000', 18, 48]} />
-      <Particles
-        speed={speed}
-        focus={focus}
-        aperture={aperture}
-        size={size}
-        noiseScale={noiseScale}
-        noiseIntensity={noiseIntensity}
-        timeScale={timeScale}
-        pointSize={pointSize}
-        opacity={opacity}
-        planeScale={planeScale}
-        hovering={hovering}
-        useManualTime={useManualTime}
-        manualTime={manualTime}
-      />
+      <color attach="background" args={["#080808"]} />
+      <fog attach="fog" args={["#080808", 9, 24]} />
+
+      <ambientLight intensity={0.55} />
+      <directionalLight position={[6, 14, 6]} intensity={1.7} castShadow />
+      <directionalLight position={[-8, 7, -4]} intensity={0.7} color="#a0c0ff" />
+      <pointLight position={[0, 2, 0]} intensity={0.6} color="#ffffff" distance={6} />
+
+      <SpatialBoardScene hovering={hovering} />
       <Preload all />
     </Canvas>
-  )
+  );
 }

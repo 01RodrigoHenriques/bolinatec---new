@@ -12,25 +12,16 @@ const noticias = defineCollection({
   }),
 });
 
-const paginas = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/paginas' }),
-  schema: z.object({
-    title: z.string(),
-    slug: z.string(),
-    seo: z.object({
-      metaTitle: z.string().optional(),
-      metaDescription: z.string().optional(),
-    }).optional(),
-  }),
-});
-
 const projetos = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projetos' }),
   schema: z.object({
     title: z.string(),
-    area: z.enum(['agricultura', 'territorio', 'inovacao']),
+    area: z.string().optional(),
+    maturity: z.enum(['produto', 'experiencia', 'investigacao']).default('produto'),
+    status: z.string().optional(),
     shortDescription: z.string(),
     image: z.string().optional(),
+    externalUrl: z.string().optional(),
   }),
 });
 
@@ -44,4 +35,4 @@ const equipa = defineCollection({
   }),
 });
 
-export const collections = { noticias, paginas, projetos, equipa };
+export const collections = { noticias, projetos, equipa };

@@ -2,6 +2,7 @@
 interface Tab {
   id: string;
   label: string;
+  badge?: string;
 }
 
 interface Props {
@@ -12,14 +13,18 @@ interface Props {
 const { tabs, defaultTab = tabs[0]?.id } = Astro.props;
 ---
 
-<div class="flex gap-8 mb-12" data-product-tabs>
+<div class="flex flex-wrap gap-2 md:gap-3 mb-10" data-product-tabs>
   {tabs.map((tab) => (
     <button
       data-tab={tab.id}
-      class="product-tab pb-2 text-sm tracking-widest transition-colors border-b-2 text-neutral-400 hover:text-black border-transparent font-medium"
-      style="font-family: 'IBM Plex Sans', sans-serif;"
+      class="product-tab px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider transition-all border border-white/[0.08] bg-[#0c0c0c] text-neutral-400 hover:text-white hover:border-white/20 cursor-pointer flex items-center gap-2"
     >
-      {tab.label}
+      <span>{tab.label}</span>
+      {tab.badge && (
+        <span class="text-[9px] px-1.5 py-0.2 rounded bg-white/[0.06] text-neutral-400">
+          {tab.badge}
+        </span>
+      )}
     </button>
   ))}
 </div>
@@ -35,15 +40,18 @@ const { tabs, defaultTab = tabs[0]?.id } = Astro.props;
 
     const setActive = (category) => {
       tabs.forEach(tab => {
-        const match = tab.getAttribute('data-tab') === category;
-        tab.classList.toggle('border-black', match);
-        tab.classList.toggle('text-black', match);
-        tab.classList.toggle('text-neutral-400', !match);
-        tab.classList.toggle('border-transparent', !match);
+        const match = tab.getAttribute('data-tab') === category || category === 'todos';
+        const isCurrent = tab.getAttribute('data-tab') === category;
+        tab.classList.toggle('border-white/40', isCurrent);
+        tab.classList.toggle('text-white', isCurrent);
+        tab.classList.toggle('bg-white/[0.08]', isCurrent);
+        tab.classList.toggle('text-neutral-400', !isCurrent);
+        tab.classList.toggle('bg-[#0c0c0c]', !isCurrent);
       });
 
       cards.forEach(card => {
-        const match = card.getAttribute('data-category') === category;
+        const itemCat = card.getAttribute('data-category');
+        const match = category === 'todos' || itemCat === category;
         card.style.opacity = '0';
         card.style.transform = 'translateY(10px)';
         setTimeout(() => {
@@ -54,7 +62,7 @@ const { tabs, defaultTab = tabs[0]?.id } = Astro.props;
               card.style.transform = 'translateY(0)';
             });
           }
-        }, 200);
+        }, 150);
       });
     };
 
@@ -62,6 +70,8 @@ const { tabs, defaultTab = tabs[0]?.id } = Astro.props;
       tab.addEventListener('click', () => setActive(tab.getAttribute('data-tab')));
     });
 
-    setActive(defaultTab);
+    if (defaultTab) {
+      setActive(defaultTab);
+    }
   })();
 </script>

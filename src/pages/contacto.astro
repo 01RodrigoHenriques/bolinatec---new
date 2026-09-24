@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Tag from '../components/Tag.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const requestedTopic = Astro.url.searchParams.get('topic') || 'geral';
+---
+
+<Layout
+  title="Contacto de Engenharia & Submissão de Contexto | BolinaTec"
+  description="Submeta o contexto do seu projeto de arquitetura para teste no ImoHarmonia ou o seu desafio de engenharia de software à equipa técnica da BolinaTec."
+>
+  <section class="py-24 md:py-32 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] relative overflow-hidden bg-[#080808]">
+    <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 mb-6">
+        <Tag>CANAL DE QUALIFICAÇÃO TÉCNICA</Tag>
+      </div>
+
+      <h1
+        class="text-4xl sm:text-5xl md:text-6xl font-light text-white tracking-tight leading-[1.05] mb-6"
+        style="font-family: 'IBM Plex Sans', sans-serif;"
+      >
+        Submeter Contexto Técnico.
+      </h1>
+
+      <p class="text-sm md:text-base text-neutral-300 max-w-xl mx-auto leading-relaxed font-sans mb-12">
+        Não enviamos propostas comerciais genéricas. Analisamos o seu problema ou projeto e respondemos com um próximo passo técnico fundamentado em 24h úteis.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-12">
+        <div class="p-6 rounded-2xl border border-white/[0.08] bg-[#0c0c0c]">
+          <span class="font-mono text-[10px] text-emerald-400 uppercase tracking-wider block mb-2">Para Testar no ImoHarmonia</span>
+          <h3 class="text-white font-medium text-sm mb-2">Projetos de Arquitetura e Engenharia</h3>
+          <p class="text-xs text-neutral-400 leading-relaxed font-sans">
+            Indique o concelho/município do projeto, a operação urbanística pretendida (construção nova, ampliação, reabilitação) e os pontos de dúvida regulatória no PDM ou RJUE.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-white/[0.08] bg-[#0c0c0c]">
+          <span class="font-mono text-[10px] text-blue-400 uppercase tracking-wider block mb-2">Para Engenharia de Sistemas</span>
+          <h3 class="text-white font-medium text-sm mb-2">Desafios de Complexidade & Modelação</h3>
+          <p class="text-xs text-neutral-400 leading-relaxed font-sans">
+            Descreva o domínio de negócio, as regras que necessitam de ser convertidas em código determinístico e as restrições operacionais do sistema pretendido.
+          </p>
+        </div>
+      </div>
+
+      <!-- THE QUALIFICATION FORM CONTAINER -->
+      <div class="p-8 md:p-12 rounded-2xl border border-white/[0.1] bg-[#0c0c0c] text-left shadow-2xl">
+        <ContactForm defaultTopic={requestedTopic} />
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-neutral-400">
+        <div>
+          Email direto: <a href="mailto:geral@bolinatec.com" class="text-white hover:underline underline-offset-4">geral@bolinatec.com</a>
+        </div>
+        <div>
+          Sede em Portugal • Operação Remota & Presencial
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

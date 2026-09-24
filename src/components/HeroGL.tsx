@@ -1,72 +1,87 @@
-import { useState, useEffect, lazy, Suspense } from "react"
+import { useState, useEffect, lazy, Suspense } from "react";
 
 function detectWebGL(): boolean {
   try {
-    const canvas = document.createElement('canvas')
-    return !!(canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+    const canvas = document.createElement("canvas");
+    return !!(
+      canvas.getContext("webgl2") ||
+      canvas.getContext("webgl") ||
+      canvas.getContext("experimental-webgl")
+    );
   } catch {
-    return false
+    return false;
   }
 }
 
-const LazyGL = lazy(() => import("./gl/index").then(m => ({ default: m.GL })))
+const LazyGL = lazy(() => import("./gl/index").then((m) => ({ default: m.GL })));
 
 function WebGLFallback() {
   return (
     <div
       style={{
-        position: 'absolute',
+        position: "absolute",
         inset: 0,
         zIndex: 0,
-        background: 'radial-gradient(ellipse at 50% 40%, #1a1a2e 0%, #000 70%)',
+        backgroundColor: "#080808",
+        backgroundImage: `
+          linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
+        `,
+        backgroundSize: "40px 40px",
+        transform: "perspective(800px) rotateX(45deg) scale(1.4)",
+        transformOrigin: "center 80%",
+        opacity: 0.6,
       }}
     />
-  )
-}
-
-function WebGLLoader() {
-  return <WebGLFallback />
+  );
 }
 
 export function HeroGL() {
-  const [hovering, setHovering] = useState(false)
-  const [supported, setSupported] = useState(true)
-  const [visible, setVisible] = useState(false)
+  const [hovering, setHovering] = useState(false);
+  const [supported, setSupported] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    setSupported(detectWebGL())
+    // Check WebGL and reduced motion
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      setSupported(false);
+      return;
+    }
+
+    setSupported(detectWebGL());
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
+          setVisible(true);
+          observer.disconnect();
         }
       },
-      { rootMargin: '200px' }
-    )
+      { rootMargin: "200px" }
+    );
 
-    const hero = document.querySelector('[data-hero-section]')
-    if (hero) observer.observe(hero)
+    const hero = document.querySelector("[data-hero-section]");
+    if (hero) observer.observe(hero);
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
-  if (!supported) return <WebGLFallback />
+  if (!supported) return <WebGLFallback />;
 
   return (
     <div
-      style={{ position: 'absolute', inset: 0, zIndex: 0 }}
+      style={{ position: "absolute", inset: 0, zIndex: 0 }}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
       {visible ? (
-        <Suspense fallback={<WebGLLoader />}>
+        <Suspense fallback={<WebGLFallback />}>
           <LazyGL hovering={hovering} />
         </Suspense>
       ) : (
         <WebGLFallback />
       )}
     </div>
-  )
+  );
 }

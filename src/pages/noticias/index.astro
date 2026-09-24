@@ -2,36 +2,51 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import BentoCard from '../../components/BentoCard.astro';
-import RevealText from '../../components/RevealText.astro';
 import Tag from '../../components/Tag.astro';
 
 const noticias = (await getCollection('noticias')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<Layout title="Notícias | Bolina Tec" description="Notícias, projetos e atualizações da Bolina Tec.">
-  <section data-nav-theme="light" class="py-32 px-6 md:px-12 lg:px-20">
+<Layout
+  title="Notas Técnicas & Engenharia | BolinaTec"
+  description="Publicações técnicas, investigações e notas de engenharia da BolinaTec sobre sistemas computáveis e regulação urbanística."
+>
+  <section class="py-24 md:py-32 px-6 md:px-12 lg:px-20 bg-[#080808]">
     <div class="max-w-6xl mx-auto">
       <div class="mb-16">
-        <Tag>NOTÍCIAS</Tag>
-        <RevealText class="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]" text={"Atualizações\nda Bolina Tec."} />
-        <p class="mt-6 text-sm text-black/45 max-w-xl leading-relaxed">
-          Acompanhe projetos, reflexões e novidades sobre consultoria tecnológica, agricultura, território e inovação técnica.
+        <div class="mb-4">
+          <Tag>REGISTOS & ENGENHARIA</Tag>
+        </div>
+        <h1
+          class="text-4xl md:text-5xl font-light text-white tracking-tight leading-[1.05] mb-6"
+          style="font-family: 'IBM Plex Sans', sans-serif;"
+        >
+          Notas Técnicas & Atualizações.
+        </h1>
+        <p class="text-sm text-neutral-400 max-w-xl leading-relaxed font-sans">
+          Reflexões de engenharia sobre modelação formal, sistemas regulatórios determinísticos e lições de implementação no terreno.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {noticias.map((post, index) => (
           <a href={`/noticias/${post.id}`} class="group">
-            <BentoCard class="h-full p-7 flex flex-col justify-between" delay={index * 80}>
+            <BentoCard class="h-full p-8 flex flex-col justify-between" delay={index * 80}>
               <div class="space-y-4">
-                <div class="text-[11px] tracking-[0.2em] text-black/50 uppercase">
-                  {new Date(post.data.date).toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' })}
+                <div class="flex items-center justify-between font-mono text-[10px] text-neutral-400 uppercase tracking-wider">
+                  <span>{new Date(post.data.date).toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+                  {post.data.category && <span>{post.data.category}</span>}
                 </div>
-                <h2 class="text-xl font-light leading-snug group-hover:translate-x-0.5 transition-transform">{post.data.title}</h2>
-                <p class="text-sm text-black/60 leading-relaxed">{post.data.description}</p>
+                <h2 class="text-xl font-medium text-white leading-snug group-hover:text-neutral-200 transition-colors">
+                  {post.data.title}
+                </h2>
+                <p class="text-xs text-neutral-400 leading-relaxed font-sans">
+                  {post.data.description}
+                </p>
               </div>
-              <div class="mt-8 text-xs tracking-widest uppercase text-black/50 group-hover:text-black transition-colors">
-                Ler notícia
+              <div class="mt-8 pt-4 border-t border-white/[0.06] font-mono text-xs uppercase tracking-wider text-white group-hover:text-neutral-300 transition-colors flex items-center justify-between">
+                <span>Ler nota técnica</span>
+                <span>→</span>
               </div>
             </BentoCard>
           </a>

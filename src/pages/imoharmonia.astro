@@ -1,0 +1,322 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Tag from '../components/Tag.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const pipeline = [
+  {
+    step: '01',
+    name: 'Projeto',
+    label: 'Identificação Cadastral',
+    desc: 'Localização geográfica precisa, polígono de intervenção e natureza da operação urbanística.',
+  },
+  {
+    step: '02',
+    name: 'Factos',
+    label: 'Parâmetros Reais',
+    desc: 'Área bruta de construção, área de implantação, cérceas, cota de soleira, usos propostos e afastamentos.',
+  },
+  {
+    step: '03',
+    name: 'Contexto Regulatório',
+    label: 'Isolamento Normativo',
+    desc: 'Seleção automática dos artigos aplicáveis do PDM municipal, RJUE, servidões e restrições de utilidade pública.',
+  },
+  {
+    step: '04',
+    name: 'Requisitos Aplicáveis',
+    label: 'Estruturação Lógica',
+    desc: 'Decomposição de texto jurídico complexo em proposições verificáveis sem ambiguidade.',
+  },
+  {
+    step: '05',
+    name: 'Regras Computáveis',
+    label: 'Algoritmos Determinísticos',
+    desc: 'Fórmulas matemáticas de índice de ocupação, planos de corte, cérceas dominantes e polígonos permitidos.',
+  },
+  {
+    step: '06',
+    name: 'Verificações',
+    label: 'Execução de Testes',
+    desc: 'Comparação estrita entre os factos do projeto e os limites permitidos por cada norma aplicável.',
+  },
+  {
+    step: '07',
+    name: 'Evidência',
+    label: 'Rastreabilidade Total',
+    desc: 'Cada verificação regista o artigo exato, a redação legal e o cálculo que suporta a validação.',
+  },
+  {
+    step: '08',
+    name: 'Resultado',
+    label: 'Diagnóstico em 4 Estados',
+    desc: 'Conclusão determinística e auditável: Conforme, Condicionado, Não Conforme ou Inconclusivo.',
+  },
+];
+---
+
+<Layout
+  title="ImoHarmonia | Pré-validação Regulatória de Projetos — BolinaTec"
+  description="O ImoHarmonia é o motor determinístico de pré-validação regulatória que analisa projetos concretos de arquitetura e engenharia face a PDMs, RJUE e normas urbanísticas."
+>
+  <!-- HERO SECTION -->
+  <section class="py-24 md:py-32 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] relative overflow-hidden bg-[#080808]">
+    <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto relative z-10">
+      <div class="inline-flex items-center gap-2 mb-6">
+        <Tag variant="product">PRODUTO PRINCIPAL</Tag>
+        <span class="font-mono text-xs text-neutral-400">/ Urbanismo Computável</span>
+      </div>
+
+      <h1
+        class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight leading-[1.05] mb-8"
+        style="font-family: 'IBM Plex Sans', sans-serif;"
+      >
+        "Este projeto<br />
+        <span class="text-white font-normal underline decoration-emerald-500/50 underline-offset-8">pode avançar?</span>"
+      </h1>
+
+      <p class="text-base md:text-lg text-neutral-300 max-w-2xl leading-relaxed font-sans mb-10">
+        O ImoHarmonia é o motor de engenharia que pré-valida projetos concretos de arquitetura e engenharia face aos regulamentos municipais e nacionais antes da submissão autárquica.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <a
+          href="#testar"
+          class="w-full sm:w-auto px-6 py-3 rounded-xl bg-white text-black font-mono text-xs uppercase tracking-wider font-semibold hover:bg-neutral-200 transition-all shadow-md text-center"
+        >
+          Testar com um projeto
+        </a>
+        <a
+          href="https://imoharmonia.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#141414] text-neutral-300 hover:text-white border border-white/[0.1] font-mono text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
+        >
+          <span>Visitar imoharmonia.com</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE REGULATORY PROBLEM -->
+  <section class="py-24 px-6 md:px-12 lg:px-20 border-b border-white/[0.08]">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="mb-4">
+            <Tag>A COMPLEXIDADE REGULATÓRIA</Tag>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight mb-6">
+            308 municípios. Milhares de páginas. Um erro de interpretação custa meses.
+          </h2>
+          <p class="text-sm text-neutral-300 leading-relaxed font-sans mb-4">
+            Em Portugal, o licenciamento de um projeto de edificação ou loteamento está sujeito a uma matriz fragmentada: o Plano Diretor Municipal (PDM) do respetivo concelho, o Regime Jurídico da Urbanização e Edificação (RJUE), o RGEU e dezenas de regimes de proteção territorial (REN, RAN, património classificado, domínio hídrico).
+          </p>
+          <p class="text-sm text-neutral-400 leading-relaxed font-sans">
+            A leitura manual é lenta, sujeita a lapsos humanos e muitas vezes descobre incongruências quando o projeto já foi desenhado e submetido, provocando rejeições liminares e aditamentos onerosos.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="p-6 rounded-xl border border-white/[0.08] bg-[#0c0c0c]">
+            <span class="font-mono text-[11px] text-rose-400 mb-1 block">O CUSTO DA INCERTEZA</span>
+            <h3 class="text-white text-base font-medium mb-1">Rejeições e Pedidos de Aperfeiçoamento</h3>
+            <p class="text-xs text-neutral-400 leading-relaxed">
+              Meses perdidos em processos camarários suspensos por desconformidades que podiam ter sido detetadas nos primeiros dias de conceção.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-xl border border-white/[0.08] bg-[#0c0c0c]">
+            <span class="font-mono text-[11px] text-amber-400 mb-1 block">DISPERSÃO DE FONTES</span>
+            <h3 class="text-white text-base font-medium mb-1">Conflitos de Revogação e Versões</h3>
+            <p class="text-xs text-neutral-400 leading-relaxed">
+              Avisos em Diário da República, revisões de plano e suspensões parciais criam incerteza sobre qual a norma exata em vigor à data da pretensão.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-xl border border-white/[0.08] bg-[#0c0c0c]">
+            <span class="font-mono text-[11px] text-emerald-400 mb-1 block">A RESPOSTA IMOHARMONIA</span>
+            <h3 class="text-white text-base font-medium mb-1">Pré-validação Computável e Auditável</h3>
+            <p class="text-xs text-neutral-300 leading-relaxed">
+              Estruturação formal das normas e validação direta contra os dados do projeto antes de qualquer assinatura ou submissão.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKFLOW DISTINCTION -->
+  <section class="py-24 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] bg-[#070707]">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-2xl mb-16">
+        <div class="mb-4">
+          <Tag>DISTINÇÃO DE ENGENHARIA</Tag>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight mb-4">
+          Não procuramos terrenos genéricos.<br />Validamos projetos concretos.
+        </h2>
+        <p class="text-sm text-neutral-400 leading-relaxed">
+          Compreenda a diferença fundamental entre ferramentas de prospeção territorial e o motor de pré-validação ImoHarmonia.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="p-8 rounded-2xl border border-white/[0.08] bg-[#0a0a0a]">
+          <div class="font-mono text-xs text-neutral-400 uppercase tracking-wider mb-2">Abordagem de Mercado Comum</div>
+          <h3 class="text-xl text-neutral-300 font-medium mb-4">Terreno → O que se pode construir?</h3>
+          <p class="text-xs text-neutral-400 leading-relaxed mb-6 font-sans">
+            A maioria das ferramentas analisa a parcela cadastral e gera estimativas genéricas de viabilidade sem conhecer o programa do arquiteto, a distribuição volumétrica ou a implantação proposta.
+          </p>
+          <ul class="space-y-2 font-mono text-[11px] text-neutral-400">
+            <li>× Não responde se o projeto do arquiteto cumpre o regulamento</li>
+            <li>× Gera centenas de páginas genéricas que ninguém lê na íntegra</li>
+            <li>× Ignora particularidades geométricas do edifício</li>
+          </ul>
+        </div>
+
+        <div class="p-8 rounded-2xl border border-emerald-500/30 bg-emerald-950/10 shadow-lg">
+          <div class="font-mono text-xs text-emerald-400 uppercase tracking-wider mb-2">Abordagem ImoHarmonia</div>
+          <h3 class="text-xl text-white font-medium mb-4">Projeto Concreto → Pode avançar?</h3>
+          <p class="text-xs text-neutral-300 leading-relaxed mb-6 font-sans">
+            O arquiteto ou engenheiro introduz os dados reais da intervenção. O ImoHarmonia cruza cirurgicamente os factos com o articulado do PDM aplicável e emite pareceres fundamentados.
+          </p>
+          <ul class="space-y-2 font-mono text-[11px] text-emerald-400">
+            <li>✓ Resposta determinística para o projeto desenhado</li>
+            <li>✓ Verificação de recuos, cérceas, índices e estacionamento</li>
+            <li>✓ Citação exata do artigo e parágrafo de cada verificação</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8-STEP PIPELINE -->
+  <section class="py-24 px-6 md:px-12 lg:px-20 border-b border-white/[0.08]">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-2xl mb-16">
+        <div class="mb-4">
+          <Tag>PIPELINE DE VALIDAÇÃO</Tag>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight mb-4">
+          O Pipeline de Verificação em 8 Etapas
+        </h2>
+        <p class="text-sm text-neutral-400 leading-relaxed font-sans">
+          Cada projeto percorre uma cadeia determinística estrita. Nenhum resultado é emitido sem a correspondente prova lógica e normativa.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {pipeline.map((item) => (
+          <div class="p-6 rounded-xl border border-white/[0.08] bg-[#0c0c0c] flex flex-col justify-between hover:border-white/20 transition-all">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-xs text-neutral-400">{item.step}</span>
+                <span class="font-mono text-[9px] uppercase tracking-wider text-neutral-400 px-2 py-0.5 rounded bg-white/[0.03] border border-white/[0.06]">
+                  {item.label}
+                </span>
+              </div>
+              <h3 class="text-base text-white font-medium mb-2">{item.name}</h3>
+              <p class="text-xs text-neutral-400 leading-relaxed font-sans">{item.desc}</p>
+            </div>
+            <div class="mt-6 pt-3 border-t border-white/[0.05] font-mono text-[10px] text-neutral-400">
+              Passo {item.step} de 08
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- THE 4 VERDICTS -->
+  <section class="py-24 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] bg-[#070707]">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-2xl mb-16">
+        <div class="mb-4">
+          <Tag>ESTADOS DO DIAGNÓSTICO</Tag>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight mb-4">
+          Os Quatro Estados de Conformidade
+        </h2>
+        <p class="text-sm text-neutral-400 leading-relaxed font-sans">
+          O sistema não emite percentagens ambíguas de 'probabilidade'. Classifica os requisitos segundo quatro estados formais de engenharia regulatória.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-6 rounded-2xl border border-emerald-500/25 bg-emerald-950/10">
+          <div class="w-3 h-3 rounded-full bg-emerald-400 mb-4"></div>
+          <h3 class="font-mono text-sm uppercase tracking-wider text-emerald-400 font-semibold mb-2">Conforme</h3>
+          <p class="text-xs text-neutral-300 leading-relaxed font-sans">
+            Todos os parâmetros do projeto verificados cumprem integralmente os limites máximos e mínimos impostos pelo instrumento de gestão territorial em vigor.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-amber-500/25 bg-amber-950/10">
+          <div class="w-3 h-3 rounded-full bg-amber-400 mb-4"></div>
+          <h3 class="font-mono text-sm uppercase tracking-wider text-amber-400 font-semibold mb-2">Condicionado</h3>
+          <p class="text-xs text-neutral-300 leading-relaxed font-sans">
+            A conformidade depende de condição suspensiva, compensação urbanística, parecer vinculativo de entidade externa ou exceção regulamentar aplicável.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-rose-500/25 bg-rose-950/10">
+          <div class="w-3 h-3 rounded-full bg-rose-400 mb-4"></div>
+          <h3 class="font-mono text-sm uppercase tracking-wider text-rose-400 font-semibold mb-2">Não Conforme</h3>
+          <p class="text-xs text-neutral-300 leading-relaxed font-sans">
+            Existe violação expressa de parâmetro regulamentar inderrogável (ex: ultrapassagem de cércea máxima ou afetação a uso interdito na categoria de solo).
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-white/15 bg-white/[0.02]">
+          <div class="w-3 h-3 rounded-full bg-neutral-400 mb-4"></div>
+          <h3 class="font-mono text-sm uppercase tracking-wider text-neutral-300 font-semibold mb-2">Inconclusivo</h3>
+          <p class="text-xs text-neutral-400 leading-relaxed font-sans">
+            Os dados fornecidos são omissos ou insuficientes para aferir deterministamente a conformidade (ex: falta de cota de soleira ou cadastro não delimitado).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFESSIONAL RESPONSIBILITY DISCLAIMER -->
+  <section class="py-16 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] bg-[#0c0c0c]">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-start gap-6">
+      <div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.1] flex items-center justify-center shrink-0 text-white font-mono text-sm">
+        !
+      </div>
+      <div>
+        <h3 class="text-sm font-mono uppercase tracking-wider text-white mb-2">
+          Garantia Ética e Responsabilidade Profissional
+        </h3>
+        <p class="text-xs text-neutral-400 leading-relaxed font-sans">
+          O ImoHarmonia é uma infraestrutura computacional de apoio e suporte à decisão técnica. Não substitui o julgamento profissional dos arquitetos e engenheiros autores do projeto, nem a competência jurídica dos técnicos municipais e órgãos autárquicos. O ImoHarmonia elimina a incerteza do cálculo; a responsabilidade do projeto permanece no profissional.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUALIFICATION / TEST SECTION -->
+  <section id="testar" class="py-24 px-6 md:px-12 lg:px-20 bg-[#080808]">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 mb-4">
+        <Tag>TESTAR COM UM PROJETO</Tag>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-light text-white tracking-tight leading-[1.05] mb-6">
+        Submeta os dados do seu projeto.
+      </h2>
+      <p class="text-sm text-neutral-400 max-w-xl mx-auto leading-relaxed mb-12 font-sans">
+        Indique o município, tipo de intervenção urbanística e as dúvidas normativas. A nossa equipa de engenharia responderá com uma avaliação técnica de viabilidade de teste.
+      </p>
+
+      <div class="p-8 md:p-10 rounded-2xl border border-white/[0.1] bg-[#0c0c0c] text-left shadow-2xl">
+        <ContactForm defaultTopic="imoharmonia" />
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,31 +1,153 @@
 ---
-const { action = 'mailto:geral@bolinatec.com', subject = 'Pedido%20de%20Contacto' } = Astro.props;
+interface Props {
+  defaultTopic?: string;
+  class?: string;
+}
+
+const { defaultTopic = 'geral', class: className = '' } = Astro.props;
 ---
 
-<form data-join-form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-  <input
-    data-join-input
-    type="email"
-    placeholder="email@email.com"
-    required
-    class="flex-1 bg-white border border-black/10 rounded-xl px-4 py-3 text-sm text-[#111] placeholder:text-black/40 focus:outline-none focus:border-black/25 transition-colors"
-  />
-  <button type="submit" class="px-8 py-3 bg-[#111] text-white text-sm rounded-xl hover:bg-[#333] transition-colors tracking-widest font-medium">
-    Pedir Contacto
-  </button>
+<form data-qualification-form class={`w-full max-w-xl mx-auto space-y-4 text-left ${className}`}>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div>
+      <label for="contact-name" class="block font-mono text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5">
+        Nome completo *
+      </label>
+      <input
+        id="contact-name"
+        name="name"
+        type="text"
+        required
+        placeholder="Eng. / Arq. Nome"
+        class="w-full bg-[#111] border border-white/[0.1] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/40 transition-colors"
+      />
+    </div>
+
+    <div>
+      <label for="contact-email" class="block font-mono text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5">
+        Email profissional *
+      </label>
+      <input
+        id="contact-email"
+        name="email"
+        type="email"
+        required
+        placeholder="nome@empresa.pt"
+        class="w-full bg-[#111] border border-white/[0.1] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/40 transition-colors"
+      />
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div>
+      <label for="contact-org" class="block font-mono text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5">
+        Organização / Gabinete
+      </label>
+      <input
+        id="contact-org"
+        name="organization"
+        type="text"
+        placeholder="Gabinete / Entidade"
+        class="w-full bg-[#111] border border-white/[0.1] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/40 transition-colors"
+      />
+    </div>
+
+    <div>
+      <label for="contact-role" class="block font-mono text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5">
+        Função / Especialidade
+      </label>
+      <select
+        id="contact-role"
+        name="role"
+        class="w-full bg-[#111] border border-white/[0.1] rounded-lg px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-white/40 transition-colors cursor-pointer"
+      >
+        <option value="arquiteto">Arquiteto / Urbanista</option>
+        <option value="engenheiro">Engenheiro Civil / Projetista</option>
+        <option value="promotor">Promotor Imobiliário</option>
+        <option value="tecnico_municipal">Técnico Municipal / Autarquia</option>
+        <option value="lider_tecnico">Líder Técnico / CTO</option>
+        <option value="outro">Outra Função</option>
+      </select>
+    </div>
+  </div>
+
+  <div>
+    <label for="contact-topic" class="block font-mono text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5">
+      O que o trouxe à BolinaTec? *
+    </label>
+    <select
+      id="contact-topic"
+      name="topic"
+      class="w-full bg-[#111] border border-white/[0.1] rounded-lg px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-white/40 transition-colors cursor-pointer"
+    >
+      <option value="imoharmonia" selected={defaultTopic === 'imoharmonia'}>Testar projeto concreto no ImoHarmonia (Validação Prévia)</option>
+      <option value="computable_systems" selected={defaultTopic === 'computable_systems'}>Engenharia de sistemas regulatórios ou computáveis</option>
+      <option value="rd_experiment" selected={defaultTopic === 'rd_experiment'}>Investigação técnica / Problema de complexidade</option>
+      <option value="outro" selected={defaultTopic === 'geral'}>Outro assunto específico</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="contact-details" class="block font-mono text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5">
+      Descrição do problema ou contexto do projeto *
+    </label>
+    <textarea
+      id="contact-details"
+      name="details"
+      rows="4"
+      required
+      placeholder="Indique concelho/município, tipo de operação urbanística ou natureza do problema técnico a computar..."
+      class="w-full bg-[#111] border border-white/[0.1] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/40 transition-colors resize-y"
+    ></textarea>
+  </div>
+
+  <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="font-mono text-[11px] text-neutral-500">
+      Resposta técnica em 24h úteis.
+    </div>
+    <button
+      type="submit"
+      class="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-white text-black font-mono text-xs uppercase tracking-wider font-semibold hover:bg-neutral-200 transition-all shadow-sm"
+    >
+      Submeter Contexto
+    </button>
+  </div>
+
+  <div data-form-status class="hidden pt-3 font-mono text-xs text-emerald-400"></div>
 </form>
 
 <script is:inline>
   (() => {
-    const form = document.currentScript?.closest('section')?.querySelector('[data-join-form]');
-    if (!form) return;
-    const input = form.querySelector('[data-join-input]');
+    const form = document.currentScript?.previousElementSibling;
+    if (!form || !form.matches('[data-qualification-form]')) return;
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      if (!input || !input.value) return;
-      const email = encodeURIComponent(input.value);
-      window.location.href = `mailto:geral@bolinatec.com?subject=Pedido%20de%20Contacto&body=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20vossos%20servi%C3%A7os.%0A%0AEmail%3A%20${email}`;
-      form.innerHTML = '<p class="text-sm text-black/60">Obrigado! A abrir o teu cliente de email...</p>';
+      const fd = new FormData(form);
+      const name = fd.get('name') || '';
+      const email = fd.get('email') || '';
+      const org = fd.get('organization') || 'Não especificada';
+      const role = fd.get('role') || 'Outro';
+      const topic = fd.get('topic') || 'Geral';
+      const details = fd.get('details') || '';
+
+      const subject = encodeURIComponent(`[Contacto BolinaTec] ${topic} — ${org}`);
+      const body = encodeURIComponent(
+        `Nome: ${name}\n` +
+        `Email: ${email}\n` +
+        `Organização: ${org}\n` +
+        `Função: ${role}\n` +
+        `Assunto / Motivo: ${topic}\n\n` +
+        `Contexto do Problema:\n${details}\n`
+      );
+
+      const statusEl = form.querySelector('[data-form-status]');
+      if (statusEl) {
+        statusEl.classList.remove('hidden');
+        statusEl.innerText = 'A preparar mensagem técnica para geral@bolinatec.com...';
+      }
+
+      window.location.href = `mailto:geral@bolinatec.com?subject=${subject}&body=${body}`;
     });
   })();
 </script>

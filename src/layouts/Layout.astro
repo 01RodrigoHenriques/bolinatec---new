@@ -3,9 +3,16 @@ import MobileNav from '../components/MobileNav.astro';
 import NavScript from '../components/NavScript.astro';
 import '../styles/global.css';
 
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
 const {
-  title = 'Bolina Tec | Consultoria Tecnológica',
-  description = 'A Bolina Tec presta consultoria tecnológica e desenvolve soluções digitais aplicadas a agricultura, território e inovação técnica.',
+  title = 'BolinaTec | Engenharia Tecnológica',
+  description = 'A BolinaTec é uma empresa portuguesa de engenharia tecnológica que investiga problemas complexos e desenvolve software, sistemas e produtos para os resolver.',
   image = '/images/uploads/logo.webp',
   canonical,
 } = Astro.props;
@@ -15,7 +22,7 @@ const resolvedImage = new URL(image, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="pt-PT">
+<html lang="pt-PT" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -30,7 +37,7 @@ const resolvedImage = new URL(image, Astro.site).href;
     <meta property="og:description" content={description} />
     <meta property="og:image" content={resolvedImage} />
     <meta property="og:locale" content="pt_PT" />
-    <meta property="og:site_name" content="Bolina Tec" />
+    <meta property="og:site_name" content="BolinaTec" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -45,87 +52,113 @@ const resolvedImage = new URL(image, Astro.site).href;
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Bolina Tec",
+      "@type": "Corporation",
+      "name": "BolinaTec",
+      "legalName": "BolinaTec",
       "description": description,
       "url": "https://bolinatec.com",
       "logo": resolvedImage,
-      "areaServed": "PT",
-      "knowsAbout": ["Consultoria Tecnológica", "Agricultura", "Território", "Inovação"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "PT"
+      },
+      "knowsAbout": [
+        "Engenharia de Software",
+        "Sistemas Computáveis",
+        "Validação Prévia Urbanística",
+        "Engenharia de Requisitos Regulatórios",
+        "ImoHarmonia"
+      ],
       "contactPoint": {
         "@type": "ContactPoint",
         "email": "geral@bolinatec.com",
-        "contactType": "customer service"
+        "contactType": "corporate"
       }
     })} />
 
     <slot name="head" />
   </head>
-  <body class="font-sans antialiased bg-[#F5F4F0] text-[#111] min-h-screen">
-    <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-black focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:outline-none">
+  <body class="font-sans antialiased bg-[#080808] text-[#ededed] min-h-screen flex flex-col justify-between selection:bg-white/20 selection:text-white">
+    <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded-md focus:text-xs focus:font-mono focus:outline-none">
       Saltar para o conteúdo
     </a>
 
     <header>
       <MobileNav />
     </header>
-    <main id="conteudo">
+
+    <main id="conteudo" class="flex-grow">
       <slot />
     </main>
 
-    <footer class="relative bg-[#F5F4F0] border-t border-black/[0.06] overflow-hidden">
-      <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(circle, #000 1px, transparent 1px); background-size: 24px 24px;"></div>
+    <footer class="relative bg-[#070707] border-t border-white/[0.08] overflow-hidden">
+      <!-- Subtle Grid Background -->
+      <div class="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
 
-      <div class="relative max-w-6xl mx-auto px-6 md:px-12 lg:px-20 pt-16 pb-8">
-        <div class="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-12 md:gap-8 mb-16">
+      <div class="relative max-w-6xl mx-auto px-6 md:px-12 lg:px-20 pt-16 pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-12 md:gap-8 mb-16">
           <div>
-            <a href="/" class="inline-block mb-5">
-              <img src="/images/favicon.png" alt="Bolina Tec" class="h-8 w-auto" style="filter: invert(1);" />
+            <a href="/" class="inline-flex items-center gap-3 mb-5 group">
+              <img src="/images/favicon.png" alt="BolinaTec" class="h-7 w-auto brightness-125" />
+              <span class="font-mono text-sm tracking-wider uppercase text-white font-medium">BolinaTec</span>
             </a>
-            <p class="text-sm text-black/50 leading-relaxed max-w-xs mb-5">
-              Consultoria tecnológica e desenvolvimento de soluções digitais aplicadas a agricultura, território e inovação técnica.
+            <p class="text-sm text-neutral-400 leading-relaxed max-w-sm mb-4">
+              Empresa portuguesa de engenharia tecnológica que investiga problemas complexos e desenvolve software, sistemas e produtos para os resolver.
             </p>
-            <a href="https://bolinatec.com" class="text-sm text-black/70 underline underline-offset-4 decoration-black/15 hover:decoration-black/40 transition-colors">bolinatec.com</a>
+            <div class="font-mono text-xs text-neutral-500">
+              <span class="text-neutral-400">Tese:</span> Transformar complexidade em sistemas computáveis.
+            </div>
           </div>
 
           <div>
-            <h4 class="text-xs font-medium tracking-[0.2em] uppercase text-black/90 mb-5">Serviços</h4>
-            <ul class="space-y-3">
-              <li><a href="/#solucoes" class="text-sm text-black/45 hover:text-black transition-colors">Soluções</a></li>
-              <li><a href="/#workflow" class="text-sm text-black/45 hover:text-black transition-colors">Como Trabalhamos</a></li>
-              <li><a href="/noticias/" class="text-sm text-black/45 hover:text-black transition-colors">Notícias</a></li>
+            <h4 class="font-mono text-xs tracking-[0.18em] uppercase text-white/90 mb-5">Sistemas</h4>
+            <ul class="space-y-3 font-sans text-sm">
+              <li>
+                <a href="/imoharmonia" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-2">
+                  <span>ImoHarmonia</span>
+                  <span class="font-mono text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">PRODUTO</span>
+                </a>
+              </li>
+              <li>
+                <a href="/trabalho" class="text-neutral-400 hover:text-white transition-colors">
+                  Portfólio de Engenharia
+                </a>
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 class="text-xs font-medium tracking-[0.2em] uppercase text-black/90 mb-5">Empresa</h4>
-            <ul class="space-y-3">
-              <li><a href="/#equipa" class="text-sm text-black/45 hover:text-black transition-colors">Equipa</a></li>
-              <li><a href="/#contacto" class="text-sm text-black/45 hover:text-black transition-colors">Contacto</a></li>
-              <li><a href="/#solucoes" class="text-sm text-black/45 hover:text-black transition-colors">Projetos</a></li>
+            <h4 class="font-mono text-xs tracking-[0.18em] uppercase text-white/90 mb-5">Engenharia</h4>
+            <ul class="space-y-3 font-sans text-sm">
+              <li><a href="/sobre" class="text-neutral-400 hover:text-white transition-colors">Sobre a Empresa</a></li>
+              <li><a href="/sobre#principios" class="text-neutral-400 hover:text-white transition-colors">Princípios Operacionais</a></li>
+              <li><a href="/contacto" class="text-neutral-400 hover:text-white transition-colors">Submeter Contexto</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 class="text-xs font-medium tracking-[0.2em] uppercase text-black/90 mb-5">Legal</h4>
-            <ul class="space-y-3">
-              <li><a href="/privacidade" class="text-sm text-black/45 hover:text-black transition-colors">Privacidade</a></li>
-              <li><a href="/termos" class="text-sm text-black/45 hover:text-black transition-colors">Termos e Condições</a></li>
+            <h4 class="font-mono text-xs tracking-[0.18em] uppercase text-white/90 mb-5">Institucional</h4>
+            <ul class="space-y-3 font-sans text-sm">
+              <li><a href="/privacidade" class="text-neutral-400 hover:text-white transition-colors">Privacidade</a></li>
+              <li><a href="/termos" class="text-neutral-400 hover:text-white transition-colors">Termos de Utilização</a></li>
+              <li><a href="mailto:geral@bolinatec.com" class="font-mono text-xs text-neutral-400 hover:text-white transition-colors">geral@bolinatec.com</a></li>
             </ul>
           </div>
         </div>
 
-        <div class="border-t border-black/[0.06] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <span class="text-xs text-black/30">&copy; 2026 Bolina Tec. Todos os direitos reservados.</span>
-          <span class="text-xs text-black/30 flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#C9A84C]"></span>
-            Desenvolvido por <a href="https://www.linkedin.com/in/rodrigohenriques00" class="underline underline-offset-2 decoration-black/15 hover:decoration-black/40 hover:text-black/60 transition-colors">Rodrigo Henriques</a>
-          </span>
+        <div class="border-t border-white/[0.08] pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-xs text-neutral-500">
+          <div>
+            &copy; 2026 BolinaTec. Sede em Portugal. Todos os direitos reservados.
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400/80"></span>
+            <span>Evidência antes da afirmação.</span>
+          </div>
         </div>
       </div>
     </footer>

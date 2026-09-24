@@ -1,72 +1,59 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Tag from '../components/Tag.astro';
-import RevealText from '../components/RevealText.astro';
 ---
 
-<Layout title="Termos e Condições | Bolina Tec" description="Termos e condições de utilização dos serviços da Bolina Tec.">
-  <section data-nav-theme="light" class="py-32 px-6 md:px-12 lg:px-20">
+<Layout
+  title="Termos de Utilização | BolinaTec"
+  description="Termos e condições gerais de utilização do sítio web e dos serviços de engenharia tecnológica da BolinaTec."
+>
+  <section class="py-24 md:py-32 px-6 md:px-12 lg:px-20 bg-[#080808]">
     <div class="max-w-3xl mx-auto">
-      <Tag>LEGAL</Tag>
-      <RevealText class="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]" text={"Termos e\nCondições."} />
+      <div class="mb-4">
+        <Tag>CONDIÇÕES CONTRATUAIS</Tag>
+      </div>
 
-      <div class="mt-16 space-y-12 text-sm text-black/60 leading-relaxed">
-        <div>
-          <h2 class="text-xl font-light text-black mb-4" style="font-family: 'IBM Plex Sans', sans-serif;">1. Aceitação dos termos</h2>
-          <p>Ao aceder ao site bolinatec.com e aos nossos serviços, aceitas integralmente estes Termos e Condições. Se não concordas com algum dos termos, não deverás utilizar os nossos serviços.</p>
+      <h1
+        class="text-4xl md:text-5xl font-light text-white tracking-tight leading-[1.05] mb-12"
+        style="font-family: 'IBM Plex Sans', sans-serif;"
+      >
+        Termos de Utilização.
+      </h1>
+
+      <div class="space-y-10 text-sm text-neutral-300 leading-relaxed font-sans">
+        <div class="border-b border-white/[0.08] pb-8">
+          <h2 class="text-lg font-medium text-white mb-3" style="font-family: 'IBM Plex Sans', sans-serif;">1. Objeto e Âmbito</h2>
+          <p class="text-neutral-400">Os presentes termos regulam a utilização do sítio bolinatec.com e a disponibilização de serviços e produtos de engenharia tecnológica pela BolinaTec. Ao aceder e utilizar este sítio, o utilizador declara concordar com as presentes condições gerais.</p>
+        </div>
+
+        <div class="border-b border-white/[0.08] pb-8">
+          <h2 class="text-lg font-medium text-white mb-3" style="font-family: 'IBM Plex Sans', sans-serif;">2. Natureza dos Serviços e Sistemas</h2>
+          <p class="text-neutral-400">A BolinaTec desenvolve sistemas computáveis, software determinístico e plataformas de verificação regulatória, incluindo o ImoHarmonia. A prestação de serviços concretos de engenharia é regida por propostas técnicas ou contratos específicos que complementam os presentes termos gerais.</p>
+        </div>
+
+        <div class="border-b border-white/[0.08] pb-8">
+          <h2 class="text-lg font-medium text-white mb-3" style="font-family: 'IBM Plex Sans', sans-serif;">3. Isenção e Responsabilidade Profissional</h2>
+          <p class="text-neutral-400">Os sistemas de validação regulatória (como o ImoHarmonia) constituem ferramentas auxiliares de verificação computacional destinadas a apoiar arquitetos, engenheiros, promotores e técnicos municipais. Os diagnósticos gerados não constituem atos administrativos vinculativos nem garantem aprovação ou licenciamento automático perante câmaras municipais ou entidades da administração pública. A responsabilidade técnica, formal e jurídica pelo projeto permanece integralmente no autor do mesmo e na autoridade licenciadora competente.</p>
+        </div>
+
+        <div class="border-b border-white/[0.08] pb-8">
+          <h2 class="text-lg font-medium text-white mb-3" style="font-family: 'IBM Plex Sans', sans-serif;">4. Propriedade Intelectual e Industrial</h2>
+          <p class="text-neutral-400">Todo o código-fonte, arquitetura de sistemas, algoritmos, grafos de modelação, documentação, marcas e elementos gráficos da BolinaTec e do ImoHarmonia são propriedade exclusiva da BolinaTec ou dos seus licenciantes legítimos, encontrando-se protegidos pelas leis nacionais e internacionais de direitos de autor e propriedade industrial.</p>
+        </div>
+
+        <div class="border-b border-white/[0.08] pb-8">
+          <h2 class="text-lg font-medium text-white mb-3" style="font-family: 'IBM Plex Sans', sans-serif;">5. Limitação de Responsabilidade</h2>
+          <p class="text-neutral-400">Na medida máxima permitida pela lei aplicável, a BolinaTec não se responsabiliza por prejuízos indiretos, lucros cessantes, perdas de oportunidade ou atrasos em prazos administrativos decorrentes da interpretação ou uso dos diagnósticos emitidos pelas suas plataformas.</p>
         </div>
 
         <div>
-          <h2 class="text-xl font-light text-black mb-4" style="font-family: 'IBM Plex Sans', sans-serif;">2. Descrição do serviço</h2>
-          <p>A Bolina Tec presta serviços de consultoria tecnológica nas áreas de agricultura, território e inovação técnica. Os nossos serviços incluem diagnóstico técnico, validação de propostas, consultoria especializada e implementação de soluções digitais.</p>
-          <p class="mt-3">Cada projeto é regido por um contrato ou proposta específica que complementa estes termos gerais.</p>
-        </div>
-
-        <div>
-          <h2 class="text-xl font-light text-black mb-4" style="font-family: 'IBM Plex Sans', sans-serif;">3. Propriedade intelectual</h2>
-          <p>O conteúdo do site — incluindo texto, imagens, código e design — é propriedade da Bolina Tec ou dos seus licenciantes, protegido por direitos de autor e propriedade intelectual.</p>
-          <p class="mt-3">Os entregáveis de cada projeto são regidos pelo contrato específico. Na ausência de disposição contrária em contrário, todos os materiais produzidos no âmbito de um projeto são transferidos para o cliente após pagamento integral.</p>
-        </div>
-
-        <div>
-          <h2 class="text-xl font-light text-black mb-4" style="font-family: 'IBM Plex Sans', sans-serif;">4. Responsabilidades</h2>
-          <p>A Bolina Tec compromete-se a prestar os serviços com diligência e profissionalismo, em conformidade com as melhores práticas da indústria.</p>
-          <p class="mt-3">O cliente compromete-se a fornecer informações verdadeiras e completas necessárias à execução do projeto, e a colaborar ativamente nas fases que lhe sejam solicitadas.</p>
-        </div>
-
-        <div>
-          <h2 class="text-xl font-light text-black mb-4" style="font-family: 'IBM Plex Sans', sans-serif;">5. Pagamento</h2>
-          <p>As condições de pagamento são definidas em cada proposta ou contrato. Em caso de atraso de pagamento, a Bolina Tec reserva-se o direito de suspender a prestação dos serviços até regularização da situação.</p>
-        </div>
-
-        <div>
-          <h2 class="text-xl font-light text-black mb-4" style="font-family: 'IBM Plex Sans', sans-serif;">6. Confidencialidade</h2>
-          <p>Ambas as partes comprometem-se a manter confidencial toda a informação trocada no âmbito da colaboração, não a divulgando a terceiros sem consentimento prévio por escrito.</p>
-        </div>
-
-        <div>
-          <h2 class="text-xl font-light text-black mb-4" style="font-family: 'IBM Plex Sans', sans-serif;">7. Limitação de responsabilidade</h2>
-          <p>A Bolina Tec não será responsável por danos indiretos, perdas de lucros ou interrupções de negócio resultantes da utilização dos nossos serviços, salvo em caso de dolo ou negligência grave.</p>
-        </div>
-
-        <div>
-          <h2 class="text-xl font-light text-black mb-4" style="font-family: 'IBM Plex Sans', sans-serif;">8. Resolução de litígios</h2>
-          <p>Quaisquer litígios decorrentes destes termos serão resolvidos pelos tribunais competentes de Portugal, com exclusão de qualquer outro foro.</p>
-        </div>
-
-        <div>
-          <h2 class="text-xl font-light text-black mb-4" style="font-family: 'IBM Plex Sans', sans-serif;">9. Alterações</h2>
-          <p>A Bolina Tec reserva-se o direito de alterar estes termos a qualquer momento. As alterações produzem efeitos a partir da data da sua publicação no site.</p>
-        </div>
-
-        <div>
-          <h2 class="text-xl font-light text-black mb-4" style="font-family: 'IBM Plex Sans', sans-serif;">10. Contacto</h2>
-          <p>Para esclarecimentos sobre estes termos, contacta-nos via <a href="mailto:geral@bolinatec.com" class="underline underline-offset-2 hover:text-black transition-colors">geral@bolinatec.com</a>.</p>
+          <h2 class="text-lg font-medium text-white mb-3" style="font-family: 'IBM Plex Sans', sans-serif;">6. Lei Aplicável e Foro</h2>
+          <p class="text-neutral-400">Os presentes Termos de Utilização regem-se pela lei portuguesa. Para a resolução de qualquer litígio emergente da utilização deste sítio, é competente com exclusão de qualquer outro o foro da comarca de Lisboa, Portugal.</p>
         </div>
       </div>
 
-      <div class="mt-20 pt-8 border-t border-black/[0.06]">
-        <p class="text-xs text-black/30">Última atualização: Junho 2026</p>
+      <div class="mt-16 pt-8 border-t border-white/[0.08] font-mono text-xs text-neutral-400">
+        Última atualização: Setembro 2026 • Sede em Portugal
       </div>
     </div>
   </section>

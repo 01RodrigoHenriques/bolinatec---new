@@ -1,20 +1,19 @@
 ---
-const letters = ['B', 'O', 'L', 'I', 'N', 'A','T', 'E', 'C'];
+// Minimal, non-blocking entrance transition that never traps the user or delays content.
 ---
+<div
+  data-page-intro
+  class="fixed inset-0 z-50 pointer-events-none bg-black transition-opacity duration-500 ease-out"
+  aria-hidden="true"
+></div>
 
-<div data-intro-animation data-phase="idle" class="fixed inset-0 z-[100] pointer-events-none" aria-hidden="true">
-  <div data-intro-curtain class="absolute inset-x-0 top-0" style="bottom:0%; background:#000000;"></div>
-  <div class="absolute inset-0 flex items-center justify-center">
-    <div class="flex" style="gap:0.05em;">
-      {letters.map((letter, index) => (
-        <span
-          data-intro-letter
-          class="font-sans font-bold text-white leading-none select-none"
-          style={`font-size: calc((100vw - 64px) / ${letters.length}); letter-spacing:0.05em; opacity:0; filter:blur(36px); transform:translateY(48px); will-change: opacity, filter, transform;`}
-        >
-          {letter}
-        </span>
-      ))}
-    </div>
-  </div>
-</div>
+<script is:inline>
+  (() => {
+    const intro = document.querySelector('[data-page-intro]');
+    if (!intro) return;
+    requestAnimationFrame(() => {
+      intro.style.opacity = '0';
+      setTimeout(() => intro.remove(), 550);
+    });
+  })();
+</script>

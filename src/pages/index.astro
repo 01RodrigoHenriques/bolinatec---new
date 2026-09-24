@@ -14,454 +14,602 @@ const newsPosts = (await getCollection('noticias'))
   .slice(0, 3);
 
 const teamMembers = await getCollection('equipa');
-const projetos = await getCollection('projetos');
+const allProjetos = await getCollection('projetos');
 
-const methodCards = [
+const workflowSteps = [
   {
-    n: '01',
-    title: 'Diagnóstico',
-    desc: 'Começamos pelo problema, não pela solução. Levantamos contexto, restrições e o que já foi tentado antes.',
+    step: '01',
+    title: 'Projeto',
+    desc: 'Operação urbanística e localização cadastral concreta.',
   },
   {
-    n: '02',
-    title: 'Validação',
-    desc: 'Nenhuma proposta avança sem ser testada com dados reais e com quem vai operar o sistema.',
+    step: '02',
+    title: 'Factos',
+    desc: 'Áreas, cérceas, utilizações e parâmetros arquitetónicos do projeto.',
   },
   {
-    n: '03',
-    title: 'Proposta',
-    desc: 'Uma proposta técnica tem de ser executável por quem a recebe — não só compreensível para quem a escreveu.',
+    step: '03',
+    title: 'Contexto Regulatório',
+    desc: 'Seleção cirúrgica de PDM, RJUE, RGEU e servidões territoriais.',
   },
   {
-    n: '04',
-    title: 'Implementação',
-    desc: 'Não entregamos ficheiros. Entregamos capacidade de operar sem depender de nós.',
+    step: '04',
+    title: 'Requisitos Aplicáveis',
+    desc: 'Decomposição de artigos legais em proposições lógicas estritas.',
+  },
+  {
+    step: '05',
+    title: 'Regras Computáveis',
+    desc: 'Algoritmos determinísticos de cálculo geométrico e normativo.',
+  },
+  {
+    step: '06',
+    title: 'Verificações',
+    desc: 'Execução de verificações automáticas com rastreabilidade formal.',
+  },
+  {
+    step: '07',
+    title: 'Evidência',
+    desc: 'Justificação legal, artigo concreto e cálculo que fundamenta a prova.',
+  },
+  {
+    step: '08',
+    title: 'Resultado',
+    desc: 'Diagnóstico objetivo em 4 estados determinísticos.',
   },
 ];
 
-const contactPlans = [
-  {
-    name: 'Email',
-    price: 'geral@bolinatec.com',
-    sub: 'Resposta em 24h úteis',
-    features: ['Consultoria tecnológica', 'Agro e território', 'Desenvolvimento digital'],
-    delay: 0,
-    href: 'mailto:geral@bolinatec.com',
-    buttonText: 'ENVIAR EMAIL',
-  },
-  {
-    name: 'Reunião',
-    price: 'Agendar',
-    period: '/30 min',
-    sub: 'Falamos sobre o teu contexto',
-    features: ['Diagnóstico inicial', 'Encontro remoto ou presencial', 'Definição de próximos passos'],
-    highlight: true,
-    delay: 80,
-    href: 'https://calendly.com/bolinatecconsulting/30min',
-    buttonText: 'AGENDAR REUNIÃO',
-  },
-  {
-    name: 'Proposta',
-    price: 'Briefing',
-    sub: 'Ponto de partida para o projeto',
-    features: ['Levantamento de necessidades', 'Estimativa de esforço', 'Roadmap de implementação'],
-    delay: 140,
-    href: 'mailto:geral@bolinatec.com?subject=Pedido%20de%20Briefing',
-    buttonText: 'PEDIR BRIEFING',
-  },
+const maturityTabs = [
+  { id: 'todos', label: 'Todos os Trabalhos' },
+  { id: 'produto', label: 'Produtos', badge: '1' },
+  { id: 'experiencia', label: 'Experiências', badge: '1' },
+  { id: 'investigacao', label: 'Investigação', badge: '1' },
 ];
 
+const methodSteps = [
+  {
+    num: '01',
+    title: 'Diagnóstico de Restrições',
+    tag: 'ESPECIFICAÇÃO FORMAL',
+    desc: 'Começamos pelo problema e pelas suas restrições invariantes. Isolamos a complexidade real antes de escrever qualquer linha de arquitetura de software.',
+  },
+  {
+    num: '02',
+    title: 'Modelação Determinística',
+    tag: 'ENGENHARIA DE DADOS',
+    desc: 'Convertemos regras verbais, normas jurídicas ou processos territoriais em grafos executáveis e especificações lógicas sem ambiguidade.',
+  },
+  {
+    num: '03',
+    title: 'Validação com Factos Reais',
+    tag: 'EVIDÊNCIA EMPÍRICA',
+    desc: 'Nenhuma hipótese avança sem teste empírico rigoroso face a projetos e dados do terreno. Evidência antes da afirmação.',
+  },
+  {
+    num: '04',
+    title: 'Construção do Ativo Tecnológico',
+    tag: 'SISTEMA ESCALÁVEL',
+    desc: 'Entregamos software determinístico e sistemas operáveis com garantias matemáticas de integridade e observabilidade.',
+  },
+];
 ---
 
-<Layout title="Bolina Tec | Consultoria Tecnológica" description="A Bolina Tec presta consultoria tecnológica e desenvolve soluções digitais aplicadas a agricultura, território e inovação técnica.">
+<Layout
+  title="BolinaTec | Engenharia Tecnológica — Sistemas Computáveis"
+  description="A BolinaTec é uma empresa portuguesa de engenharia tecnológica que investiga problemas complexos e desenvolve software, sistemas e produtos para os resolver."
+>
   <IntroAnimation />
 
-  <section id="sobre" data-hero-section data-nav-theme="dark" class="relative h-screen overflow-hidden bg-black">
+  <!-- 01 HERO SECTION WITH SPATIAL 3D BOARD -->
+  <section
+    id="hero"
+    data-hero-section
+    class="relative min-h-[92vh] flex flex-col justify-center items-center overflow-hidden bg-[#080808] border-b border-white/[0.08]"
+  >
     <HeroGL client:only="react" />
 
-    <div class="absolute inset-x-0 top-0 z-10 pointer-events-none" style="height:22%; background: linear-gradient(to bottom, #000 0%, transparent 100%);"></div>
-    <div class="absolute inset-x-0 bottom-0 z-10 pointer-events-none" style="height:28%; background: linear-gradient(to top, #000 0%, transparent 100%);"></div>
+    <!-- Atmospheric Gradient Overlays -->
+    <div class="absolute inset-x-0 top-0 h-32 pointer-events-none bg-gradient-to-b from-[#080808] via-[#080808]/70 to-transparent z-10"></div>
+    <div class="absolute inset-x-0 bottom-0 h-40 pointer-events-none bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent z-10"></div>
 
-    <div class="absolute inset-0 z-30 flex flex-col items-center justify-center px-6 md:px-12 text-center">
+    <!-- Center Hero Content -->
+    <div class="relative z-20 max-w-5xl mx-auto px-6 md:px-12 text-center pt-24 pb-16 pointer-events-none">
+      <div class="inline-flex items-center gap-2 mb-6 pointer-events-auto">
+        <Tag variant="active">ENGENHARIA TECNOLÓGICA</Tag>
+        <span class="font-mono text-xs text-neutral-400 hidden sm:inline-block">/ Lisboa, Portugal</span>
+      </div>
+
       <h1
-        data-hero-title
-        class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-white leading-[1.05] tracking-tight mb-6 max-w-4xl"
-        style="font-family: 'IBM Plex Sans', sans-serif; opacity:0; filter:blur(24px); transform:translateY(32px); transition: opacity 1s cubic-bezier(0.16,1,0.3,1), filter 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);"
+        class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.08] tracking-tight mb-8 max-w-4xl mx-auto"
+        style="font-family: 'IBM Plex Sans', sans-serif;"
       >
-        Consultoria Tecnológica<br />para o mundo real.
+        Transformar complexidade<br class="hidden sm:inline" />
+        em <span class="font-normal text-white underline decoration-white/30 underline-offset-8">sistemas computáveis</span>.
       </h1>
 
-      <p
-        data-hero-subtitle
-        class="text-sm md:text-base text-white/45 max-w-xl mb-12"
-        style="font-family: 'IBM Plex Sans', sans-serif; opacity:0; filter:blur(12px); transform:translateY(16px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1) 200ms, filter 0.9s cubic-bezier(0.16,1,0.3,1) 200ms, transform 0.9s cubic-bezier(0.16,1,0.3,1) 200ms;"
-      >
-        Resolvemos problemas técnicos complexos em agricultura, território e sistemas digitais — do diagnóstico ao piloto.
+      <p class="text-sm md:text-base text-neutral-300 max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
+        A BolinaTec é uma empresa portuguesa de engenharia tecnológica que investiga problemas complexos e desenvolve software, sistemas e produtos para os resolver.
       </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pointer-events-auto">
+        <a
+          href="#imoharmonia"
+          class="w-full sm:w-auto px-6 py-3 rounded-xl bg-white text-black font-mono text-xs tracking-wider uppercase font-semibold hover:bg-neutral-200 transition-all shadow-md flex items-center justify-center gap-2"
+        >
+          <span>Conhecer o ImoHarmonia</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+
+        <a
+          href="/contacto"
+          class="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#141414] text-neutral-200 hover:text-white border border-white/[0.12] hover:border-white/30 font-mono text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2"
+        >
+          <span>Submeter Contexto Técnico</span>
+        </a>
+      </div>
+
+      <!-- Operating Principle Micro-Banner -->
+      <div class="mt-14 inline-flex items-center justify-center gap-2.5 px-4 py-1.5 rounded-full border border-white/10 bg-[#080808]/90 backdrop-blur-md shadow-sm pointer-events-auto">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></span>
+        <span class="font-mono text-xs text-neutral-300">Princípio: Problema antes da tecnologia. Evidência antes da afirmação.</span>
+      </div>
     </div>
   </section>
 
-  <section id="solucoes" data-nav-theme="light" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
+  <!-- 02 COMPLEXITY: THE REAL-WORLD PROBLEM -->
+  <section class="py-24 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] relative">
     <div class="max-w-6xl mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1.8fr] gap-12 lg:gap-20 items-start">
         <div>
-          <div class="mt-4"><Tag>SOLUÇÕES</Tag></div>
-          <RevealText class="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]" text={"Produtos\npor área."} />
-        </div>
-        <p class="text-sm text-black leading-relaxed max-w-xs">
-          Soluções construídas para problemas reais — não para demonstrações.
-        </p>
-      </div>
-
-      <ProductTabs
-        tabs={[
-          { id: 'agricultura', label: 'Agricultura' },
-          { id: 'territorio', label: 'Território' },
-          { id: 'inovacao', label: 'Inovação' },
-        ]}
-        defaultTab="agricultura"
-      />
-
-      <!-- Products Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-products-grid>
-        {projetos.map((projeto) => (
-          <div data-category={projeto.data.area} class="product-card">
-            <a href={`/projetos/${projeto.id}`} class="block bg-white rounded-xl border border-neutral-200/60 p-8 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 text-left group">
-              {projeto.data.image && (
-                <img 
-                  src={projeto.data.image}
-                  alt={projeto.data.title}
-                  loading="lazy"
-                  class="w-12 h-12 rounded-lg border border-neutral-200/60 flex items-center justify-center mb-4 object-cover"
-                />
-              )}
-              {!projeto.data.image && (
-                <div class="w-12 h-12 rounded-lg border border-neutral-200/60 flex items-center justify-center mb-4">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-neutral-800">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-                  </svg>
-                </div>
-              )}
-              <h3 class="text-xl font-light mb-2" style="font-family: 'IBM Plex Sans', sans-serif;">{projeto.data.title}</h3>
-              <p class="text-sm text-neutral-600 leading-relaxed mb-6">{projeto.data.shortDescription}</p>
-              <span class="text-xs tracking-widest uppercase text-neutral-600 hover:text-black transition-colors inline-flex items-center gap-2 group">
-                Saber mais
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform group-hover:translate-x-1">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </span>
-            </a>
+          <div class="mb-4">
+            <Tag>O PROBLEMA DA COMPLEXIDADE</Tag>
           </div>
-        ))}
+          <h2 class="text-3xl md:text-4xl font-light text-white leading-tight tracking-tight mb-6">
+            O software comum falha onde o mundo real resiste à computação.
+          </h2>
+          <p class="text-sm text-neutral-400 leading-relaxed font-sans mb-6">
+            Em setores regulados, no planeamento territorial e na indústria técnica, a complexidade não é acidental. Resulta de camadas sucessivas de normas, condições de exceção e restrições interdependentes.
+          </p>
+          <div class="p-4 rounded-xl border border-white/[0.08] bg-[#0c0c0c] font-mono text-xs text-neutral-300">
+            "Tecnologia é mecanismo de implementação. O desafio de engenharia é estruturar o problema."
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-6 rounded-xl border border-white/[0.08] bg-[#0d0d0d]">
+            <span class="font-mono text-xs text-neutral-400 mb-2 block">01 / DADOS FRAGMENTADOS</span>
+            <h3 class="text-base text-white font-medium mb-2">Normas Dispersas</h3>
+            <p class="text-xs text-neutral-400 leading-relaxed">
+              Centenas de páginas de regulamentos municipais, portarias e decretos-lei cuja interpretação manual consome semanas e acumula erros caros.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-xl border border-white/[0.08] bg-[#0d0d0d]">
+            <span class="font-mono text-xs text-neutral-400 mb-2 block">02 / RISCO TARDIO</span>
+            <h3 class="text-base text-white font-medium mb-2">Incerteza no Licenciamento</h3>
+            <p class="text-xs text-neutral-400 leading-relaxed">
+              Projetos investem recursos significativos antes de saber se cumprem parâmetros fundamentais de volumetria, afastamento ou uso.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-xl border border-white/[0.08] bg-[#0d0d0d]">
+            <span class="font-mono text-xs text-neutral-400 mb-2 block">03 / ABSTRAÇÕES FALSAS</span>
+            <h3 class="text-base text-white font-medium mb-2">Soluções Genéricas</h3>
+            <p class="text-xs text-neutral-400 leading-relaxed">
+              Plataformas que prometem automação através de palpites probabilísticos quando a decisão exige determinismo lógico estrito.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-xl border border-white/[0.08] bg-[#0d0d0d]">
+            <span class="font-mono text-xs text-neutral-400 mb-2 block">04 / FALTA DE EVIDÊNCIA</span>
+            <h3 class="text-base text-white font-medium mb-2">Invisibilidade dos Passos</h3>
+            <p class="text-xs text-neutral-400 leading-relaxed">
+              Resultados que não demonstram o artigo, o cálculo ou o raciocínio legal que sustentam a conclusão.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="workflow" data-nav-theme="dark" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06] overflow-hidden bg-[#0f0f0f]">
-    <div class="max-w-6xl mx-auto">
-      <div class="mb-20">
-        <p class="text-xs font-medium tracking-[0.3em] text-white/40 uppercase mb-4">COMO TRABALHAMOS</p>
-        <h2 class="text-4xl md:text-5xl font-light tracking-tight leading-[1.05] text-white">
-          Do contexto à entrega.<br />Em quatro passos.
+  <!-- 03 THE METAPHOR: BOARD, PAWN, PROGRESSION -->
+  <section class="py-24 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] bg-[#070707] relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="max-w-2xl mb-16">
+        <div class="mb-4">
+          <Tag>METÁFORA OPERACIONAL</Tag>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-light text-white leading-tight tracking-tight mb-4">
+          Avanço quadrado a quadrado. Evidência a cada passo.
         </h2>
-      </div>
-
-      <div class="flex flex-col divide-y divide-white/[0.06]">
-        {methodCards.map((step, index) => (
-          <div class="group grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-6 md:gap-24 py-8 items-center hover:bg-white/[0.02] transition-colors px-4 -mx-4 rounded-xl">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 shrink-0 rounded-xl border border-white/10 flex items-center justify-center text-white/40 group-hover:border-white/20 group-hover:text-white/60 transition-colors">
-                {index === 0 && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>}
-                {index === 1 && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6 9 17l-5-5"/></svg>}
-                {index === 2 && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>}
-                {index === 3 && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>}
-              </div>
-              <h3 class="text-xl md:text-2xl font-light text-white">{step.title}</h3>
-            </div>
-            <p class="text-sm text-white/45 leading-relaxed group-hover:text-white/60 transition-colors">{step.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section id="noticias" data-nav-theme="light" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
-        <div>
-          <div class="mt-4"><Tag>NOTÍCIAS</Tag></div>
-          <RevealText class="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]" text={"Atualizações,\nprojetos e contexto."} />
-        </div>
-        <p class="text-sm text-black leading-relaxed max-w-xs">
-          O que estamos a construir, o que aprendemos no terreno e o que vale a pena acompanhar em tecnologia e território.
+        <p class="text-sm text-neutral-400 leading-relaxed">
+          Na BolinaTec, cada projeto opera num espaço rigoroso de restrições. O peão avança não por impulso, mas por validação demonstrável do terreno.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-        {newsPosts.map((post, index) => (
-          <a href={`/noticias/${post.id}`} class="group">
-            <BentoCard class="h-full p-7 flex flex-col justify-between" delay={index * 80}>
-              <div class="space-y-4">
-                <div class="text-[11px] tracking-[0.2em] text-black uppercase">
-                  {new Date(post.data.date).toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' })}
-                </div>
-                <h3 class="text-xl font-light leading-snug group-hover:translate-x-0.5 transition-transform">{post.data.title}</h3>
-                <p class="text-sm text-black leading-relaxed">{post.data.description}</p>
-              </div>
-              <div class="mt-8 text-xs tracking-widest uppercase text-black group-hover:text-black transition-colors">
-                Ler notícia
-              </div>
-            </BentoCard>
-          </a>
-        ))}
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-8 rounded-2xl border border-white/[0.08] bg-[#0a0a0a] flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center font-mono text-sm text-neutral-300 mb-6">
+              01
+            </div>
+            <h3 class="text-lg text-white font-medium mb-2">O Tabuleiro: O Espaço do Problema</h3>
+            <p class="text-xs text-neutral-400 leading-relaxed">
+              O tabuleiro representa o conjunto total de condicionantes, normas vigentes, servidões administrativas e limites físicos. Não há movimentos fora da grelha de regras.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-white/[0.06] font-mono text-[11px] text-neutral-400">
+            Topologia de Restrições
+          </div>
+        </div>
+
+        <div class="p-8 rounded-2xl border border-white/[0.15] bg-[#0f0f0f] shadow-lg flex flex-col justify-between relative">
+          <div class="absolute -top-3 right-6">
+            <span class="font-mono text-[9px] px-2 py-0.5 rounded bg-white text-black font-semibold uppercase tracking-wider">
+              Em Execução
+            </span>
+          </div>
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-mono text-sm text-white mb-6">
+              02
+            </div>
+            <h3 class="text-lg text-white font-medium mb-2">O Peão: A Hipótese em Validação</h3>
+            <p class="text-xs text-neutral-300 leading-relaxed">
+              O peão é a hipótese concreta ou o projeto em análise. Não salta etapas nem assume factos não verificados. Cada avanço exige a prova formal do quadrado onde assenta.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-white/[0.06] font-mono text-[11px] text-white">
+            Validação Ponto a Ponto
+          </div>
+        </div>
+
+        <div class="p-8 rounded-2xl border border-white/[0.08] bg-[#0a0a0a] flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center font-mono text-sm text-neutral-300 mb-6">
+              03
+            </div>
+            <h3 class="text-lg text-white font-medium mb-2">A Promoção: O Ativo Tecnológico</h3>
+            <p class="text-xs text-neutral-400 leading-relaxed">
+              Ao atingir a outra extremidade com evidência completa, a hipótese não se transforma numa ficção de marketing: consolida-se como um produto tecnológico escalável e determinístico.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-white/[0.06] font-mono text-[11px] text-neutral-400">
+            Produto Determinístico
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="equipa" data-nav-theme="light" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
+  <!-- 04 PRIMARY PRODUCT: IMOHARMONIA -->
+  <section id="imoharmonia" class="py-28 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] relative">
     <div class="max-w-6xl mx-auto">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
         <div>
-          <div class="mt-4"><Tag>EQUIPA</Tag></div>
-          <RevealText class="mt-5 text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.05]" text={"Pessoa certa,\npara o problema certo."} />
-          <p class="mt-6 text-base text-black leading-relaxed max-w-sm">
-            Consultoria, desenvolvimento e operação de campo na mesma equipa — para não haver gap entre quem pensa e quem executa.
+          <div class="inline-flex items-center gap-2 mb-4">
+            <Tag variant="product">PRODUTO PRINCIPAL</Tag>
+            <span class="font-mono text-xs text-emerald-400">Em Produção / Piloto Operacional</span>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-light text-white tracking-tight leading-[1.05]">
+            ImoHarmonia.<br />
+            <span class="text-neutral-400 font-normal">"Este projeto pode avançar?"</span>
+          </h2>
+        </div>
+        <div class="max-w-md">
+          <p class="text-sm text-neutral-300 leading-relaxed font-sans mb-4">
+            Motor de pré-validação regulatória que analisa projetos concretos de arquitetura e engenharia face aos regulamentos municipais (PDM), RJUE e normas setoriais.
+          </p>
+          <a
+            href="/imoharmonia"
+            class="font-mono text-xs text-white hover:text-neutral-300 transition-colors inline-flex items-center gap-2 underline underline-offset-4 decoration-white/30"
+          >
+            Ver documentação completa do ImoHarmonia
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- WORKFLOW DISTINCTION CARD -->
+      <div class="p-6 md:p-8 rounded-2xl border border-white/[0.1] bg-[#0c0c0c] mb-12">
+        <h3 class="font-mono text-xs uppercase tracking-wider text-neutral-400 mb-4">
+          A Distinção Fundamental de Fluxo de Trabalho
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="p-5 rounded-xl border border-white/[0.05] bg-black/40">
+            <div class="font-mono text-xs text-rose-400 mb-2">ABORDAGEM TRADICIONAL (TERRENO PRIMEIRO)</div>
+            <div class="font-mono text-xs text-neutral-400 mb-2">TERRENO / LOCALIZAÇÃO → O que se poderia construir aqui?</div>
+            <p class="text-xs text-neutral-400 leading-relaxed">
+              Gera relatórios volumosos mas especulativos sobre potenciais genéricos que não respondem à volumetria ou programa funcional do projetista.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl border border-emerald-500/20 bg-emerald-950/10">
+            <div class="font-mono text-xs text-emerald-400 mb-2">ABORDAGEM IMOHARMONIA (PROJETO PRIMEIRO)</div>
+            <div class="font-mono text-xs text-white mb-2">PROJETO CONCRETO → O que podemos verificar antes da submissão?</div>
+            <p class="text-xs text-neutral-300 leading-relaxed">
+              O profissional insere os parâmetros reais do projeto. O motor isola cirurgicamente as regras aplicáveis e emite um diagnóstico de conformidade verificável.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8-STEP PIPELINE DIAGRAM -->
+      <div class="mb-12">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="font-mono text-xs uppercase tracking-wider text-white">
+            Cadeia de Computação e Verificação (8 Etapas)
+          </h3>
+          <span class="font-mono text-[11px] text-neutral-400">Rastreabilidade Determinística</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+          {workflowSteps.map((step) => (
+            <div class="p-3.5 rounded-xl border border-white/[0.08] bg-[#0c0c0c] flex flex-col justify-between min-h-[140px] hover:border-white/20 transition-colors">
+              <span class="font-mono text-[10px] text-neutral-400">{step.step}</span>
+              <div>
+                <h4 class="text-xs font-medium text-white mb-1">{step.title}</h4>
+                <p class="text-[10px] text-neutral-400 leading-tight">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 4 POSSIBLE RESULTS -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <div class="p-5 rounded-xl border border-emerald-500/20 bg-emerald-950/10">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span class="font-mono text-xs text-emerald-400 font-semibold">CONFORME</span>
+          </div>
+          <p class="text-xs text-neutral-300 leading-relaxed">
+            Todos os requisitos e parâmetros do regulamento municipal foram cumpridos pelo projeto com prova documental.
           </p>
         </div>
-        <div class="relative">
-          <div class="space-y-4">
-            {teamMembers.map((member) => (
-              <div class="bg-[#faf9f7] rounded-2xl border border-black/[0.07] p-8">
-                {member.data.photo && (
-                  <img 
-                    src={member.data.photo}
-                    alt={member.data.name}
-                    loading="lazy"
-                    class="w-20 h-20 rounded-full object-cover mb-4"
-                  />
-                )}
-                <div class="text-sm text-black leading-relaxed">
-                  {member.data.name}<br />
-                  <span class="text-black/50">{member.data.role}</span>
-                  {member.data.shortBio && (
-                    <p class="mt-2 text-xs text-black/70 leading-relaxed">{member.data.shortBio}</p>
-                  )}
-                </div>
+
+        <div class="p-5 rounded-xl border border-amber-500/20 bg-amber-950/10">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            <span class="font-mono text-xs text-amber-400 font-semibold">CONDICIONADO</span>
+          </div>
+          <p class="text-xs text-neutral-300 leading-relaxed">
+            Viável mediante cumprimento de condicionante explícita (e.g. parecer de entidade externa ou ajuste de cércea).
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl border border-rose-500/20 bg-rose-950/10">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+            <span class="font-mono text-xs text-rose-400 font-semibold">NÃO CONFORME</span>
+          </div>
+          <p class="text-xs text-neutral-300 leading-relaxed">
+            Violação inequívoca de parâmetro urbanístico inultrapassável identificado com citação direta do artigo e valor em falta.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl border border-white/10 bg-white/[0.02]">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-2 h-2 rounded-full bg-neutral-400"></span>
+            <span class="font-mono text-xs text-neutral-300 font-semibold">INCONCLUSIVO</span>
+          </div>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            Falta de dados geométricos ou cadastro insuficiente para determinar formalmente a conformidade.
+          </p>
+        </div>
+      </div>
+
+      <!-- DISCLAIMER & CTA -->
+      <div class="p-6 rounded-2xl border border-white/[0.08] bg-[#0a0a0a] flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="text-xs text-neutral-400 max-w-2xl leading-relaxed">
+          <span class="text-white font-medium">Nota de Responsabilidade Profissional:</span> O ImoHarmonia é uma ferramenta de apoio técnico à decisão. Não garante aprovação camarária nem substitui a competência do arquiteto, do engenheiro ou dos serviços municipais.
+        </div>
+        <a
+          href="/contacto?topic=imoharmonia"
+          class="shrink-0 px-6 py-3 rounded-xl bg-white text-black font-mono text-xs uppercase tracking-wider font-semibold hover:bg-neutral-200 transition-all shadow-sm"
+        >
+          Testar com um projeto
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 HOW WE WORK: ENGINEERING DISCIPLINE -->
+  <section id="workflow" class="py-24 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] bg-[#070707]">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-2xl mb-16">
+        <div class="mb-4">
+          <Tag>MÉTODO DE ENGENHARIA</Tag>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight mb-4">
+          Como trabalhamos.<br />Do diagnóstico à entrega determinística.
+        </h2>
+        <p class="text-sm text-neutral-400 leading-relaxed">
+          Problema antes da tecnologia. Evidência antes da afirmação. Quatro etapas que garantem rigor do primeiro dia até ao sistema em produção.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {methodSteps.map((step) => (
+          <div class="p-8 rounded-2xl border border-white/[0.08] bg-[#0c0c0c] flex flex-col justify-between hover:border-white/20 transition-colors">
+            <div>
+              <div class="flex items-center justify-between mb-6">
+                <span class="font-mono text-lg text-white font-light">{step.num}</span>
+                <span class="font-mono text-[10px] tracking-wider text-neutral-400 uppercase px-2 py-0.5 rounded border border-white/[0.08] bg-white/[0.02]">
+                  {step.tag}
+                </span>
               </div>
-            ))}
+              <h3 class="text-lg text-white font-medium mb-3">{step.title}</h3>
+              <p class="text-xs text-neutral-400 leading-relaxed font-sans">{step.desc}</p>
+            </div>
+            <div class="mt-8 pt-4 border-t border-white/[0.05] flex items-center justify-between font-mono text-[11px] text-neutral-400">
+              <span>Etapa {step.num} / 04</span>
+              <span>Garantia de Rigor</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 PORTFOLIO & MATURITY MODEL -->
+  <section id="trabalho" class="py-24 px-6 md:px-12 lg:px-20 border-b border-white/[0.08]">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div>
+          <div class="mb-4">
+            <Tag>PORTFÓLIO DE ENGENHARIA</Tag>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight">
+            Trabalhos e Modelo de Maturidade
+          </h2>
+        </div>
+        <p class="text-xs font-mono text-neutral-400 max-w-sm">
+          Classificação rigorosa por maturidade real. Nunca afirmamos um nível de produto sem prova de validação técnica.
+        </p>
+      </div>
+
+      <!-- Maturity Filter Tabs -->
+      <ProductTabs tabs={maturityTabs} defaultTab="todos" />
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-products-grid>
+        {allProjetos.map((proj) => (
+          <div data-category={proj.data.maturity} class="product-card">
+            <div class="h-full p-7 rounded-2xl border border-white/[0.08] bg-[#0c0c0c] flex flex-col justify-between hover:border-white/20 hover:bg-[#111111] transition-all group">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class={`font-mono text-[10px] tracking-wider uppercase px-2.5 py-0.5 rounded border ${
+                    proj.data.maturity === 'produto'
+                      ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
+                      : proj.data.maturity === 'experiencia'
+                      ? 'border-amber-500/30 bg-amber-500/10 text-amber-400'
+                      : 'border-blue-500/30 bg-blue-500/10 text-blue-400'
+                  }`}>
+                    {proj.data.maturity === 'produto' ? 'Produto' : proj.data.maturity === 'experiencia' ? 'Experiência' : 'Investigação'}
+                  </span>
+                  <span class="font-mono text-[10px] text-neutral-400">{proj.data.status || 'Ativo'}</span>
+                </div>
+
+                <h3 class="text-lg text-white font-medium mb-3 group-hover:text-neutral-100 transition-colors">
+                  {proj.data.title}
+                </h3>
+                <p class="text-xs text-neutral-400 leading-relaxed mb-6 font-sans">
+                  {proj.data.shortDescription}
+                </p>
+              </div>
+
+              <div class="pt-4 border-t border-white/[0.06] flex items-center justify-between">
+                <a
+                  href={`/projetos/${proj.id}`}
+                  class="font-mono text-xs text-white hover:text-neutral-300 transition-colors inline-flex items-center gap-1.5"
+                >
+                  <span>Ver Especificação</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </a>
+                {proj.data.externalUrl && (
+                  <a
+                    href={proj.data.externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-mono text-[10px] text-neutral-400 hover:text-white transition-colors"
+                  >
+                    Site Oficial ↗
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 ENGINEERING PHILOSOPHY -->
+  <section class="py-24 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] bg-[#070707]">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="mb-4">
+            <Tag>FILOSOFIA DE ENGENHARIA</Tag>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight mb-6">
+            Rigor, Rastreabilidade e Determinismo.
+          </h2>
+          <p class="text-sm text-neutral-300 leading-relaxed font-sans mb-6">
+            A tecnologia não é o posicionamento da BolinaTec; é o mecanismo com que materializamos soluções. Escolhemos ferramentas em função das garantias matemáticas e operacionais que fornecem.
+          </p>
+          <ul class="space-y-4 font-sans text-xs text-neutral-400">
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-white mt-1.5 shrink-0"></span>
+              <span><strong>Lógica Determinística:</strong> Decisões de conformidade não dependem de adivinhação estatística; dependem de regras computadas com rastreabilidade absoluta.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-white mt-1.5 shrink-0"></span>
+              <span><strong>Autonomia Operacional:</strong> Criamos sistemas que o cliente e o utilizador final podem operar e validar sem dependência permanente.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-white mt-1.5 shrink-0"></span>
+              <span><strong>Soberania de Dados:</strong> Arquitetura orientada à privacidade, soberania e integridade dos registos de cada projeto submetido.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="p-8 rounded-2xl border border-white/[0.08] bg-[#0b0b0b]">
+          <h3 class="font-mono text-xs uppercase tracking-wider text-white mb-6">Valores de Operação</h3>
+          <div class="space-y-6">
+            <div class="border-b border-white/[0.06] pb-4">
+              <div class="font-mono text-xs text-white mb-1">PRECISO</div>
+              <p class="text-xs text-neutral-400 leading-relaxed">Tolerância zero para ambiguidades normativas ou cálculos não justificados.</p>
+            </div>
+            <div class="border-b border-white/[0.06] pb-4">
+              <div class="font-mono text-xs text-white mb-1">SÓBRIO</div>
+              <p class="text-xs text-neutral-400 leading-relaxed">Sem promessas inflacionadas, sem jargão desnecessário, sem artifícios visuais supérfluos.</p>
+            </div>
+            <div class="border-b border-white/[0.06] pb-4">
+              <div class="font-mono text-xs text-white mb-1">CONCRETO</div>
+              <p class="text-xs text-neutral-400 leading-relaxed">Foco no projeto real e nos seus parâmetros específicos antes de qualquer generalização.</p>
+            </div>
+            <div>
+              <div class="font-mono text-xs text-white mb-1">TRANSPARENTE</div>
+              <p class="text-xs text-neutral-400 leading-relaxed">Evidência aberta de cada passo de validação, artigo citado e metodologia utilizada.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-<section id="contacto" data-nav-theme="dark" class="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06] bg-[#0a0a0a] overflow-hidden">
-  
-  <svg class="absolute w-0 h-0 pointer-events-none">
-    <defs>
-      <filter id="contact-metallic-fast" color-interpolation-filters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
-        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" result="noise1" seed="1" />
-        <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
-          <animate attributeName="dy" values="60; 0" dur="4s" repeatCount="indefinite" calcMode="linear" />
-        </feOffset>
-
-        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" result="noise2" seed="1" />
-        <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
-          <animate attributeName="dy" values="0; -60" dur="4s" repeatCount="indefinite" calcMode="linear" />
-        </feOffset>
-
-        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" result="noise3" seed="2" />
-        <feOffset in="noise3" dx="0" dy="0" result="offsetNoise3">
-          <animate attributeName="dx" values="60; 0" dur="4s" repeatCount="indefinite" calcMode="linear" />
-        </feOffset>
-
-        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" result="noise4" seed="2" />
-        <feOffset in="noise4" dx="0" dy="0" result="offsetNoise4">
-          <animate attributeName="dx" values="0; -60" dur="4s" repeatCount="indefinite" calcMode="linear" />
-        </feOffset>
-
-        <feComposite in="offsetNoise1" in2="offsetNoise2" result="part1" />
-        <feComposite in="offsetNoise3" in2="offsetNoise4" result="part2" />
-        <feBlend in="part1" in2="part2" mode="color-dodge" result="combinedNoise" />
-
-        <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="16" xChannelSelector="R" yChannelSelector="B" />
-      </filter>
-    </defs>
-  </svg>
-
-  <div class="max-w-5xl mx-auto">
-    
-    <div class="text-center mb-20 flex flex-col items-center">
-      <div class="mt-4"><Tag class="bg-white/10 text-white border-white/20">CONTACTO</Tag></div>
-      <RevealText class="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05] text-white" text={"Vamos falar\nsobre o teu projeto."} />
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-      {contactPlans.map((plan) => {
-        const isHighlight = plan.highlight;
-
-        return (
-          <div 
-            class={`rounded-2xl p-8 flex flex-col justify-between min-h-[480px] relative transition-all duration-300 group ${
-              isHighlight 
-                ? 'bg-[#0c0c0c] text-white border border-white/20 shadow-[0_0_40px_rgba(255,255,255,0.15)] md:scale-[1.04] z-10' 
-                : 'bg-[#161616] text-neutral-200 border border-white/[0.06] hover:border-white/20 hover:text-white shadow-[0_0_20px_rgba(255,255,255,0.02)]'
-            }`}
-          >
-            
-            <div class="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden transform-gpu will-change-[transform,opacity]">
-              
-              <div 
-                class={`absolute -inset-[1px] rounded-2xl border transform-gpu ${
-                  isHighlight ? 'border-white/90 opacity-100' : 'border-white/40 opacity-40 group-hover:opacity-100'
-                }`}
-                style="filter: url(#contact-metallic-fast);"
-              ></div>
-              
-              <div 
-                class={`absolute -inset-1 rounded-2xl bg-white/5 blur-sm transform-gpu transition-opacity duration-300 ${
-                  isHighlight ? 'opacity-100' : 'opacity-0 group-hover:opacity-70'
-                }`} 
-                style="filter: url(#contact-metallic-fast);"
-              ></div>
-              
-              <div class={`absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent transition-opacity ${
-                isHighlight ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-              }`}></div>
-            </div>
-
-            <div class="relative z-10">
-              <div class="mb-6">
-                <span class="font-mono text-[10px] tracking-widest uppercase px-2.5 py-1 rounded border border-white/10 bg-white/[0.04] text-neutral-300">
-                  {plan.name}
-                </span>
-              </div>
-              
-              <div class="mb-2">
-                <span class={`font-light leading-tight tracking-tight block ${plan.price.includes('@') ? 'text-lg font-normal text-white break-all' : 'text-3xl text-white'}`}>
-                  {plan.price}
-                </span>
-                {plan.period && <span class="text-xs font-mono text-neutral-400 block mt-1">{plan.period}</span>}
-              </div>
-              
-              <p class="text-xs mt-3 leading-relaxed text-neutral-400">
-                {plan.sub}
-              </p>
-
-              <div class="h-[1px] my-6 bg-white/10"></div>
-
-              <ul class="space-y-3.5">
-                {plan.features.map((feature) => (
-                  <li class="flex items-start gap-2.5 text-xs">
-                    <span class="w-1 h-1 rounded-full mt-1.5 shrink-0 bg-white/40"></span>
-                    <span class="text-neutral-300 group-hover:text-neutral-200 transition-colors">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div class="pt-8 relative z-10">
-              <a
-                href={plan.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class={`block w-full py-3 rounded-xl text-xs font-mono tracking-widest uppercase text-center transition-all duration-200 ${
-                  isHighlight 
-                    ? 'bg-white text-black font-semibold hover:bg-neutral-200 shadow-[0_4px_25px_rgba(255,255,255,0.25)]' 
-                    : 'bg-[#262626] text-white border border-white/5 hover:bg-[#323232] hover:border-white/10'
-                }`}
-              >
-                {plan.buttonText}
-              </a>
-            </div>
-
-          </div>
-        );
-      })}
-    </div>
-
-  </div>
-</section>
-
-  <section data-nav-theme="light" class="relative py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06] overflow-hidden">
-    <img
-      src="/images/footer.png"
-      alt=""
-      aria-hidden="true"
-      loading="lazy"
-      class="absolute bottom-0 left-0 w-full object-cover object-bottom pointer-events-none select-none"
-      style="opacity:0.85;"
-    />
-    <div class="absolute inset-0 pointer-events-none" style="mask-image: linear-gradient(to top, transparent 0%, black 55%); -webkit-mask-image: linear-gradient(to top, transparent 0%, black 55%); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);"></div>
-    <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(to top, rgb(245,244,240) 0%, rgba(245,244,240,0.92) 18%, rgba(245,244,240,0.55) 35%, transparent 55%);"></div>
-    <div class="relative z-10 max-w-2xl mx-auto text-center">
-      <h2 class="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.05] mb-6">
-        Recebe novidades<br />ou pede contacto direto.
+  <!-- 08 QUALIFICATION CONTACT SECTION -->
+  <section id="contacto" class="py-28 px-6 md:px-12 lg:px-20 relative overflow-hidden bg-[#080808]">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 mb-4">
+        <Tag>CONTACTO DE QUALIFICAÇÃO</Tag>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-light text-white tracking-tight leading-[1.05] mb-6">
+        Submeter Contexto Técnico.
       </h2>
-      <p class="text-sm text-black leading-relaxed mb-10">
-        Partilha o contexto do projeto. Respondemos com um próximo passo concreto — não com uma proposta genérica.
+      <p class="text-sm text-neutral-400 max-w-xl mx-auto leading-relaxed mb-12 font-sans">
+        Tem um projeto concreto para pré-validar no ImoHarmonia ou um desafio de engenharia de sistemas? Partilhe o seu contexto e entraremos em contacto com um próximo passo estruturado.
       </p>
-      <ContactForm />
+
+      <div class="p-8 md:p-10 rounded-2xl border border-white/[0.1] bg-[#0c0c0c] shadow-2xl text-left">
+        <ContactForm defaultTopic="imoharmonia" />
+      </div>
+
+      <div class="mt-8 font-mono text-xs text-neutral-400 flex items-center justify-center gap-4">
+        <span>Canal direto: <a href="mailto:geral@bolinatec.com" class="text-neutral-300 hover:text-white underline underline-offset-4 decoration-white/20">geral@bolinatec.com</a></span>
+        <span>•</span>
+        <span>Lisboa, Portugal</span>
+      </div>
     </div>
   </section>
-
-  <script is:inline>
-    (() => {
-      if (window.__agenticHomeInitialized) return;
-      window.__agenticHomeInitialized = true;
-
-      const LETTERS_IN_TOTAL = 90 * (7 - 1) + 700 + 300;
-      const LETTERS_OUT_TOTAL = 55 * (7 - 1) + 450;
-      const CURTAIN_DELAY = LETTERS_IN_TOTAL + 100;
-      const CURTAIN_DURATION = 1300;
-      const HERO_REVEAL_MS = CURTAIN_DELAY + CURTAIN_DURATION - 150;
-      const ANIM_TOTAL = CURTAIN_DELAY + LETTERS_OUT_TOTAL + 1400;
-
-      const intro = document.querySelector('[data-intro-animation]');
-      const introLetters = intro ? Array.from(intro.querySelectorAll('[data-intro-letter]')) : [];
-      const curtain = intro ? intro.querySelector('[data-intro-curtain]') : null;
-      const heroTitle = document.querySelector('[data-hero-title]');
-      const heroSubtitle = document.querySelector('[data-hero-subtitle]');
-
-      const setLetters = (phase) => {
-        introLetters.forEach((letter, index) => {
-          const inDelay = index * 90;
-          const outDelay = index * 55;
-          const transitionIn = `opacity 700ms cubic-bezier(0.16,1,0.3,1) ${inDelay}ms, filter 700ms cubic-bezier(0.16,1,0.3,1) ${inDelay}ms, transform 700ms cubic-bezier(0.16,1,0.3,1) ${inDelay}ms`;
-          const transitionOut = `opacity 450ms cubic-bezier(0.4,0,1,1) ${outDelay}ms, filter 450ms cubic-bezier(0.4,0,1,1) ${outDelay}ms, transform 450ms cubic-bezier(0.4,0,1,1) ${outDelay}ms`;
-          letter.style.transition = phase === 'in' ? transitionIn : phase === 'out' ? transitionOut : 'none';
-          letter.style.opacity = phase === 'in' ? '1' : '0';
-          letter.style.filter = phase === 'in' ? 'blur(0px)' : phase === 'out' ? 'blur(24px)' : 'blur(36px)';
-          letter.style.transform = phase === 'in' ? 'translateY(0px)' : phase === 'out' ? 'translateY(-20px)' : 'translateY(48px)';
-        });
-      };
-
-      setTimeout(() => setLetters('in'), 80);
-      setTimeout(() => setLetters('out'), LETTERS_IN_TOTAL);
-
-      if (curtain) {
-        setTimeout(() => {
-          curtain.style.bottom = '100%';
-          curtain.style.transition = 'bottom 1.3s cubic-bezier(0.76, 0, 0.24, 1)';
-        }, CURTAIN_DELAY);
-      }
-
-      setTimeout(() => {
-        if (heroTitle) {
-          heroTitle.style.opacity = '1';
-          heroTitle.style.filter = 'blur(0px)';
-          heroTitle.style.transform = 'translateY(0px)';
-        }
-        if (heroSubtitle) {
-          heroSubtitle.style.opacity = '1';
-          heroSubtitle.style.filter = 'blur(0px)';
-          heroSubtitle.style.transform = 'translateY(0px)';
-        }
-      }, HERO_REVEAL_MS);
-
-      setTimeout(() => {
-        if (intro) intro.remove();
-      }, ANIM_TOTAL);
-    })();
-  </script>
 </Layout>

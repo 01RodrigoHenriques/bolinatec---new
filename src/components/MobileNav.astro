@@ -1,77 +1,90 @@
 ---
 const navLinks = [
-  { label: 'Soluções', href: '/#solucoes' },
-  { label: 'Como Trabalhamos', href: '/#workflow' },
-  { label: 'Notícias', href: '/noticias/' },
-  { label: 'Equipa', href: '/#equipa' },
-  { label: 'Contacto', href: '/#contacto' },
+  { label: 'ImoHarmonia', href: '/imoharmonia', badge: 'PRODUTO' },
+  { label: 'Trabalho', href: '/trabalho' },
+  { label: 'Engenharia', href: '/sobre#principios' },
+  { label: 'Sobre', href: '/sobre' },
 ];
 ---
-<div data-mobile-nav class="fixed top-0 inset-x-0 z-50 flex justify-center pt-4">
-  <div class="pill flex items-center gap-2 px-4 py-3 rounded-full transition-all duration-300 max-w-4xl w-full justify-between">
+<div data-mobile-nav class="fixed top-0 inset-x-0 z-50 flex justify-center pt-4 px-4 pointer-events-none">
+  <div class="pill pointer-events-auto flex items-center gap-4 px-4 py-2.5 rounded-full transition-all duration-300 max-w-4xl w-full justify-between bg-[#0a0a0a]/90 backdrop-blur-md border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
 
     <!-- Logo -->
-    <a href="/" class="flex items-center shrink-0 px-2 py-1 hover:opacity-70 transition-opacity duration-200">
-      <img src="/images/favicon.png" alt="" class="h-8 w-auto" style="filter: brightness(1.1) drop-shadow(0 1px 2px rgba(0,0,0,0.3));" />
+    <a href="/" class="flex items-center gap-2.5 shrink-0 px-1 py-0.5 hover:opacity-80 transition-opacity duration-200">
+      <img src="/images/favicon.png" alt="BolinaTec" class="h-6 w-auto brightness-125" />
+      <span class="font-mono text-xs tracking-wider uppercase text-white font-medium">BolinaTec</span>
     </a>
 
-    <!-- Links -->
-    <div class="hidden md:flex items-center gap-0.5">
+    <!-- Desktop Navigation Links -->
+    <div class="hidden md:flex items-center gap-1">
       {navLinks.map((link) => (
-        <a href={link.href}
-           class="px-3 py-1.5 rounded-full text-[12px] text-white/60 hover:text-white hover:bg-white/[0.08] transition-all duration-200 tracking-wide"
-           style="font-family: 'IBM Plex Sans', sans-serif;">
-          {link.label}
+        <a
+          href={link.href}
+          class="px-3 py-1.5 rounded-full text-xs text-neutral-300 hover:text-white hover:bg-white/[0.06] transition-all duration-200 tracking-wide font-sans flex items-center gap-1.5"
+        >
+          <span>{link.label}</span>
+          {link.badge && (
+            <span class="font-mono text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              {link.badge}
+            </span>
+          )}
         </a>
       ))}
     </div>
 
-    <!-- CTA -->
-    <a href="/#contacto"
-       class="hidden md:block text-[12px] px-4 py-1.5 rounded-full bg-white/[0.08] text-white/70 hover:text-white hover:bg-white/[0.14] transition-all duration-200 tracking-wide border border-white/[0.08]"
-       style="font-family: 'IBM Plex Sans', sans-serif;">
-      Fala Connosco
-    </a>
+    <!-- Right Side CTA -->
+    <div class="hidden md:flex items-center gap-2">
+      <a
+        href="/contacto"
+        class="text-xs font-mono tracking-wider uppercase px-4 py-1.5 rounded-full bg-white text-black font-medium hover:bg-neutral-200 transition-all duration-200 shadow-sm"
+      >
+        Contacto
+      </a>
+    </div>
 
-    <!-- Mobile toggle -->
-    <button data-mobile-toggle
-            class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-[5px] rounded-lg hover:bg-white/[0.08] transition-colors"
-            aria-label="Abrir menu" aria-expanded="false" type="button">
-      <span data-burger-line class="block h-px w-4 bg-white/60 rounded-full transition-all duration-300 origin-center"></span>
-      <span data-burger-line class="block h-px w-4 bg-white/60 rounded-full transition-all duration-300"></span>
-      <span data-burger-line class="block h-px w-4 bg-white/60 rounded-full transition-all duration-300 origin-center"></span>
+    <!-- Mobile Menu Toggle Button -->
+    <button
+      data-mobile-toggle
+      class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-[5px] rounded-lg hover:bg-white/[0.08] transition-colors"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+      type="button"
+    >
+      <span data-burger-line class="block h-px w-4 bg-white/70 rounded-full transition-all duration-300 origin-center"></span>
+      <span data-burger-line class="block h-px w-4 bg-white/70 rounded-full transition-all duration-300"></span>
+      <span data-burger-line class="block h-px w-4 bg-white/70 rounded-full transition-all duration-300 origin-center"></span>
     </button>
   </div>
 
-  <!-- Mobile panel -->
-  <div data-mobile-panel class="absolute top-full mt-2 w-full max-w-xs overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0px; opacity: 0;">
-    <div class="rounded-xl px-2 py-2 flex flex-col"
-         style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+  <!-- Mobile Panel Dropdown -->
+  <div data-mobile-panel class="pointer-events-auto absolute top-full mt-2 w-full max-w-sm px-4 overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0px; opacity: 0;">
+    <div class="rounded-2xl p-3 flex flex-col bg-[#0d0d0d] border border-white/[0.1] shadow-[0_16px_40px_rgba(0,0,0,0.6)]">
       {navLinks.map((link) => (
-        <a href={link.href} data-mobile-close
-           class="px-4 py-3 text-[13px] text-white/60 hover:text-white rounded-lg transition-colors"
-           style="font-family: 'IBM Plex Sans', sans-serif;">
-          {link.label}
+        <a
+          href={link.href}
+          data-mobile-close
+          class="px-4 py-2.5 text-xs text-neutral-300 hover:text-white rounded-xl hover:bg-white/[0.05] transition-colors flex items-center justify-between font-sans"
+        >
+          <span>{link.label}</span>
+          {link.badge && (
+            <span class="font-mono text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              {link.badge}
+            </span>
+          )}
         </a>
       ))}
-      <div class="mt-2 pt-2 px-2" style="border-top: 1px solid rgba(255,255,255,0.06);">
-        <a href="/#contacto"
-           class="block w-full text-center text-[12px] px-4 py-2.5 rounded-full bg-white/[0.08] text-white/70 hover:text-white transition-all border border-white/[0.08]"
-           style="font-family: 'IBM Plex Sans', sans-serif;">
-          Fala Connosco
+      <div class="mt-2 pt-2 border-t border-white/[0.06]">
+        <a
+          href="/contacto"
+          data-mobile-close
+          class="block w-full text-center text-xs font-mono tracking-wider uppercase px-4 py-2.5 rounded-xl bg-white text-black font-medium hover:bg-neutral-200 transition-all"
+        >
+          Submeter Contexto
         </a>
       </div>
     </div>
   </div>
 </div>
-
-<style>
-  [data-mobile-nav] .pill {
-    background: #0a0a0a;
-    border: 1px solid rgba(255,255,255,0.06);
-    box-shadow: 0 2px 16px rgba(0,0,0,0.15);
-  }
-</style>
 
 <script>
   (() => {
@@ -89,7 +102,7 @@ const navLinks = [
 
     const sync = (open) => {
       if (!panel || !toggle) return;
-      panel.style.maxHeight = open ? '400px' : '0px';
+      panel.style.maxHeight = open ? '360px' : '0px';
       panel.style.opacity = open ? '1' : '0';
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
