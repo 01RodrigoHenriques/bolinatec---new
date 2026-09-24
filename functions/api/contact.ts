@@ -106,7 +106,6 @@ export async function onRequestPost(context: { request: Request; env: Record<str
 
   // 5. Delivery Check (Owner credential gating)
   const webhookUrl = env?.CONTACT_WEBHOOK_URL;
-  const forwardEmailApiKey = env?.RESEND_API_KEY;
 
   if (webhookUrl) {
     try {

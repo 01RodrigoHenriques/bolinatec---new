@@ -66,11 +66,14 @@ const currentYear = new Date().getFullYear();
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "BolinaTec",
+      "legalName": "Egitano-Construtora — Construções e Imobiliária da Guarda, Lda.",
+      "taxID": "501897151",
       "description": description,
       "url": "https://bolinatec.com",
       "logo": resolvedImage,
       "address": {
         "@type": "PostalAddress",
+        "addressLocality": "Guarda",
         "addressCountry": "PT"
       },
       "knowsAbout": [
@@ -159,8 +162,13 @@ const currentYear = new Date().getFullYear();
         </div>
 
         <div class="border-t border-white/[0.08] pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-xs text-neutral-400">
-          <div>
-            &copy; {currentYear} BolinaTec. Sede em Portugal. Todos os direitos reservados.
+          <div class="flex flex-col gap-1">
+            <div>
+              &copy; {currentYear} BolinaTec. Sede em Portugal. Todos os direitos reservados.
+            </div>
+            <div class="text-[11px] text-neutral-500 font-sans">
+              BolinaTec é uma marca operada por Egitano-Construtora — Construções e Imobiliária da Guarda, Lda.
+            </div>
           </div>
           <div class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400/80"></span>
