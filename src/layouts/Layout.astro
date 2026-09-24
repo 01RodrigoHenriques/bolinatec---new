@@ -8,17 +8,20 @@ interface Props {
   description?: string;
   image?: string;
   canonical?: string;
+  noindex?: boolean;
 }
 
 const {
   title = 'BolinaTec | Engenharia Tecnológica',
   description = 'A BolinaTec é uma empresa portuguesa de engenharia tecnológica que investiga problemas complexos e desenvolve software, sistemas e produtos para os resolver.',
-  image = '/images/uploads/logo.webp',
+  image = '/images/og-image.png',
   canonical,
+  noindex = false,
 } = Astro.props;
 
 const resolvedCanonical = canonical || new URL(Astro.url.pathname, Astro.site).href;
 const resolvedImage = new URL(image, Astro.site).href;
+const currentYear = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -28,7 +31,11 @@ const resolvedImage = new URL(image, Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <link rel="canonical" href={resolvedCanonical} />
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <link rel="canonical" href={resolvedCanonical} />
+    )}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -57,9 +64,8 @@ const resolvedImage = new URL(image, Astro.site).href;
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Corporation",
+      "@type": "Organization",
       "name": "BolinaTec",
-      "legalName": "BolinaTec",
       "description": description,
       "url": "https://bolinatec.com",
       "logo": resolvedImage,
@@ -137,6 +143,7 @@ const resolvedImage = new URL(image, Astro.site).href;
             <ul class="space-y-3 font-sans text-sm">
               <li><a href="/sobre" class="text-neutral-400 hover:text-white transition-colors">Sobre a Empresa</a></li>
               <li><a href="/sobre#principios" class="text-neutral-400 hover:text-white transition-colors">Princípios Operacionais</a></li>
+              <li><a href="/noticias" class="text-neutral-400 hover:text-white transition-colors">Notas Técnicas</a></li>
               <li><a href="/contacto" class="text-neutral-400 hover:text-white transition-colors">Submeter Contexto</a></li>
             </ul>
           </div>
@@ -153,7 +160,7 @@ const resolvedImage = new URL(image, Astro.site).href;
 
         <div class="border-t border-white/[0.08] pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-xs text-neutral-400">
           <div>
-            &copy; 2026 BolinaTec. Sede em Portugal. Todos os direitos reservados.
+            &copy; {currentYear} BolinaTec. Sede em Portugal. Todos os direitos reservados.
           </div>
           <div class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400/80"></span>
