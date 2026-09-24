@@ -9,4 +9,4 @@ A complexidade dos licenciamentos urbanísticos não reside apenas no volume de 
 
 Quando um regulamento estipula que *"o índice de ocupação pode ser aumentado até 20% mediante compensação urbanística ou quando comprovada a continuidade da cércea dominante"*, temos uma bifurcação lógica com condições de guarda e variáveis contextuais.
 
-Na BolinaTec, tratamos a conformidade não como uma consulta textual probabilística, mas como um problema de engenharia de software determinística: modelar entidades, estabelecer contratos invariantes e executar verificações com rastreabilidade total da evidência normativa.
+Na BolinaTec, tratamos a conformidade não como uma consulta textual probabilística, mas como um problema de engenharia de sistemas computáveis: modelar entidades, estabelecer contratos invariantes e executar verificações com rastreabilidade total da evidência normativa.

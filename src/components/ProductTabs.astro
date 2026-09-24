@@ -30,7 +30,7 @@ const { tabs, defaultTab = tabs[0]?.id } = Astro.props;
 </div>
 
 <script is:inline define:vars={{ defaultTab }}>
-  (() => {
+  const initTabs = () => {
     const tabsContainer = document.querySelector('[data-product-tabs]');
     const grid = document.querySelector('[data-products-grid]');
     if (!tabsContainer || !grid) return;
@@ -40,7 +40,6 @@ const { tabs, defaultTab = tabs[0]?.id } = Astro.props;
 
     const setActive = (category) => {
       tabs.forEach(tab => {
-        const match = tab.getAttribute('data-tab') === category || category === 'todos';
         const isCurrent = tab.getAttribute('data-tab') === category;
         tab.classList.toggle('border-white/40', isCurrent);
         tab.classList.toggle('text-white', isCurrent);
@@ -48,6 +47,12 @@ const { tabs, defaultTab = tabs[0]?.id } = Astro.props;
         tab.classList.toggle('text-neutral-400', !isCurrent);
         tab.classList.toggle('bg-[#0c0c0c]', !isCurrent);
       });
+
+      const secondaryHeader = document.querySelector('[data-secondary-header]');
+      if (secondaryHeader) {
+        const hasSecondary = category === 'todos' || category === 'experiencia' || category === 'investigacao';
+        secondaryHeader.style.display = hasSecondary ? 'flex' : 'none';
+      }
 
       cards.forEach(card => {
         const itemCat = card.getAttribute('data-category');
@@ -73,5 +78,11 @@ const { tabs, defaultTab = tabs[0]?.id } = Astro.props;
     if (defaultTab) {
       setActive(defaultTab);
     }
-  })();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTabs);
+  } else {
+    initTabs();
+  }
 </script>

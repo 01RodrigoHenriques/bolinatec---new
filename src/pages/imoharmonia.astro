@@ -20,44 +20,44 @@ const pipeline = [
     step: '03',
     name: 'Contexto Regulatório',
     label: 'Isolamento Normativo',
-    desc: 'Seleção automática dos artigos aplicáveis do PDM municipal, RJUE, servidões e restrições de utilidade pública.',
+    desc: 'Identificação e seleção contextual dos artigos aplicáveis do PDM municipal, RJUE e servidões territoriais mapeadas.',
   },
   {
     step: '04',
     name: 'Requisitos Aplicáveis',
     label: 'Estruturação Lógica',
-    desc: 'Decomposição de texto jurídico complexo em proposições verificáveis sem ambiguidade.',
+    desc: 'Decomposição de requisitos regulamentares em proposições verificáveis sem ambiguidade.',
   },
   {
     step: '05',
     name: 'Regras Computáveis',
-    label: 'Algoritmos Determinísticos',
-    desc: 'Fórmulas matemáticas de índice de ocupação, planos de corte, cérceas dominantes e polígonos permitidos.',
+    label: 'Cálculo e Modelação',
+    desc: 'Fórmulas de índice de ocupação, planos de corte, cérceas máximas e polígonos permitidos.',
   },
   {
     step: '06',
     name: 'Verificações',
     label: 'Execução de Testes',
-    desc: 'Comparação estrita entre os factos do projeto e os limites permitidos por cada norma aplicável.',
+    desc: 'Execução reproduzível de verificações computáveis face aos parâmetros fornecidos pelo projeto.',
   },
   {
     step: '07',
     name: 'Evidência',
     label: 'Rastreabilidade Total',
-    desc: 'Cada verificação regista o artigo exato, a redação legal e o cálculo que suporta a validação.',
+    desc: 'Cada verificação regista o artigo exato, a redação legal e o cálculo que suporta o diagnóstico.',
   },
   {
     step: '08',
     name: 'Resultado',
     label: 'Diagnóstico em 4 Estados',
-    desc: 'Conclusão determinística e auditável: Conforme, Condicionado, Não Conforme ou Inconclusivo.',
+    desc: 'Diagnóstico estruturado e auditável: Conforme, Condicionado, Não Conforme ou Inconclusivo.',
   },
 ];
 ---
 
 <Layout
-  title="ImoHarmonia | Pré-validação Regulatória de Projetos — BolinaTec"
-  description="O ImoHarmonia é o motor determinístico de pré-validação regulatória que analisa projetos concretos de arquitetura e engenharia face a PDMs, RJUE e normas urbanísticas."
+  title="ImoHarmonia | Pré-validação de Projetos face a Regulamentos Urbanísticos — BolinaTec"
+  description="O ImoHarmonia é o sistema de engenharia da BolinaTec que executa a pré-validação de projetos de arquitetura e engenharia face a regras computáveis de PDMs e normas urbanísticas."
 >
   <!-- HERO SECTION -->
   <section class="py-24 md:py-32 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] relative overflow-hidden bg-[#080808]">
@@ -65,7 +65,7 @@ const pipeline = [
 
     <div class="max-w-5xl mx-auto relative z-10">
       <div class="inline-flex items-center gap-2 mb-6">
-        <Tag variant="product">PRODUTO PRINCIPAL</Tag>
+        <Tag variant="product">EM VALIDAÇÃO COM PROJETOS REAIS</Tag>
         <span class="font-mono text-xs text-neutral-400">/ Urbanismo Computável</span>
       </div>
 
@@ -78,7 +78,7 @@ const pipeline = [
       </h1>
 
       <p class="text-base md:text-lg text-neutral-300 max-w-2xl leading-relaxed font-sans mb-10">
-        O ImoHarmonia é o motor de engenharia que pré-valida projetos concretos de arquitetura e engenharia face aos regulamentos municipais e nacionais antes da submissão autárquica.
+        O ImoHarmonia é um sistema de engenharia que pré-valida projetos concretos de arquitetura e engenharia face a regras computáveis de regulamentos municipais e setoriais antes da submissão autárquica.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center gap-4">
@@ -103,47 +103,47 @@ const pipeline = [
     </div>
   </section>
 
-  <!-- THE REGULATORY PROBLEM -->
+  <!-- THE REGULATORY COMPLEXITY -->
   <section class="py-24 px-6 md:px-12 lg:px-20 border-b border-white/[0.08]">
     <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div>
           <div class="mb-4">
-            <Tag>A COMPLEXIDADE REGULATÓRIA</Tag>
+            <Tag>A COMPLEXIDADE TERRITORIAL</Tag>
           </div>
           <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight mb-6">
-            308 municípios. Milhares de páginas. Um erro de interpretação custa meses.
+            Cada município acrescenta instrumentos, regras, cartografia e contexto próprios.
           </h2>
           <p class="text-sm text-neutral-300 leading-relaxed font-sans mb-4">
-            Em Portugal, o licenciamento de um projeto de edificação ou loteamento está sujeito a uma matriz fragmentada: o Plano Diretor Municipal (PDM) do respetivo concelho, o Regime Jurídico da Urbanização e Edificação (RJUE), o RGEU e dezenas de regimes de proteção territorial (REN, RAN, património classificado, domínio hídrico).
+            O licenciamento de um projeto de edificação em Portugal cruza o Plano Diretor Municipal (PDM) local, o Regime Jurídico da Urbanização e Edificação (RJUE), o RGEU e regimes de proteção territorial (REN, RAN, património classificado, domínio hídrico).
           </p>
           <p class="text-sm text-neutral-400 leading-relaxed font-sans">
-            A leitura manual é lenta, sujeita a lapsos humanos e muitas vezes descobre incongruências quando o projeto já foi desenhado e submetido, provocando rejeições liminares e aditamentos onerosos.
+            A leitura manual de centenas de páginas dispersas consome tempo crítico e frequentemente descobre inconformidades quando o projeto já se encontra formalmente submetido, gerando rejeições liminares e aditamentos onerosos.
           </p>
         </div>
 
         <div class="space-y-4">
           <div class="p-6 rounded-xl border border-white/[0.08] bg-[#0c0c0c]">
-            <span class="font-mono text-[11px] text-rose-400 mb-1 block">O CUSTO DA INCERTEZA</span>
-            <h3 class="text-white text-base font-medium mb-1">Rejeições e Pedidos de Aperfeiçoamento</h3>
+            <span class="font-mono text-[11px] text-rose-400 mb-1 block">O RISCO DE ATRASO</span>
+            <h3 class="text-white text-base font-medium mb-1">Incerteza na Tramitação</h3>
             <p class="text-xs text-neutral-400 leading-relaxed">
-              Meses perdidos em processos camarários suspensos por desconformidades que podiam ter sido detetadas nos primeiros dias de conceção.
+              Processos suspensos por desconformidades em parâmetros objetivos (cérceas, afastamentos, índices) que poderiam ser verificados nos primeiros dias de conceção.
             </p>
           </div>
 
           <div class="p-6 rounded-xl border border-white/[0.08] bg-[#0c0c0c]">
             <span class="font-mono text-[11px] text-amber-400 mb-1 block">DISPERSÃO DE FONTES</span>
-            <h3 class="text-white text-base font-medium mb-1">Conflitos de Revogação e Versões</h3>
+            <h3 class="text-white text-base font-medium mb-1">Versões e Servidões Sobrepostas</h3>
             <p class="text-xs text-neutral-400 leading-relaxed">
-              Avisos em Diário da República, revisões de plano e suspensões parciais criam incerteza sobre qual a norma exata em vigor à data da pretensão.
+              Avisos em Diário da República, revisões de plano e restrições setoriais tornam complexo determinar com rigor os limites vigentes para uma parcela específica.
             </p>
           </div>
 
           <div class="p-6 rounded-xl border border-white/[0.08] bg-[#0c0c0c]">
-            <span class="font-mono text-[11px] text-emerald-400 mb-1 block">A RESPOSTA IMOHARMONIA</span>
-            <h3 class="text-white text-base font-medium mb-1">Pré-validação Computável e Auditável</h3>
+            <span class="font-mono text-[11px] text-emerald-400 mb-1 block">A ABORDAGEM DE ENGENHARIA</span>
+            <h3 class="text-white text-base font-medium mb-1">Verificação Computável de Requisitos Objetivos</h3>
             <p class="text-xs text-neutral-300 leading-relaxed">
-              Estruturação formal das normas e validação direta contra os dados do projeto antes de qualquer assinatura ou submissão.
+              Estruturação formal das regras que admitem computação e teste direto contra os parâmetros do projeto, com rastreabilidade legal do artigo citado.
             </p>
           </div>
         </div>
@@ -156,13 +156,13 @@ const pipeline = [
     <div class="max-w-6xl mx-auto">
       <div class="max-w-2xl mb-16">
         <div class="mb-4">
-          <Tag>DISTINÇÃO DE ENGENHARIA</Tag>
+          <Tag>DISTINÇÃO DE FLUXO DE TRABALHO</Tag>
         </div>
         <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight mb-4">
-          Não procuramos terrenos genéricos.<br />Validamos projetos concretos.
+          Não prospetamos terrenos abstratos.<br />Validamos projetos concretos.
         </h2>
         <p class="text-sm text-neutral-400 leading-relaxed">
-          Compreenda a diferença fundamental entre ferramentas de prospeção territorial e o motor de pré-validação ImoHarmonia.
+          Compreenda a diferença de método entre ferramentas de prospeção territorial e o sistema de pré-validação ImoHarmonia.
         </p>
       </div>
 
@@ -175,8 +175,8 @@ const pipeline = [
           </p>
           <ul class="space-y-2 font-mono text-[11px] text-neutral-400">
             <li>× Não responde se o projeto do arquiteto cumpre o regulamento</li>
-            <li>× Gera centenas de páginas genéricas que ninguém lê na íntegra</li>
-            <li>× Ignora particularidades geométricas do edifício</li>
+            <li>× Gera relatórios genéricos que não verificam o edifício proposto</li>
+            <li>× Desconhece a volumetria concreta da operação</li>
           </ul>
         </div>
 
@@ -184,12 +184,12 @@ const pipeline = [
           <div class="font-mono text-xs text-emerald-400 uppercase tracking-wider mb-2">Abordagem ImoHarmonia</div>
           <h3 class="text-xl text-white font-medium mb-4">Projeto Concreto → Pode avançar?</h3>
           <p class="text-xs text-neutral-300 leading-relaxed mb-6 font-sans">
-            O arquiteto ou engenheiro introduz os dados reais da intervenção. O ImoHarmonia cruza cirurgicamente os factos com o articulado do PDM aplicável e emite pareceres fundamentados.
+            O arquiteto ou engenheiro introduz os dados reais da intervenção. O ImoHarmonia cruza cirurgicamente os factos com o articulado aplicável e emite diagnósticos rastreáveis.
           </p>
           <ul class="space-y-2 font-mono text-[11px] text-emerald-400">
-            <li>✓ Resposta determinística para o projeto desenhado</li>
+            <li>✓ Verificações reproduzíveis para os parâmetros do projeto desenhado</li>
             <li>✓ Verificação de recuos, cérceas, índices e estacionamento</li>
-            <li>✓ Citação exata do artigo e parágrafo de cada verificação</li>
+            <li>✓ Citação exata do artigo e fórmula de cada teste executado</li>
           </ul>
         </div>
       </div>
@@ -204,10 +204,10 @@ const pipeline = [
           <Tag>PIPELINE DE VALIDAÇÃO</Tag>
         </div>
         <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight mb-4">
-          O Pipeline de Verificação em 8 Etapas
+          A Cadeia de Verificação em 8 Etapas
         </h2>
         <p class="text-sm text-neutral-400 leading-relaxed font-sans">
-          Cada projeto percorre uma cadeia determinística estrita. Nenhum resultado é emitido sem a correspondente prova lógica e normativa.
+          Cada projeto é submetido a uma cadeia estruturada de verificações reproduzíveis. Quando um requisito pode ser expresso como regra computável, a sua execução pode ser reproduzida e auditada.
         </p>
       </div>
 
@@ -233,7 +233,7 @@ const pipeline = [
     </div>
   </section>
 
-  <!-- THE 4 VERDICTS -->
+  <!-- THE 4 OUTCOMES -->
   <section class="py-24 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] bg-[#070707]">
     <div class="max-w-6xl mx-auto">
       <div class="max-w-2xl mb-16">
@@ -244,7 +244,7 @@ const pipeline = [
           Os Quatro Estados de Conformidade
         </h2>
         <p class="text-sm text-neutral-400 leading-relaxed font-sans">
-          O sistema não emite percentagens ambíguas de 'probabilidade'. Classifica os requisitos segundo quatro estados formais de engenharia regulatória.
+          O sistema não emite percentagens probabilísticas arbitrárias. Classifica os requisitos verificados segundo quatro estados formais de engenharia de conformidade.
         </p>
       </div>
 
@@ -253,7 +253,7 @@ const pipeline = [
           <div class="w-3 h-3 rounded-full bg-emerald-400 mb-4"></div>
           <h3 class="font-mono text-sm uppercase tracking-wider text-emerald-400 font-semibold mb-2">Conforme</h3>
           <p class="text-xs text-neutral-300 leading-relaxed font-sans">
-            Todos os parâmetros do projeto verificados cumprem integralmente os limites máximos e mínimos impostos pelo instrumento de gestão territorial em vigor.
+            Todos os parâmetros quantitativos verificados respeitam os limites impostos pelos artigos aplicáveis do regulamento municipal e setorial em vigor.
           </p>
         </div>
 
@@ -261,7 +261,7 @@ const pipeline = [
           <div class="w-3 h-3 rounded-full bg-amber-400 mb-4"></div>
           <h3 class="font-mono text-sm uppercase tracking-wider text-amber-400 font-semibold mb-2">Condicionado</h3>
           <p class="text-xs text-neutral-300 leading-relaxed font-sans">
-            A conformidade depende de condição suspensiva, compensação urbanística, parecer vinculativo de entidade externa ou exceção regulamentar aplicável.
+            A conformidade depende de condição explícita, compensação urbanística, parecer vinculativo de entidade externa ou aplicação de regime de exceção regulamentar.
           </p>
         </div>
 
@@ -269,7 +269,7 @@ const pipeline = [
           <div class="w-3 h-3 rounded-full bg-rose-400 mb-4"></div>
           <h3 class="font-mono text-sm uppercase tracking-wider text-rose-400 font-semibold mb-2">Não Conforme</h3>
           <p class="text-xs text-neutral-300 leading-relaxed font-sans">
-            Existe violação expressa de parâmetro regulamentar inderrogável (ex: ultrapassagem de cércea máxima ou afetação a uso interdito na categoria de solo).
+            Identificada violação objetiva de parâmetro regulamentar inultrapassável (ex: cércea acima do limite inderrogável ou afetação a uso expressamente interdito).
           </p>
         </div>
 
@@ -277,7 +277,7 @@ const pipeline = [
           <div class="w-3 h-3 rounded-full bg-neutral-400 mb-4"></div>
           <h3 class="font-mono text-sm uppercase tracking-wider text-neutral-300 font-semibold mb-2">Inconclusivo</h3>
           <p class="text-xs text-neutral-400 leading-relaxed font-sans">
-            Os dados fornecidos são omissos ou insuficientes para aferir deterministamente a conformidade (ex: falta de cota de soleira ou cadastro não delimitado).
+            Os dados fornecidos são omissos ou insuficientes para aferir a conformidade, ou o artigo envolve juízo discricionário humano que não admite computação direta.
           </p>
         </div>
       </div>
@@ -292,10 +292,10 @@ const pipeline = [
       </div>
       <div>
         <h3 class="text-sm font-mono uppercase tracking-wider text-white mb-2">
-          Garantia Ética e Responsabilidade Profissional
+          Princípio Ético e Soberania da Decisão Profissional
         </h3>
-        <p class="text-xs text-neutral-400 leading-relaxed font-sans">
-          O ImoHarmonia é uma infraestrutura computacional de apoio e suporte à decisão técnica. Não substitui o julgamento profissional dos arquitetos e engenheiros autores do projeto, nem a competência jurídica dos técnicos municipais e órgãos autárquicos. O ImoHarmonia elimina a incerteza do cálculo; a responsabilidade do projeto permanece no profissional.
+        <p class="text-xs text-neutral-300 leading-relaxed font-sans">
+          O ImoHarmonia é uma infraestrutura de apoio técnico e verificação analítica. Não substitui o julgamento profissional dos arquitetos e engenheiros autores do projeto, nem a competência decisória exclusiva dos técnicos municipais e órgãos autárquicos. O ImoHarmonia confere rigor aos cálculos; a responsabilidade pelo projeto permanece integralmente no profissional.
         </p>
       </div>
     </div>
@@ -308,10 +308,10 @@ const pipeline = [
         <Tag>TESTAR COM UM PROJETO</Tag>
       </div>
       <h2 class="text-3xl md:text-5xl font-light text-white tracking-tight leading-[1.05] mb-6">
-        Submeta os dados do seu projeto.
+        Submeta os parâmetros do seu projeto.
       </h2>
       <p class="text-sm text-neutral-400 max-w-xl mx-auto leading-relaxed mb-12 font-sans">
-        Indique o município, tipo de intervenção urbanística e as dúvidas normativas. A nossa equipa de engenharia responderá com uma avaliação técnica de viabilidade de teste.
+        Indique o município da intervenção, o tipo de operação urbanística e os pontos de dúvida regulatória. A equipa da BolinaTec avaliará a adequação para validação de teste.
       </p>
 
       <div class="p-8 md:p-10 rounded-2xl border border-white/[0.1] bg-[#0c0c0c] text-left shadow-2xl">

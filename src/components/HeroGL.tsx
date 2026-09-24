@@ -39,45 +39,68 @@ function WebGLFallback() {
 export function HeroGL() {
   const [hovering, setHovering] = useState(false);
   const [supported, setSupported] = useState(true);
-  const [visible, setVisible] = useState(false);
+  const [hasIntersected, setHasIntersected] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [isDocumentVisible, setIsDocumentVisible] = useState(true);
 
   useEffect(() => {
     // Check WebGL and reduced motion
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motionQuery.matches) {
       setSupported(false);
       return;
     }
 
+    const onMotionChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        setSupported(false);
+      }
+    };
+    motionQuery.addEventListener("change", onMotionChange);
+
     setSupported(detectWebGL());
 
+    // Continuous IntersectionObserver to pause loop when scrolled out of view
     const observer = new IntersectionObserver(
       ([entry]) => {
+        setIsIntersecting(entry.isIntersecting);
         if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
+          setHasIntersected(true);
         }
       },
-      { rootMargin: "200px" }
+      { rootMargin: "100px", threshold: 0 }
     );
 
     const hero = document.querySelector("[data-hero-section]");
     if (hero) observer.observe(hero);
 
-    return () => observer.disconnect();
+    // Document visibility listener to pause loop when tab is backgrounded
+    const onVisibilityChange = () => {
+      setIsDocumentVisible(!document.hidden);
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
+    return () => {
+      motionQuery.removeEventListener("change", onMotionChange);
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
   }, []);
 
   if (!supported) return <WebGLFallback />;
 
+  const isRenderingActive = isIntersecting && isDocumentVisible;
+
   return (
     <div
       style={{ position: "absolute", inset: 0, zIndex: 0 }}
+      aria-hidden="true"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
-      {visible ? (
+      {hasIntersected ? (
         <Suspense fallback={<WebGLFallback />}>
-          <LazyGL hovering={hovering} />
+          <LazyGL hovering={hovering} active={isRenderingActive} />
         </Suspense>
       ) : (
         <WebGLFallback />

@@ -8,7 +8,7 @@ const allProjetos = await getCollection('projetos');
 
 const maturityTabs = [
   { id: 'todos', label: 'Todos os Projetos' },
-  { id: 'produto', label: 'Produtos', badge: '1' },
+  { id: 'produto', label: 'Sistemas em Validação', badge: '1' },
   { id: 'experiencia', label: 'Experiências', badge: '1' },
   { id: 'investigacao', label: 'Investigação', badge: '1' },
 ];
@@ -17,9 +17,12 @@ const maturityLevels = [
   { step: '01', name: 'Interesse', desc: 'Identificação de fricção real no terreno e análise preliminar de viabilidade.' },
   { step: '02', name: 'Investigação', desc: 'Modelação teórica e formal do problema através de grafos e especificação.' },
   { step: '03', name: 'Experiência', desc: 'Construção de protótipos de computação rápida para validar hipóteses concretas.' },
-  { step: '04', name: 'Validação', desc: 'Testagem rigorosa face a dados reais, regulamentos em vigor e utilizadores técnicos.' },
-  { step: '05', name: 'Produto', desc: 'Sistema determinístico escalável em produção contínua com garantia de integridade.' },
+  { step: '04', name: 'Validação', desc: 'Testagem empírica rigorosa face a projetos reais, dados cadastrais e regulamentos em vigor.' },
+  { step: '05', name: 'Produto', desc: 'Sistema com execução algorítmica verificável e rastreabilidade total norma-a-cálculo em produção contínua.' },
 ];
+
+const imoharmonia = allProjetos.find((p) => p.id === 'imoharmonia' || p.data.title.toLowerCase().includes('imoharmonia'));
+const otherProjetos = allProjetos.filter((p) => p.id !== imoharmonia?.id);
 ---
 
 <Layout
@@ -30,7 +33,7 @@ const maturityLevels = [
   <section class="py-24 md:py-32 px-6 md:px-12 lg:px-20 border-b border-white/[0.08] relative overflow-hidden bg-[#080808]">
     <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
 
-    <div class="max-w-5xl mx-auto relative z-10">
+    <div class="max-w-6xl mx-auto relative z-10">
       <div class="inline-flex items-center gap-2 mb-6">
         <Tag>PORTFÓLIO DE ENGENHARIA</Tag>
         <span class="font-mono text-xs text-neutral-400">/ Disciplina de Evidência</span>
@@ -77,60 +80,189 @@ const maturityLevels = [
   <!-- PROJECTS DIRECTORY -->
   <section class="py-24 px-6 md:px-12 lg:px-20 border-b border-white/[0.08]">
     <div class="max-w-6xl mx-auto">
-      <div class="mb-10">
+      <div class="mb-12">
         <ProductTabs tabs={maturityTabs} defaultTab="todos" />
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-products-grid>
-        {allProjetos.map((proj) => (
-          <div data-category={proj.data.maturity} class="product-card">
-            <div class="h-full p-8 rounded-2xl border border-white/[0.08] bg-[#0c0c0c] flex flex-col justify-between hover:border-white/20 hover:bg-[#111] transition-all group">
-              <div>
-                <div class="flex items-center justify-between mb-5">
-                  <span class={`font-mono text-[10px] tracking-wider uppercase px-2.5 py-0.5 rounded border ${
-                    proj.data.maturity === 'produto'
-                      ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
-                      : proj.data.maturity === 'experiencia'
-                      ? 'border-amber-500/30 bg-amber-500/10 text-amber-400'
-                      : 'border-blue-500/30 bg-blue-500/10 text-blue-400'
-                  }`}>
-                    {proj.data.maturity === 'produto' ? 'Produto' : proj.data.maturity === 'experiencia' ? 'Experiência' : 'Investigação'}
+      <div data-products-grid>
+        {/* FEATURED HERO CARD: IMOHARMONIA */}
+        {imoharmonia && (
+          <div data-category="produto" class="product-card mb-12">
+            <div class="p-8 md:p-12 rounded-2xl border border-emerald-500/20 bg-gradient-to-b from-[#0e1411] to-[#0c0c0c] relative overflow-hidden group hover:border-emerald-500/40 transition-all shadow-xl">
+              <div class="flex flex-wrap items-center justify-between gap-3 mb-8 pb-6 border-b border-white/[0.08]">
+                <div class="flex flex-wrap items-center gap-2.5">
+                  <span class="font-mono text-[11px] font-semibold tracking-wider uppercase px-3 py-1 rounded border border-emerald-500/40 bg-emerald-500/15 text-emerald-400">
+                    SISTEMA EM VALIDAÇÃO COM PROJETOS REAIS
                   </span>
-                  <span class="font-mono text-[10px] text-neutral-400">{proj.data.status || 'Ativo'}</span>
+                  <span class="font-mono text-[11px] tracking-wider uppercase px-2.5 py-1 rounded border border-white/10 bg-white/5 text-neutral-300">
+                    MOTOR URBANÍSTICO
+                  </span>
                 </div>
-
-                <h3 class="text-xl text-white font-medium mb-3 group-hover:text-neutral-100 transition-colors">
-                  {proj.data.title}
-                </h3>
-                <p class="text-xs text-neutral-400 leading-relaxed mb-6 font-sans">
-                  {proj.data.shortDescription}
-                </p>
+                <div class="font-mono text-xs text-neutral-400 flex items-center gap-2">
+                  <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>Fase Empírica Ativa (TRL 5-6)</span>
+                </div>
               </div>
 
-              <div class="pt-6 border-t border-white/[0.06] flex items-center justify-between">
-                <a
-                  href={`/projetos/${proj.id}`}
-                  class="font-mono text-xs text-white hover:text-neutral-300 transition-colors inline-flex items-center gap-1.5"
-                >
-                  <span>Ver Especificação</span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </a>
-                {proj.data.externalUrl && (
-                  <a
-                    href={proj.data.externalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="font-mono text-[10px] text-neutral-400 hover:text-white transition-colors"
-                  >
-                    Aceder ↗
-                  </a>
-                )}
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-7">
+                  <h2 class="text-3xl sm:text-4xl font-light text-white tracking-tight mb-4 font-sans">
+                    {imoharmonia.data.title}
+                  </h2>
+                  <p class="text-sm md:text-base text-neutral-300 leading-relaxed font-sans mb-8">
+                    Engine de pré-validação regulatória que compila o corpus jurídico-urbanístico (RJUE, RGEU e articulados municipais) em grafos executáveis de regras computáveis. Concebido para conferir clareza técnica e rastreabilidade total norma-a-cálculo a gabinetes de arquitetura, promotores e técnicos municipais antes da submissão autárquica.
+                  </p>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                    <div class="p-4 rounded-xl border border-white/[0.08] bg-[#080808]/70">
+                      <div class="font-mono text-[10px] text-neutral-400 uppercase tracking-wider mb-1">Entrada</div>
+                      <div class="text-xs font-medium text-white font-sans">Parâmetros reais de projeto & cadastro</div>
+                    </div>
+                    <div class="p-4 rounded-xl border border-white/[0.08] bg-[#080808]/70">
+                      <div class="font-mono text-[10px] text-neutral-400 uppercase tracking-wider mb-1">Processamento</div>
+                      <div class="text-xs font-medium text-white font-sans">Pipeline de 8 etapas de regras computáveis</div>
+                    </div>
+                    <div class="p-4 rounded-xl border border-white/[0.08] bg-[#080808]/70">
+                      <div class="font-mono text-[10px] text-neutral-400 uppercase tracking-wider mb-1">Diagnóstico</div>
+                      <div class="text-xs font-medium text-emerald-400 font-sans">4 estados com prova documental</div>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap items-center gap-4">
+                    <a
+                      href="/imoharmonia"
+                      class="px-6 py-3 rounded-xl bg-white text-black font-mono text-xs uppercase tracking-wider font-semibold hover:bg-neutral-200 transition-all inline-flex items-center gap-2 shadow-sm"
+                    >
+                      <span>Aceder à Apresentação Completa</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                    <a
+                      href="/contacto?context=imoharmonia"
+                      class="px-5 py-3 rounded-xl border border-white/20 text-white font-mono text-xs uppercase tracking-wider hover:bg-white/5 transition-colors"
+                    >
+                      Testar com um Projeto
+                    </a>
+                    <a
+                      href="/projetos/imoharmonia"
+                      class="font-mono text-xs text-neutral-400 hover:text-white transition-colors underline underline-offset-4 px-2 py-3"
+                    >
+                      Ficha de Engenharia
+                    </a>
+                  </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                  <div class="rounded-xl border border-white/[0.08] bg-[#090b0a] p-6 space-y-4">
+                    <div class="text-xs font-mono text-neutral-400 uppercase tracking-wider pb-3 border-b border-white/[0.06] flex items-center justify-between">
+                      <span>Especificação de Engenharia</span>
+                      <span class="text-emerald-400">v1.4</span>
+                    </div>
+
+                    <div class="space-y-3 font-mono text-xs">
+                      <div class="flex justify-between items-baseline py-1 border-b border-white/[0.04]">
+                        <span class="text-neutral-400">Maturidade:</span>
+                        <span class="text-white text-right">Em validação com projetos reais</span>
+                      </div>
+                      <div class="flex justify-between items-baseline py-1 border-b border-white/[0.04]">
+                        <span class="text-neutral-400">Cobertura:</span>
+                        <span class="text-neutral-300 text-right">Progressiva concelho a concelho</span>
+                      </div>
+                      <div class="flex justify-between items-baseline py-1 border-b border-white/[0.04]">
+                        <span class="text-neutral-400">Fronteira:</span>
+                        <span class="text-neutral-300 text-right">Regras computáveis (RJUE/PDM)</span>
+                      </div>
+                      <div class="flex justify-between items-baseline py-1 border-b border-white/[0.04]">
+                        <span class="text-neutral-400">Discricionariedade:</span>
+                        <span class="text-amber-400/90 text-right">Preservação humana integral</span>
+                      </div>
+                      <div class="flex justify-between items-baseline py-1 border-b border-white/[0.04]">
+                        <span class="text-neutral-400">Rastreabilidade:</span>
+                        <span class="text-emerald-400 text-right">Artigo, alínea e fórmula</span>
+                      </div>
+                      {imoharmonia.data.externalUrl && (
+                        <div class="flex justify-between items-baseline pt-2">
+                          <span class="text-neutral-400">Repositório / Web:</span>
+                          <a
+                            href={imoharmonia.data.externalUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-neutral-200 hover:text-white underline underline-offset-2"
+                          >
+                            imoharmonia.com ↗
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        ))}
+        )}
+
+        {/* SECONDARY PROJECTS GRID */}
+        <div>
+          <div data-secondary-header class="mb-6 flex items-center justify-between">
+            <h3 class="font-mono text-xs uppercase tracking-wider text-neutral-400">
+              Investigação & Experiências Complementares
+            </h3>
+            <span class="font-mono text-[11px] text-neutral-400">2 Iniciativas em Curso</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {otherProjetos.map((proj) => (
+              <div data-category={proj.data.maturity} class="product-card">
+                <div class="h-full p-8 rounded-2xl border border-white/[0.08] bg-[#0c0c0c] flex flex-col justify-between hover:border-white/20 hover:bg-[#111] transition-all group">
+                  <div>
+                    <div class="flex items-center justify-between mb-5">
+                      <span class={`font-mono text-[10px] tracking-wider uppercase px-2.5 py-0.5 rounded border ${
+                        proj.data.maturity === 'produto'
+                          ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
+                          : proj.data.maturity === 'experiencia'
+                          ? 'border-amber-500/30 bg-amber-500/10 text-amber-400'
+                          : 'border-blue-500/30 bg-blue-500/10 text-blue-400'
+                      }`}>
+                        {proj.data.maturity === 'produto' ? 'Produto' : proj.data.maturity === 'experiencia' ? 'Experiência' : 'Investigação'}
+                      </span>
+                      <span class="font-mono text-[10px] text-neutral-400">{proj.data.status || 'Ativo'}</span>
+                    </div>
+
+                    <h3 class="text-xl text-white font-medium mb-3 group-hover:text-neutral-100 transition-colors font-sans">
+                      {proj.data.title}
+                    </h3>
+                    <p class="text-xs text-neutral-400 leading-relaxed mb-6 font-sans">
+                      {proj.data.shortDescription}
+                    </p>
+                  </div>
+
+                  <div class="pt-6 border-t border-white/[0.06] flex items-center justify-between">
+                    <a
+                      href={`/projetos/${proj.id}`}
+                      class="font-mono text-xs text-white hover:text-neutral-300 transition-colors inline-flex items-center gap-1.5"
+                    >
+                      <span>Ver Especificação</span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                    {proj.data.externalUrl && (
+                      <a
+                        href={proj.data.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="font-mono text-[10px] text-neutral-400 hover:text-white transition-colors"
+                      >
+                        Aceder ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </section>

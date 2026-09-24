@@ -1,9 +1,8 @@
 ---
 title: Verificação Geométrica de Afastamentos e Cérceas
-area: inovacao
 maturity: experiencia
 status: Protótipo Funcional
-shortDescription: Motor algorítmico para cálculo determinístico de planos de corte, polígonos de implantação e distâncias a limites de lote.
+shortDescription: Motor algorítmico para cálculo e verificação geométrica de planos de corte, polígonos de implantação e distâncias a limites de lote.
 ---
 
 ## Geometria Computacional Aplicada a Regulamentos de Edificação

@@ -3,8 +3,6 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import IntroAnimation from '../components/IntroAnimation.astro';
 import Tag from '../components/Tag.astro';
-import RevealText from '../components/RevealText.astro';
-import BentoCard from '../components/BentoCard.astro';
 import ProductTabs from '../components/ProductTabs.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { HeroGL } from '../components/HeroGL';
@@ -30,32 +28,32 @@ const workflowSteps = [
   {
     step: '03',
     title: 'Contexto Regulatório',
-    desc: 'Seleção cirúrgica de PDM, RJUE, RGEU e servidões territoriais.',
+    desc: 'Seleção contextual de PDM, RJUE, RGEU e servidões territoriais.',
   },
   {
     step: '04',
     title: 'Requisitos Aplicáveis',
-    desc: 'Decomposição de artigos legais em proposições lógicas estritas.',
+    desc: 'Decomposição de requisitos em proposições lógicas verificáveis.',
   },
   {
     step: '05',
     title: 'Regras Computáveis',
-    desc: 'Algoritmos determinísticos de cálculo geométrico e normativo.',
+    desc: 'Algoritmos de cálculo e validação para requisitos quantificáveis.',
   },
   {
     step: '06',
     title: 'Verificações',
-    desc: 'Execução de verificações automáticas com rastreabilidade formal.',
+    desc: 'Execução reproduzível de verificações computáveis face aos parâmetros.',
   },
   {
     step: '07',
     title: 'Evidência',
-    desc: 'Justificação legal, artigo concreto e cálculo que fundamenta a prova.',
+    desc: 'Justificação legal, artigo concreto e cálculo que fundamenta o teste.',
   },
   {
     step: '08',
     title: 'Resultado',
-    desc: 'Diagnóstico objetivo em 4 estados determinísticos.',
+    desc: 'Diagnóstico estruturado em 4 estados: Conforme, Condicionado, Não Conforme e Inconclusivo.',
   },
 ];
 
@@ -75,7 +73,7 @@ const methodSteps = [
   },
   {
     num: '02',
-    title: 'Modelação Determinística',
+    title: 'Modelação e Grafos',
     tag: 'ENGENHARIA DE DADOS',
     desc: 'Convertemos regras verbais, normas jurídicas ou processos territoriais em grafos executáveis e especificações lógicas sem ambiguidade.',
   },
@@ -89,14 +87,14 @@ const methodSteps = [
     num: '04',
     title: 'Construção do Ativo Tecnológico',
     tag: 'SISTEMA ESCALÁVEL',
-    desc: 'Entregamos software determinístico e sistemas operáveis com garantias matemáticas de integridade e observabilidade.',
+    desc: 'Entregamos sistemas computáveis e motores de verificação operáveis com integridade e rastreabilidade verificáveis.',
   },
 ];
 ---
 
 <Layout
   title="BolinaTec | Engenharia Tecnológica — Sistemas Computáveis"
-  description="A BolinaTec é uma empresa portuguesa de engenharia tecnológica que investiga problemas complexos e desenvolve software, sistemas e produtos para os resolver."
+  description="A BolinaTec é uma empresa portuguesa de engenharia tecnológica que investiga problemas complexos e desenvolve software, sistemas de verificação e produtos computáveis para áreas técnicas e reguladas."
 >
   <IntroAnimation />
 
@@ -128,7 +126,7 @@ const methodSteps = [
       </h1>
 
       <p class="text-sm md:text-base text-neutral-300 max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
-        A BolinaTec é uma empresa portuguesa de engenharia tecnológica que investiga problemas complexos e desenvolve software, sistemas e produtos para os resolver.
+        A BolinaTec é uma empresa portuguesa de engenharia tecnológica que investiga problemas complexos e desenvolve software, sistemas de verificação e produtos computáveis para áreas técnicas e reguladas.
       </p>
 
       <!-- Action Buttons -->
@@ -170,7 +168,7 @@ const methodSteps = [
           <h2 class="text-3xl md:text-4xl font-light text-white leading-tight tracking-tight mb-6">
             O software comum falha onde o mundo real resiste à computação.
           </h2>
-          <p class="text-sm text-neutral-400 leading-relaxed font-sans mb-6">
+          <p class="text-sm text-neutral-300 leading-relaxed font-sans mb-6">
             Em setores regulados, no planeamento territorial e na indústria técnica, a complexidade não é acidental. Resulta de camadas sucessivas de normas, condições de exceção e restrições interdependentes.
           </p>
           <div class="p-4 rounded-xl border border-white/[0.08] bg-[#0c0c0c] font-mono text-xs text-neutral-300">
@@ -183,7 +181,7 @@ const methodSteps = [
             <span class="font-mono text-xs text-neutral-400 mb-2 block">01 / DADOS FRAGMENTADOS</span>
             <h3 class="text-base text-white font-medium mb-2">Normas Dispersas</h3>
             <p class="text-xs text-neutral-400 leading-relaxed">
-              Centenas de páginas de regulamentos municipais, portarias e decretos-lei cuja interpretação manual consome semanas e acumula erros caros.
+              Centenas de páginas de regulamentos municipais, portarias e decretos-lei cuja interpretação manual consome semanas e acumula atrasos.
             </p>
           </div>
 
@@ -191,7 +189,7 @@ const methodSteps = [
             <span class="font-mono text-xs text-neutral-400 mb-2 block">02 / RISCO TARDIO</span>
             <h3 class="text-base text-white font-medium mb-2">Incerteza no Licenciamento</h3>
             <p class="text-xs text-neutral-400 leading-relaxed">
-              Projetos investem recursos significativos antes de saber se cumprem parâmetros fundamentais de volumetria, afastamento ou uso.
+              Projetos investem recursos significativos antes de verificar se cumprem parâmetros fundamentais de volumetria, afastamento ou uso.
             </p>
           </div>
 
@@ -199,7 +197,7 @@ const methodSteps = [
             <span class="font-mono text-xs text-neutral-400 mb-2 block">03 / ABSTRAÇÕES FALSAS</span>
             <h3 class="text-base text-white font-medium mb-2">Soluções Genéricas</h3>
             <p class="text-xs text-neutral-400 leading-relaxed">
-              Plataformas que prometem automação através de palpites probabilísticos quando a decisão exige determinismo lógico estrito.
+              Plataformas que prometem automação através de palpites estatísticos quando a análise exige verificação lógica estrita.
             </p>
           </div>
 
@@ -222,13 +220,13 @@ const methodSteps = [
     <div class="max-w-6xl mx-auto relative z-10">
       <div class="max-w-2xl mb-16">
         <div class="mb-4">
-          <Tag>METÁFORA OPERACIONAL</Tag>
+          <Tag>MODELO DE PROGRESSÃO</Tag>
         </div>
         <h2 class="text-3xl md:text-4xl font-light text-white leading-tight tracking-tight mb-4">
           Avanço quadrado a quadrado. Evidência a cada passo.
         </h2>
         <p class="text-sm text-neutral-400 leading-relaxed">
-          Na BolinaTec, cada projeto opera num espaço rigoroso de restrições. O peão avança não por impulso, mas por validação demonstrável do terreno.
+          Na BolinaTec, cada projeto opera num espaço rigoroso de restrições. O avanço faz-se não por presunção, mas por validação demonstrável dos factos.
         </p>
       </div>
 
@@ -238,9 +236,9 @@ const methodSteps = [
             <div class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center font-mono text-sm text-neutral-300 mb-6">
               01
             </div>
-            <h3 class="text-lg text-white font-medium mb-2">O Tabuleiro: O Espaço do Problema</h3>
+            <h3 class="text-lg text-white font-medium mb-2">O Espaço de Restrições: O Campo Normativo</h3>
             <p class="text-xs text-neutral-400 leading-relaxed">
-              O tabuleiro representa o conjunto total de condicionantes, normas vigentes, servidões administrativas e limites físicos. Não há movimentos fora da grelha de regras.
+              A grelha representa o conjunto total de condicionantes, normas vigentes, servidões administrativas e limites físicos. O avanço faz-se no estrito respeito pelas regras do terreno.
             </p>
           </div>
           <div class="mt-8 pt-4 border-t border-white/[0.06] font-mono text-[11px] text-neutral-400">
@@ -251,16 +249,16 @@ const methodSteps = [
         <div class="p-8 rounded-2xl border border-white/[0.15] bg-[#0f0f0f] shadow-lg flex flex-col justify-between relative">
           <div class="absolute -top-3 right-6">
             <span class="font-mono text-[9px] px-2 py-0.5 rounded bg-white text-black font-semibold uppercase tracking-wider">
-              Em Execução
+              Em Validação
             </span>
           </div>
           <div>
             <div class="w-10 h-10 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-mono text-sm text-white mb-6">
               02
             </div>
-            <h3 class="text-lg text-white font-medium mb-2">O Peão: A Hipótese em Validação</h3>
+            <h3 class="text-lg text-white font-medium mb-2">A Hipótese Concreta: Validação Passo a Passo</h3>
             <p class="text-xs text-neutral-300 leading-relaxed">
-              O peão é a hipótese concreta ou o projeto em análise. Não salta etapas nem assume factos não verificados. Cada avanço exige a prova formal do quadrado onde assenta.
+              A hipótese técnica ou projeto em análise não salta etapas nem assume pressupostos não verificados. Cada avanço exige a prova formal dos factos onde assenta.
             </p>
           </div>
           <div class="mt-8 pt-4 border-t border-white/[0.06] font-mono text-[11px] text-white">
@@ -273,13 +271,13 @@ const methodSteps = [
             <div class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center font-mono text-sm text-neutral-300 mb-6">
               03
             </div>
-            <h3 class="text-lg text-white font-medium mb-2">A Promoção: O Ativo Tecnológico</h3>
+            <h3 class="text-lg text-white font-medium mb-2">O Ativo Tecnológico: Sistema Verificado</h3>
             <p class="text-xs text-neutral-400 leading-relaxed">
-              Ao atingir a outra extremidade com evidência completa, a hipótese não se transforma numa ficção de marketing: consolida-se como um produto tecnológico escalável e determinístico.
+              Ao demonstrar conformidade com evidência completa, a solução consolida-se como um ativo computável escalável e auditável para operação contínua.
             </p>
           </div>
           <div class="mt-8 pt-4 border-t border-white/[0.06] font-mono text-[11px] text-neutral-400">
-            Produto Determinístico
+            Sistema Auditável
           </div>
         </div>
       </div>
@@ -292,8 +290,8 @@ const methodSteps = [
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
         <div>
           <div class="inline-flex items-center gap-2 mb-4">
-            <Tag variant="product">PRODUTO PRINCIPAL</Tag>
-            <span class="font-mono text-xs text-emerald-400">Em Produção / Piloto Operacional</span>
+            <Tag variant="product">EM VALIDAÇÃO COM PROJETOS REAIS</Tag>
+            <span class="font-mono text-xs text-emerald-400">Urbanismo Computável</span>
           </div>
           <h2 class="text-4xl md:text-5xl font-light text-white tracking-tight leading-[1.05]">
             ImoHarmonia.<br />
@@ -302,7 +300,7 @@ const methodSteps = [
         </div>
         <div class="max-w-md">
           <p class="text-sm text-neutral-300 leading-relaxed font-sans mb-4">
-            Motor de pré-validação regulatória que analisa projetos concretos de arquitetura e engenharia face aos regulamentos municipais (PDM), RJUE e normas setoriais.
+            Motor de pré-validação regulatória que analisa projetos concretos de arquitetura e engenharia face a regras computáveis de regulamentos municipais (PDM), RJUE e normas setoriais.
           </p>
           <a
             href="/imoharmonia"
@@ -318,7 +316,7 @@ const methodSteps = [
 
       <!-- WORKFLOW DISTINCTION CARD -->
       <div class="p-6 md:p-8 rounded-2xl border border-white/[0.1] bg-[#0c0c0c] mb-12">
-        <h3 class="font-mono text-xs uppercase tracking-wider text-neutral-400 mb-4">
+        <h3 class="font-mono text-xs uppercase tracking-wider text-neutral-300 mb-4">
           A Distinção Fundamental de Fluxo de Trabalho
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -326,7 +324,7 @@ const methodSteps = [
             <div class="font-mono text-xs text-rose-400 mb-2">ABORDAGEM TRADICIONAL (TERRENO PRIMEIRO)</div>
             <div class="font-mono text-xs text-neutral-400 mb-2">TERRENO / LOCALIZAÇÃO → O que se poderia construir aqui?</div>
             <p class="text-xs text-neutral-400 leading-relaxed">
-              Gera relatórios volumosos mas especulativos sobre potenciais genéricos que não respondem à volumetria ou programa funcional do projetista.
+              Gera relatórios genéricos sobre potenciais abstratos que não respondem à volumetria ou programa funcional do projetista.
             </p>
           </div>
 
@@ -334,7 +332,7 @@ const methodSteps = [
             <div class="font-mono text-xs text-emerald-400 mb-2">ABORDAGEM IMOHARMONIA (PROJETO PRIMEIRO)</div>
             <div class="font-mono text-xs text-white mb-2">PROJETO CONCRETO → O que podemos verificar antes da submissão?</div>
             <p class="text-xs text-neutral-300 leading-relaxed">
-              O profissional insere os parâmetros reais do projeto. O motor isola cirurgicamente as regras aplicáveis e emite um diagnóstico de conformidade verificável.
+              O profissional insere os parâmetros reais do projeto. O motor isola cirurgicamente as regras aplicáveis e emite diagnósticos rastreáveis.
             </p>
           </div>
         </div>
@@ -346,7 +344,7 @@ const methodSteps = [
           <h3 class="font-mono text-xs uppercase tracking-wider text-white">
             Cadeia de Computação e Verificação (8 Etapas)
           </h3>
-          <span class="font-mono text-[11px] text-neutral-400">Rastreabilidade Determinística</span>
+          <span class="font-mono text-[11px] text-neutral-400">Rastreabilidade de Evidência</span>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
@@ -370,7 +368,7 @@ const methodSteps = [
             <span class="font-mono text-xs text-emerald-400 font-semibold">CONFORME</span>
           </div>
           <p class="text-xs text-neutral-300 leading-relaxed">
-            Todos os requisitos e parâmetros do regulamento municipal foram cumpridos pelo projeto com prova documental.
+            Todos os requisitos quantitativos verificados cumprem os limites regulamentares com rastreabilidade documental.
           </p>
         </div>
 
@@ -390,7 +388,7 @@ const methodSteps = [
             <span class="font-mono text-xs text-rose-400 font-semibold">NÃO CONFORME</span>
           </div>
           <p class="text-xs text-neutral-300 leading-relaxed">
-            Violação inequívoca de parâmetro urbanístico inultrapassável identificado com citação direta do artigo e valor em falta.
+            Violação objetiva de parâmetro urbanístico identificada com citação direta do artigo e valor em falta.
           </p>
         </div>
 
@@ -400,14 +398,14 @@ const methodSteps = [
             <span class="font-mono text-xs text-neutral-300 font-semibold">INCONCLUSIVO</span>
           </div>
           <p class="text-xs text-neutral-400 leading-relaxed">
-            Falta de dados geométricos ou cadastro insuficiente para determinar formalmente a conformidade.
+            Falta de dados geométricos ou parâmetros insuficientes para aferir a conformidade (não assumimos conformidade por presunção).
           </p>
         </div>
       </div>
 
       <!-- DISCLAIMER & CTA -->
       <div class="p-6 rounded-2xl border border-white/[0.08] bg-[#0a0a0a] flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="text-xs text-neutral-400 max-w-2xl leading-relaxed">
+        <div class="text-xs text-neutral-300 max-w-2xl leading-relaxed">
           <span class="text-white font-medium">Nota de Responsabilidade Profissional:</span> O ImoHarmonia é uma ferramenta de apoio técnico à decisão. Não garante aprovação camarária nem substitui a competência do arquiteto, do engenheiro ou dos serviços municipais.
         </div>
         <a
@@ -428,10 +426,10 @@ const methodSteps = [
           <Tag>MÉTODO DE ENGENHARIA</Tag>
         </div>
         <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight mb-4">
-          Como trabalhamos.<br />Do diagnóstico à entrega determinística.
+          Como trabalhamos.<br />Do diagnóstico ao sistema verificado.
         </h2>
         <p class="text-sm text-neutral-400 leading-relaxed">
-          Problema antes da tecnologia. Evidência antes da afirmação. Quatro etapas que garantem rigor do primeiro dia até ao sistema em produção.
+          Problema antes da tecnologia. Evidência antes da afirmação. Quatro etapas que garantem rigor do primeiro dia até à validação operacional.
         </p>
       </div>
 
@@ -441,7 +439,7 @@ const methodSteps = [
             <div>
               <div class="flex items-center justify-between mb-6">
                 <span class="font-mono text-lg text-white font-light">{step.num}</span>
-                <span class="font-mono text-[10px] tracking-wider text-neutral-400 uppercase px-2 py-0.5 rounded border border-white/[0.08] bg-white/[0.02]">
+                <span class="font-mono text-[10px] tracking-wider text-neutral-300 uppercase px-2 py-0.5 rounded border border-white/[0.08] bg-white/[0.02]">
                   {step.tag}
                 </span>
               </div>
@@ -450,7 +448,7 @@ const methodSteps = [
             </div>
             <div class="mt-8 pt-4 border-t border-white/[0.05] flex items-center justify-between font-mono text-[11px] text-neutral-400">
               <span>Etapa {step.num} / 04</span>
-              <span>Garantia de Rigor</span>
+              <span>Critério de Rigor</span>
             </div>
           </div>
         ))}
@@ -542,15 +540,15 @@ const methodSteps = [
             <Tag>FILOSOFIA DE ENGENHARIA</Tag>
           </div>
           <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight mb-6">
-            Rigor, Rastreabilidade e Determinismo.
+            Rigor, Rastreabilidade e Execução Algorítmica.
           </h2>
           <p class="text-sm text-neutral-300 leading-relaxed font-sans mb-6">
-            A tecnologia não é o posicionamento da BolinaTec; é o mecanismo com que materializamos soluções. Escolhemos ferramentas em função das garantias matemáticas e operacionais que fornecem.
+            A tecnologia não é o posicionamento da BolinaTec; é o mecanismo com que materializamos soluções. Escolhemos ferramentas em função das garantias operacionais e de integridade que fornecem.
           </p>
-          <ul class="space-y-4 font-sans text-xs text-neutral-400">
+          <ul class="space-y-4 font-sans text-xs text-neutral-300">
             <li class="flex items-start gap-3">
               <span class="w-1.5 h-1.5 rounded-full bg-white mt-1.5 shrink-0"></span>
-              <span><strong>Lógica Determinística:</strong> Decisões de conformidade não dependem de adivinhação estatística; dependem de regras computadas com rastreabilidade absoluta.</span>
+              <span><strong>Execução Reproduzível:</strong> Regras codificadas são avaliadas de forma reproduzível com rastreabilidade formal do artigo legal e cálculo aplicável.</span>
             </li>
             <li class="flex items-start gap-3">
               <span class="w-1.5 h-1.5 rounded-full bg-white mt-1.5 shrink-0"></span>
@@ -558,7 +556,7 @@ const methodSteps = [
             </li>
             <li class="flex items-start gap-3">
               <span class="w-1.5 h-1.5 rounded-full bg-white mt-1.5 shrink-0"></span>
-              <span><strong>Soberania de Dados:</strong> Arquitetura orientada à privacidade, soberania e integridade dos registos de cada projeto submetido.</span>
+              <span><strong>Soberania de Dados:</strong> Arquitetura orientada à privacidade e integridade dos registos de cada projeto submetido.</span>
             </li>
           </ul>
         </div>

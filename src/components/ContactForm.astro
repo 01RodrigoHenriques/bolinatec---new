@@ -4,150 +4,273 @@ interface Props {
   class?: string;
 }
 
-const { defaultTopic = 'geral', class: className = '' } = Astro.props;
+const { defaultTopic = 'imoharmonia', class: className = '' } = Astro.props;
 ---
 
-<form data-qualification-form class={`w-full max-w-xl mx-auto space-y-4 text-left ${className}`}>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <div>
-      <label for="contact-name" class="block font-mono text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5">
-        Nome completo *
-      </label>
-      <input
-        id="contact-name"
-        name="name"
-        type="text"
-        required
-        placeholder="Eng. / Arq. Nome"
-        class="w-full bg-[#111] border border-white/[0.1] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/40 transition-colors"
-      />
+<div class={`w-full max-w-xl mx-auto text-left ${className}`} data-qualification-container>
+  <form data-qualification-form class="space-y-4">
+    <!-- Honeypot anti-spam field (hidden from legitimate users) -->
+    <div style="display:none;" aria-hidden="true">
+      <label for="contact-hp">Não preencher se for humano</label>
+      <input id="contact-hp" name="_hp" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label for="contact-name" class="block font-mono text-[11px] text-neutral-300 uppercase tracking-wider mb-1.5">
+          Nome completo *
+        </label>
+        <input
+          id="contact-name"
+          name="name"
+          type="text"
+          required
+          maxlength="100"
+          placeholder="Eng. / Arq. Nome"
+          class="w-full bg-[#111] border border-white/[0.12] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-500 focus:outline-none focus:border-white/50 focus:ring-1 focus:ring-white/30 transition-all"
+        />
+      </div>
+
+      <div>
+        <label for="contact-email" class="block font-mono text-[11px] text-neutral-300 uppercase tracking-wider mb-1.5">
+          Email profissional *
+        </label>
+        <input
+          id="contact-email"
+          name="email"
+          type="email"
+          required
+          maxlength="120"
+          placeholder="nome@empresa.pt"
+          class="w-full bg-[#111] border border-white/[0.12] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-500 focus:outline-none focus:border-white/50 focus:ring-1 focus:ring-white/30 transition-all"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label for="contact-org" class="block font-mono text-[11px] text-neutral-300 uppercase tracking-wider mb-1.5">
+          Organização / Gabinete
+        </label>
+        <input
+          id="contact-org"
+          name="organization"
+          type="text"
+          maxlength="150"
+          placeholder="Gabinete / Entidade"
+          class="w-full bg-[#111] border border-white/[0.12] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-500 focus:outline-none focus:border-white/50 focus:ring-1 focus:ring-white/30 transition-all"
+        />
+      </div>
+
+      <div>
+        <label for="contact-role" class="block font-mono text-[11px] text-neutral-300 uppercase tracking-wider mb-1.5">
+          Função / Especialidade
+        </label>
+        <select
+          id="contact-role"
+          name="role"
+          class="w-full bg-[#111] border border-white/[0.12] rounded-lg px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-white/50 focus:ring-1 focus:ring-white/30 transition-all cursor-pointer"
+        >
+          <option value="arquiteto">Arquiteto / Urbanista</option>
+          <option value="engenheiro">Engenheiro Civil / Projetista</option>
+          <option value="promotor">Promotor Imobiliário</option>
+          <option value="tecnico_municipal">Técnico Municipal / Autarquia</option>
+          <option value="lider_tecnico">Líder Técnico / CTO</option>
+          <option value="outro">Outra Função</option>
+        </select>
+      </div>
     </div>
 
     <div>
-      <label for="contact-email" class="block font-mono text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5">
-        Email profissional *
-      </label>
-      <input
-        id="contact-email"
-        name="email"
-        type="email"
-        required
-        placeholder="nome@empresa.pt"
-        class="w-full bg-[#111] border border-white/[0.1] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/40 transition-colors"
-      />
-    </div>
-  </div>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <div>
-      <label for="contact-org" class="block font-mono text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5">
-        Organização / Gabinete
-      </label>
-      <input
-        id="contact-org"
-        name="organization"
-        type="text"
-        placeholder="Gabinete / Entidade"
-        class="w-full bg-[#111] border border-white/[0.1] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/40 transition-colors"
-      />
-    </div>
-
-    <div>
-      <label for="contact-role" class="block font-mono text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5">
-        Função / Especialidade
+      <label for="contact-topic" class="block font-mono text-[11px] text-neutral-300 uppercase tracking-wider mb-1.5">
+        O que o trouxe à BolinaTec? *
       </label>
       <select
-        id="contact-role"
-        name="role"
-        class="w-full bg-[#111] border border-white/[0.1] rounded-lg px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-white/40 transition-colors cursor-pointer"
+        id="contact-topic"
+        name="intent"
+        class="w-full bg-[#111] border border-white/[0.12] rounded-lg px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-white/50 focus:ring-1 focus:ring-white/30 transition-all cursor-pointer"
       >
-        <option value="arquiteto">Arquiteto / Urbanista</option>
-        <option value="engenheiro">Engenheiro Civil / Projetista</option>
-        <option value="promotor">Promotor Imobiliário</option>
-        <option value="tecnico_municipal">Técnico Municipal / Autarquia</option>
-        <option value="lider_tecnico">Líder Técnico / CTO</option>
-        <option value="outro">Outra Função</option>
+        <option value="imoharmonia_teste" selected={defaultTopic === 'imoharmonia'}>Testar projeto concreto no ImoHarmonia (Validação Prévia)</option>
+        <option value="computable_systems" selected={defaultTopic === 'computable_systems'}>Engenharia de sistemas regulatórios ou computáveis</option>
+        <option value="rd_experiment" selected={defaultTopic === 'rd_experiment'}>Investigação técnica / Problema de complexidade</option>
+        <option value="outro" selected={defaultTopic === 'geral'}>Outro assunto específico</option>
       </select>
     </div>
-  </div>
 
-  <div>
-    <label for="contact-topic" class="block font-mono text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5">
-      O que o trouxe à BolinaTec? *
-    </label>
-    <select
-      id="contact-topic"
-      name="topic"
-      class="w-full bg-[#111] border border-white/[0.1] rounded-lg px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-white/40 transition-colors cursor-pointer"
-    >
-      <option value="imoharmonia" selected={defaultTopic === 'imoharmonia'}>Testar projeto concreto no ImoHarmonia (Validação Prévia)</option>
-      <option value="computable_systems" selected={defaultTopic === 'computable_systems'}>Engenharia de sistemas regulatórios ou computáveis</option>
-      <option value="rd_experiment" selected={defaultTopic === 'rd_experiment'}>Investigação técnica / Problema de complexidade</option>
-      <option value="outro" selected={defaultTopic === 'geral'}>Outro assunto específico</option>
-    </select>
-  </div>
-
-  <div>
-    <label for="contact-details" class="block font-mono text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5">
-      Descrição do problema ou contexto do projeto *
-    </label>
-    <textarea
-      id="contact-details"
-      name="details"
-      rows="4"
-      required
-      placeholder="Indique concelho/município, tipo de operação urbanística ou natureza do problema técnico a computar..."
-      class="w-full bg-[#111] border border-white/[0.1] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/40 transition-colors resize-y"
-    ></textarea>
-  </div>
-
-  <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div class="font-mono text-[11px] text-neutral-500">
-      Resposta técnica em 24h úteis.
+    <div>
+      <label for="contact-details" class="block font-mono text-[11px] text-neutral-300 uppercase tracking-wider mb-1.5">
+        Descrição do problema ou contexto do projeto *
+      </label>
+      <textarea
+        id="contact-details"
+        name="problemContext"
+        rows="4"
+        required
+        minlength="10"
+        maxlength="4000"
+        placeholder="Indique município do projeto, tipo de operação urbanística ou natureza do problema técnico..."
+        class="w-full bg-[#111] border border-white/[0.12] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-500 focus:outline-none focus:border-white/50 focus:ring-1 focus:ring-white/30 transition-all resize-y"
+      ></textarea>
     </div>
-    <button
-      type="submit"
-      class="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-white text-black font-mono text-xs uppercase tracking-wider font-semibold hover:bg-neutral-200 transition-all shadow-sm"
-    >
-      Submeter Contexto
-    </button>
-  </div>
 
-  <div data-form-status class="hidden pt-3 font-mono text-xs text-emerald-400"></div>
-</form>
+    <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="font-mono text-[11px] text-neutral-400">
+        Submissão técnica segura (POST /api/contact)
+      </div>
+      <button
+        type="submit"
+        data-submit-btn
+        class="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-white text-black font-mono text-xs uppercase tracking-wider font-semibold hover:bg-neutral-200 transition-all shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Submeter Contexto
+      </button>
+    </div>
+  </form>
+
+  <!-- Live Status & Feedback Area -->
+  <div data-form-status role="alert" aria-live="polite" class="hidden mt-4 p-5 rounded-xl border transition-all text-xs font-sans">
+  </div>
+</div>
 
 <script is:inline>
   (() => {
-    const form = document.currentScript?.previousElementSibling;
-    if (!form || !form.matches('[data-qualification-form]')) return;
+    const container = document.currentScript?.previousElementSibling;
+    if (!container) return;
 
-    form.addEventListener('submit', (e) => {
+    const form = container.querySelector('[data-qualification-form]');
+    const statusBox = container.querySelector('[data-form-status]');
+    const submitBtn = container.querySelector('[data-submit-btn]');
+    if (!form || !statusBox || !submitBtn) return;
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const fd = new FormData(form);
-      const name = fd.get('name') || '';
-      const email = fd.get('email') || '';
-      const org = fd.get('organization') || 'Não especificada';
-      const role = fd.get('role') || 'Outro';
-      const topic = fd.get('topic') || 'Geral';
-      const details = fd.get('details') || '';
 
-      const subject = encodeURIComponent(`[Contacto BolinaTec] ${topic} — ${org}`);
-      const body = encodeURIComponent(
-        `Nome: ${name}\n` +
-        `Email: ${email}\n` +
-        `Organização: ${org}\n` +
-        `Função: ${role}\n` +
-        `Assunto / Motivo: ${topic}\n\n` +
-        `Contexto do Problema:\n${details}\n`
-      );
+      const payload = {
+        name: String(fd.get('name') || '').trim(),
+        email: String(fd.get('email') || '').trim(),
+        organization: String(fd.get('organization') || '').trim(),
+        role: String(fd.get('role') || 'outro'),
+        intent: String(fd.get('intent') || 'imoharmonia_teste'),
+        problemContext: String(fd.get('problemContext') || '').trim(),
+        source: 'website_qualification_form',
+        submittedAt: new Date().toISOString(),
+        _hp: String(fd.get('_hp') || ''),
+      };
 
-      const statusEl = form.querySelector('[data-form-status]');
-      if (statusEl) {
-        statusEl.classList.remove('hidden');
-        statusEl.innerText = 'A preparar mensagem técnica para geral@bolinatec.com...';
+      if (!payload.name || !payload.email || !payload.problemContext) {
+        statusBox.className = 'mt-4 p-4 rounded-xl border border-rose-500/30 bg-rose-950/20 text-rose-300 text-xs';
+        statusBox.innerHTML = '<p class="font-medium">Por favor preencha todos os campos obrigatórios (*).</p>';
+        statusBox.classList.remove('hidden');
+        return;
       }
 
-      window.location.href = `mailto:geral@bolinatec.com?subject=${subject}&body=${body}`;
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'A VALIDAR...';
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json().catch(() => null);
+
+        if (res.ok && data?.status === 'DELIVERED') {
+          // Complete server-side delivery verified
+          form.classList.add('hidden');
+          statusBox.className = 'mt-4 p-6 rounded-xl border border-emerald-500/30 bg-emerald-950/20 text-emerald-200 text-xs';
+          statusBox.innerHTML = `
+            <div class="flex items-center gap-2 mb-2 font-mono text-emerald-400 font-semibold uppercase tracking-wider">
+              <span>✓ Contexto Recebido com Sucesso</span>
+            </div>
+            <p class="leading-relaxed mb-3">Obrigado, <strong>${escapeHtml(payload.name)}</strong>. O seu contexto foi registado no sistema da BolinaTec. Responderemos com uma análise técnica em 24h úteis para <strong>${escapeHtml(payload.email)}</strong>.</p>
+          `;
+          statusBox.classList.remove('hidden');
+        } else {
+          // Graceful handling (e.g., CONFIG_REQUIRED or static preview)
+          // Securely provide structured technical briefing without exposing personal data in URLs
+          const briefText =
+            `[BRIEFING TÉCNICO BOLINATEC]\n` +
+            `Nome: ${payload.name}\n` +
+            `Email: ${payload.email}\n` +
+            `Organização: ${payload.organization || 'Não especificada'}\n` +
+            `Função: ${payload.role}\n` +
+            `Assunto: ${payload.intent}\n` +
+            `Data: ${payload.submittedAt}\n\n` +
+            `Contexto do Problema:\n${payload.problemContext}`;
+
+          form.classList.add('hidden');
+          statusBox.className = 'mt-4 p-6 rounded-xl border border-white/20 bg-[#111] text-neutral-200 text-xs space-y-4';
+          statusBox.innerHTML = `
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+              <span class="font-mono text-emerald-400 font-semibold uppercase tracking-wider text-[11px]">
+                ✓ Payload Validado (POST /api/contact)
+              </span>
+              <span class="font-mono text-[10px] text-neutral-400">Entrega Direta</span>
+            </div>
+            <p class="text-xs text-neutral-300 leading-relaxed">
+              O seu pedido foi estruturado e validado. Pode copiar o briefing com um clique ou enviar diretamente para <a href="mailto:geral@bolinatec.com" class="text-white underline underline-offset-2">geral@bolinatec.com</a>.
+            </p>
+            <div id="contact-briefing-text" class="p-3 rounded-lg bg-black/60 border border-white/10 font-mono text-[11px] text-neutral-300 whitespace-pre-wrap max-h-40 overflow-y-auto">${escapeHtml(briefText)}</div>
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+              <button
+                type="button"
+                id="btn-copy-brief"
+                class="px-4 py-2 rounded-lg bg-white text-black font-mono text-[11px] uppercase tracking-wider font-semibold hover:bg-neutral-200 transition-all cursor-pointer"
+              >
+                Copiar Briefing para a Área de Transferência
+              </button>
+              <a
+                href="mailto:geral@bolinatec.com"
+                class="px-4 py-2 rounded-lg border border-white/20 bg-transparent text-white font-mono text-[11px] uppercase tracking-wider hover:bg-white/10 transition-all text-center"
+              >
+                Abrir geral@bolinatec.com
+              </a>
+            </div>
+            <div id="copy-msg" class="hidden font-mono text-[10px] text-emerald-400">Briefing copiado para a área de transferência!</div>
+          `;
+          statusBox.classList.remove('hidden');
+
+          const copyBtn = statusBox.querySelector('#btn-copy-brief');
+          const copyMsg = statusBox.querySelector('#copy-msg');
+          if (copyBtn && copyMsg) {
+            copyBtn.addEventListener('click', async () => {
+              try {
+                await navigator.clipboard.writeText(briefText);
+                copyMsg.classList.remove('hidden');
+                copyBtn.innerText = 'COPIADO!';
+                setTimeout(() => {
+                  copyBtn.innerText = 'COPIAR BRIEFING PARA A ÁREA DE TRANSFERÊNCIA';
+                }, 3000);
+              } catch {
+                copyMsg.classList.remove('hidden');
+                copyMsg.innerText = 'Selecione o texto acima e utilize Ctrl+C / Cmd+C.';
+              }
+            });
+          }
+        }
+      } catch (err) {
+        statusBox.className = 'mt-4 p-4 rounded-xl border border-rose-500/30 bg-rose-950/20 text-rose-300 text-xs';
+        statusBox.innerHTML = `
+          <p class="font-medium mb-1">Não foi possível ligar ao servidor.</p>
+          <p class="text-neutral-400">Por favor envie o seu contexto diretamente para <a href="mailto:geral@bolinatec.com" class="text-white underline">geral@bolinatec.com</a>.</p>
+        `;
+        statusBox.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'SUBMETER CONTEXTO';
+      }
     });
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
   })();
 </script>

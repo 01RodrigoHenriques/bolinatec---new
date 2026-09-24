@@ -1,14 +1,15 @@
 import { Canvas } from "@react-three/fiber";
-import { Preload } from "@react-three/drei";
 import { SpatialBoardScene } from "./board";
 
 type GLProps = {
   hovering: boolean;
+  active?: boolean;
 };
 
-export function GL({ hovering }: GLProps) {
+export function GL({ hovering, active = true }: GLProps) {
   return (
     <Canvas
+      frameloop={active ? "always" : "never"}
       dpr={[1, 1.5]}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       camera={{ position: [0, 5.0, 8.4], fov: 36 }}
@@ -23,7 +24,6 @@ export function GL({ hovering }: GLProps) {
       <pointLight position={[0, 2, 0]} intensity={0.6} color="#ffffff" distance={6} />
 
       <SpatialBoardScene hovering={hovering} />
-      <Preload all />
     </Canvas>
   );
 }
