@@ -20,6 +20,6 @@ O ImoHarmonia não é uma ferramenta de prospeção de terrenos que especula sob
 5. **Regras Computáveis:** Algoritmos de cálculo e validação geométrica/aritmética.
 6. **Verificações:** Execução reproduzível de cada regra computável face aos parâmetros fornecidos.
 7. **Evidência:** Apresentação da justificação legal, artigo concreto e fórmula de cada teste.
-8. **Resultado:** Diagnóstico em 4 estados: *Conforme*, *Condicionado*, *Não Conforme* ou *Inconclusivo*.
+8. **Resultado:** 4 estados de resultado: *Conforme*, *Condicionado*, *Não Conforme* ou *Inconclusivo*.
 
 A decisão final permanece sempre humana e profissional. O ImoHarmonia confere clareza técnica e rastreabilidade antes da submissão municipal.

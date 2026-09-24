@@ -44,13 +44,13 @@ const pipeline = [
     step: '07',
     name: 'Evidência',
     label: 'Rastreabilidade Total',
-    desc: 'Cada verificação regista o artigo exato, a redação legal e o cálculo que suporta o diagnóstico.',
+    desc: 'Cada verificação regista o artigo exato, a redação legal e o cálculo que suporta o resultado.',
   },
   {
     step: '08',
     name: 'Resultado',
-    label: 'Diagnóstico em 4 Estados',
-    desc: 'Diagnóstico estruturado e auditável: Conforme, Condicionado, Não Conforme ou Inconclusivo.',
+    label: '4 Estados de Resultado',
+    desc: 'Resultado estruturado e auditável: Conforme, Condicionado, Não Conforme ou Inconclusivo.',
   },
 ];
 ---
@@ -238,10 +238,10 @@ const pipeline = [
     <div class="max-w-6xl mx-auto">
       <div class="max-w-2xl mb-16">
         <div class="mb-4">
-          <Tag>ESTADOS DO DIAGNÓSTICO</Tag>
+          <Tag>RESULTADOS DA VERIFICAÇÃO</Tag>
         </div>
         <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight mb-4">
-          Os Quatro Estados de Conformidade
+          Os Quatro Estados de Resultado
         </h2>
         <p class="text-sm text-neutral-400 leading-relaxed font-sans">
           O sistema não emite percentagens probabilísticas arbitrárias. Classifica os requisitos verificados segundo quatro estados formais de engenharia de conformidade.
